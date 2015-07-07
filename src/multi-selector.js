@@ -63,7 +63,7 @@ const MultiSelector = React.createClass({
 		setTimeout(this.triggerItemChange);
 	},
 
-	getPillTitle: function(item) {
+	getItemTitle: function(item) {
 		return `${item.firstName} ${item.lastName}`;
 	},
 
@@ -128,10 +128,10 @@ const MultiSelector = React.createClass({
 	},
 
 	getFilterItems: function(items = []) {
-		let getPillTitle = this.props.getPillTitle || this.getPillTitle;
+		let getItemTitle = this.props.getItemTitle || this.getItemTitle;
 
 		return items.filter((item) => {
-			return getPillTitle(item).toLowerCase().indexOf(this.state.searchValue.toLowerCase()) > -1;
+			return getItemTitle(item).toLowerCase().indexOf(this.state.searchValue.toLowerCase()) > -1;
 		})
 	},
 
@@ -176,13 +176,13 @@ const MultiSelector = React.createClass({
 	},
 
 	render: function() {
-		let getPillTitle = this.props.getPillTitle || this.getPillTitle;
+		let getItemTitle = this.props.getItemTitle || this.getItemTitle;
 
 		let pills = this.state.selectedItems
 			.map((item) => {
 				return (
 					<div className="cp-multi-selector__pill cps-white cps-bg-gray-10">
-						<span style={{verticalAlign: 'top'}}>{getPillTitle(item)}</span><i onClick={this.removeItem.bind(this, item)} className="cps-icon cps-icon-sm-close"></i>
+						<span style={{verticalAlign: 'top'}}>{getItemTitle(item)}</span><i onClick={this.removeItem.bind(this, item)} className="cps-icon cps-icon-sm-close"></i>
 					</div>
 				);
 			});
