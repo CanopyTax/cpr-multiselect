@@ -39,12 +39,12 @@ describe('multi-selector', function() {
 			}
 		];
 
-		function getPillTitle(item) {
+		function getItemTitle(item) {
 			return `yo dogg ${item.firstName}`;
 		}
 
 		let multiSelect = TestUtils.renderIntoDocument(
-			<MultiSelector initialSelectedItems={items} getPillTitle={getPillTitle}></MultiSelector>
+			<MultiSelector initialSelectedItems={items} getItemTitle={getItemTitle}></MultiSelector>
 		);
 
 		let pill = TestUtils.findRenderedDOMComponentWithClass(multiSelect, 'cp-multi-selector__pill');
