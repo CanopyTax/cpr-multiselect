@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+<head>
+	<title>Canopy React Multi-select</title>
+</head>
+
+<body>
+	<div class="cps-topnav">
+		<div class="cps-topnav__bar"></div>
+		<div class="cps-topnav__content" data-reactid=".0.0.1"><span class="cps-topnav__content__brand" data-reactid=".0.0.1.0"><img src="canopy-logotype.svg" alt="Company Logo" data-reactid=".0.0.1.0.0"></span>
+			<ul class="cps-topnav__content__menu">
+				<li><a href="https://github.com/canopytax/cp-multi-selector">Canopy React Multi-selector on Github</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="cps-nav-content +full">
+		<div class="cps-fixed-focus cps-card">
+			<div class="cps-card__header cps-subheader">
+				Canopy React Multi-Selector
+			</div>
+			<div class="cps-card__body" ng-controller="testController">
+				<div class="form-group">
+					<label>Assigned to</label>
+					<div id='cpMultiSelector'>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<link type="text/css" href="node_modules/canopy-styleguide/build/styleguide.css" rel="stylesheet">
+	<script type="text/javascript" src="node_modules/react/dist/react.min.js"></script>
+	<script type="text/javascript" src="node_modules/lodash/index.js"></script>
+	<script type="text/javascript" src="build/cpr-multiselect.js"></script>
+	<script>
+		React.render(
+			React.createElement(window.MultiSelector, {items: [
+				{
+					"lastName": "Seward",
+					"firstName": "William"
+				},
+				{
+					"lastName": "Montgomery",
+					"firstName": "Blair"
+				},
+				{
+					"lastName": "Meriwether",
+					"firstName": "Lewis"
+				}
+			]}),
+			document.getElementById('cpMultiSelector')
+		);
+	</script>
+</body>
+
+</html>

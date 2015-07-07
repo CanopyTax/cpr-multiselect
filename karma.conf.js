@@ -15,13 +15,9 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-			'node_modules/bs-styleguide/index.css',
-			'https://s3.amazonaws.com/icomoon.io/57942/BeanstalkIcons/style.css',
-			'node_modules/jquery/dist/jquery.js',
-      'node_modules/angular/angular.js',
-      'node_modules/angular-mocks/angular-mocks.js',
-      'build/*.js',
-      'src/*spec.js'
+			'node_modules/canopy-styleguide/build/styleguide.css',
+			'node_modules/react/dist/react.js',
+      'tests.webpack.js'
     ],
 
 
@@ -34,8 +30,21 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
+			'tests.webpack.js': [ 'webpack', 'sourcemap' ]
     },
 
+		webpack: {
+			devtool: 'inline-sourcemap',
+			module: {
+				loaders: [
+					{test: /\.js$/, loader: 'babel-loader'},
+					{
+						test: /\.css$/,
+						loader: "style-loader!css-loader!autoprefixer"
+					}
+				]
+			}
+		},
 
     // test results reporter to use
     // possible values: 'dots', 'progress'

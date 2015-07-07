@@ -6,7 +6,7 @@ var version = require('./package.json').version;
 var name = require('./package.json').name;
 
 module.exports = {
-	entry: "./src/index.js",
+	entry: "./src/multi-selector.js",
 	output: {
 		path: './build',
 		filename: name + '.js'
@@ -25,8 +25,8 @@ module.exports = {
 		}]
 	},
 	externals: {
-		"jquery": "$",
-		"angular": "angular"
+		"react": "React",
+		"lodash": "_"
 	},
 	plugins: [
 		new webpack.BannerPlugin("\
