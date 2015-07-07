@@ -1,4 +1,6 @@
-# cpr-multiselect
+cpr-multiselect [![Build Status](https://travis-ci.org/CanopyTax/cpr-multiselect.png?branch=master)](https://travis-ci.org/CanopyTax/cpr-multiselect)
+===============
+
 Canopy React Multi-select Component
 
 ## Requirements
