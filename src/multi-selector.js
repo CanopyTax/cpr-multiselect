@@ -130,9 +130,13 @@ const MultiSelector = React.createClass({
 	getFilterItems: function(items = []) {
 		let getItemTitle = this.props.getItemTitle || this.getItemTitle;
 
-		return items.filter((item) => {
-			return getItemTitle(item).toLowerCase().indexOf(this.state.searchValue.toLowerCase()) > -1;
-		})
+		return items
+			.filter((item) => {
+				return getItemTitle(item).toLowerCase().indexOf(this.state.searchValue.toLowerCase()) > -1;
+			})
+			.filter((item, index) => {
+				return index < 4;
+			});
 	},
 
 	getSearchItems: function(items = []) {
