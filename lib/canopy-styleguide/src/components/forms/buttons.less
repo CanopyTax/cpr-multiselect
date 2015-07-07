@@ -1,0 +1,193 @@
+/** buttons.less **/
+
+@import "../variables/variables.less";
+
+/************Buttons************/
+
+a {
+	color: @blue-link;
+	text-decoration: none;
+
+	&:hover, &:focus{
+		text-decoration: underline;
+	}
+}
+
+.cps-btn {
+	display: inline-block;
+	text-align: center;
+	vertical-align: middle;
+	-webkit-appearance: none;
+		 -moz-appearance: none;
+			  	appearance: none;
+	margin: 0px;
+	padding: 4px 24px;
+	font-size: 14px;
+	text-align: center;
+	line-height: 1.75; // accounts for icon
+	white-space: nowrap;
+	vertical-align: middle;
+	cursor: pointer;
+	-webkit-user-select: none;
+		 -moz-user-select: none;
+			-ms-user-select: none;
+					user-select: none;
+	background-image: none;
+	border: 0px solid transparent;
+	font-weight: 600;
+	text-transform: uppercase;
+	border-radius: 2px;
+	color: white;
+	text-decoration: none;
+	.depth-z1;
+
+	&:hover, &:focus{
+		.depth-z2;
+		text-decoration: none;
+	}
+
+	&:focus {
+		outline: none;
+	}
+
+	+ .cps-btn {
+		margin-left: 24px;
+	}
+
+	+ .cps-link {
+		margin-left: 12px;
+	}
+	// Primary Raised Buttons //
+
+	&.\+primary {
+		background-color: @primary-green;
+
+		&:focus {
+			background-color: @medium-green;
+		}
+	}
+
+	// Secondary Raised Buttons //
+
+	&.\+secondary {
+		background-color: #f4f4f4;
+		color: @light-gray;
+
+		&:focus {
+			background-color: @gray6;
+		}
+	}
+
+	.cps-icon {
+		float: left;
+		padding-right: 4px;
+		color: inherit;
+	}
+	// Disabled Raised Buttons //
+
+	&.\+disabled, &[disabled] {
+		pointer-events: none;
+		cursor: not-allowed;
+		background-color: @gray7;
+		color: rgba(0,0,0,.24);
+		box-shadow: none !important;
+	}
+
+	&.\+large,&.\+phat {
+		font-size: 18px;
+		height: 48px;
+		padding: 8px 28px;
+	}
+}
+
+button.cps-btn.\+large,
+button.cps-btn.\+phat {
+	padding: 0 28px;
+}
+
+.cps-btn-icon {
+	 display: inline-block;
+	a.cps-link, .cps-link {
+		padding: 4px; // 8px + 24px icon height = 32px
+	}
+
+	.cps-icon {
+		padding-right: 0px !important;
+		color: @light-gray !important;
+	}
+}
+
+a.cps-link, .cps-link {
+	display: inline-block;
+	text-align: center;
+	vertical-align: middle;
+	-webkit-appearance: none;
+		 -moz-appearance: none;
+			  	appearance: none;
+	font-size: 14px;
+	color: @primary-green;
+	text-decoration: none;
+	padding: 4px 12px 4px 12px;
+	border-radius: 2px;
+	line-height: 1.75; // accounts for icon
+	font-weight: 600;
+	background-color: transparent;
+	cursor: pointer;
+
+	&:hover {
+		background-color: rgba(0,0,0,.05);
+	}
+	&:focus {
+		background-color: rgba(0,0,0,.1);
+		outline:none;
+	}
+
+	+ .cps-btn {
+		margin-left: 12px;
+	}
+
+	&.\+align {
+		margin-left: -12px;
+	}
+
+	&.\+disabled, &[disabled] {
+		pointer-events: none;
+		cursor: not-allowed;
+		color: rgba(0,0,0,.24);
+		box-shadow: none !important;
+	}
+
+	.cps-icon {
+		float: left;
+		padding-right: 4px;
+		color: inherit;
+	}
+}
+
+button.cps-btn {
+	padding: 0px 24px;
+	height: 32px;
+}
+
+fieldset {
+  padding: 0px;
+  margin: 0px;
+  border: 0px solid #c0c0c0;
+}
+
+fieldset[disabled] .cps-btn {
+	pointer-events: none;
+	cursor: not-allowed;
+	background-color: @gray7;
+	color: rgba(0,0,0,.24);
+	box-shadow: none !important;
+}
+
+fieldset[disabled] .cps-link {
+	pointer-events: none;
+	cursor: not-allowed;
+	color: rgba(0,0,0,.24);
+	box-shadow: none !important;
+}
+
+

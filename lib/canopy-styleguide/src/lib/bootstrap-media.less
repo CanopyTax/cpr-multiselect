@@ -1,0 +1,49 @@
+/** bootstrap-media.less **/
+
+.cps-media {
+  // Proper spacing between instances of .cps-media
+  margin-top: 15px;
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+.cps-media-right,
+.cps-media > .pull-right {
+  padding-left: 10px;
+}
+
+.cps-media-left,
+.cps-media > .pull-left {
+  padding-right: 10px;
+}
+
+.cps-media-left,
+.cps-media-right,
+.cps-media-body {
+  display: table-cell;
+  vertical-align: top;
+}
+
+.cps-media-middle {
+  vertical-align: middle;
+}
+
+.cps-media-bottom {
+  vertical-align: bottom;
+}
+
+// Reset margins on headings for tighter default spacing
+.cps-media-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+// cps-media list variation
+//
+// Undo default ul/ol styles
+.cps-media-list {
+  padding-left: 0;
+  list-style: none;
+}

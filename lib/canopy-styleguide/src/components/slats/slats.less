@@ -1,0 +1,221 @@
+/** slats.less **/
+
+@import "../variables/variables.less";
+@import "../mixins/mixins.less";
+
+.cps-slat {
+	height: 4.8rem;
+	position: relative;
+	background-color: @white;
+	border-radius: .2rem;
+	cursor: pointer;
+	display: block;
+	font-size: 1.4rem;
+	color: @dark-gray;
+	.depth-z1;
+	transition: 200ms ease-in background-color;
+
+	&.\+noclick {
+		cursor: auto;
+
+		&:hover {
+			background-color: @white;
+		}
+	}
+
+	&:hover {
+		background-color: @hover-color;
+
+		.cps-slat__actions.\+hover-show {
+			opacity: 1;
+		}
+	}
+
+	&__badge {
+		width: 7.2rem;
+		display:inline-block;
+		padding: .8rem 1.6rem .8rem 2.0rem;
+	}
+
+	&__badge + .cps-slat__content {
+		left: 7.2rem;
+	}
+
+	&__content {
+		max-width: ~"calc(100% - 30rem)";
+		width: 100%;
+		left: 2.0rem;
+		padding: 1.5rem 0;
+		position: absolute;
+		display: inline-block;
+
+		&.\+long {
+			max-width: ~"calc(100% - 15rem)";
+		}
+
+		&__title {
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			width: 25%;
+			display:inline-block;
+		}
+
+		&__description {
+			left: 2.5rem;
+			width: ~"calc(75% - 2.5rem)";
+			display:inline-block;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			position: relative;
+		}
+	}
+
+	&__actions {
+		float: right;
+		position: relative;
+		top: 1.5rem;
+		right: 2.4rem;
+
+		&.\+hover-show {
+			transition: 200ms ease-in opacity;
+			opacity: 0;
+		}
+
+		.cps-icon {
+			position: relative;
+			top: -.3rem;
+		}
+	}
+
+	&.\+small {
+		height: 4.0rem;
+		.cps-slat__badge {
+			padding: .5rem 1.6rem .8rem 2.0rem;
+		}
+		.cps-slat__content {
+			padding: 1.0rem 0;
+		}
+		.cps-slat__actions {
+			top:1.1rem;
+		}
+	}
+}
+
+.cps-card .cps-slat-lg, .cps-card .cps-slat {
+	box-shadow: none;
+	border-bottom: 1px solid @breakline-light;
+
+	&:last-child {
+		border-bottom: 0;
+	}
+}
+
+.cps-slat-lg, a.cps-slat-lg {
+	position: relative;
+	background-color: @white;
+	.depth-z1;
+	border-radius: .2rem;
+	height: 7.2rem;
+	min-width: 70rem;
+	cursor: pointer;
+	margin: 0 auto;
+	font-size: 1.4rem;
+	display: block;
+	color: @dark-gray;
+	transition: 200ms ease-in background-color;
+
+	&.\+noclick {
+		cursor: auto;
+
+		&:hover {
+			background-color: @white;
+		}
+	}
+
+	&:hover {
+		background-color: @hover-color;
+		.cps-slat-lg__actions.\+hover-show {
+			opacity: 1;
+		}
+	}
+
+	&__badge {
+		width:7.2rem;
+		display: inline-block;
+		padding: .8rem 1.6rem .8rem 2.4rem;
+		&__main {
+			color: @success;
+			font-size: 2.8rem;
+			font-weight: lighter;
+		}
+		&__sub {
+			position: relative;
+			top:-.5rem;
+			left:.2rem;
+		}
+	}
+
+	&__badge + .cps-slat-lg__content {
+		left: 7.2rem;
+	}
+
+	&__content {
+		position: absolute;
+		display: inline-block;
+		padding: 1.6rem 0;
+		left: 2.4rem;
+		max-width: ~"calc(100% - 30rem)";
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		color: @light-gray;
+
+		&__title {
+			font-weight: 400;
+			font-size: 1.6rem;
+			color: @dark-gray;
+		}
+	}
+
+	&__actions {
+		float: right;
+		position: relative;
+		top: 1.8rem;
+		right: 2.4rem;
+
+		.cps-link {
+			position: relative;
+			top: -4px;
+		}
+
+		&.\+hover-show {
+			transition: 200ms ease-in opacity;
+			opacity: 0;
+		}
+	}
+
+	&.cps-animate.ng-enter,
+	&.cps-animate.ng-leave {
+		-webkit-transition: .5s linear all;
+		transition: .5s linear all;
+		overflow: hidden;
+	}
+	&.cps-animate.ng-enter {
+		opacity: 0;
+		height: 0;
+	}
+	&.cps-animate.ng-enter.ng-enter-active {
+		opacity: 1;
+		height: 7.2rem;
+	}
+	&.cps-animate.ng-leave {
+		opacity: 1;
+		height: 7.2rem;
+	}
+	&.cps-animate.ng-leave.ng-leave-active {
+		opacity: 0;
+		height: 0;
+	}
+}

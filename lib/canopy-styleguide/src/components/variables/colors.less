@@ -1,0 +1,56 @@
+/** colors.less **/
+
+/************Palettes************/
+@primary-green: #4caf50;
+
+@dark-green: #388E3C;
+@medium-green: #43A047;
+@light-green: #67BB6a;
+
+@dark-gray: #333333;
+@medium-gray: #5c5c5c;
+@light-gray: #777777;
+
+@red: #F44336;
+
+@gray1: #FBFBFB;
+@gray2: #FAFAFA;
+@gray3: #F9F9F9;
+@gray4: #F7F7F7;
+@gray5: #F2F2F2;
+@gray6: #E9E9E9;
+@gray7: #E2E2E2;
+@gray8: #DFDFDF;
+@gray9: #CFCFCF;
+@gray10: #AFAFAF;
+
+@blue-link: #4A90E2;
+@medium-blue: rgba( red(@blue-link), green(@blue-link), blue(@blue-link), .2);
+@light-blue: rgba( red(@blue-link), green(@blue-link), blue(@blue-link), .1);
+
+@white: white;
+
+@font-color : @dark-gray;
+@hover-color : @gray4;
+@breakline-light: @gray6;
+@breakline-dark: @gray8;
+@card-color: #FFFDE9;
+
+@inset-background: @gray1;
+
+@warning: #FF8A65;
+@info: #45A8F8;
+@general: @dark-gray;
+@success: @primary-green;
+
+.gen-color-class(@name, @color) {
+	.cps-@{name} {
+		color: @color!important;
+		&.cps-icon:before {
+			color: @color!important;
+		}
+	}
+	.cps-bg-@{name} {
+		background-color: @color!important;
+	}
+}

@@ -1,0 +1,176 @@
+/** animate.less **/
+
+@import "./variables/variables.less";
+@import "./mixins/mixins.less";
+
+/** Animate ng-repeat statements **/
+.cps-animate-repeat.ng-enter, .cps-animate-repeat.ng-leave {
+  -webkit-transition: .5s linear all;
+  -moz-transition: .5s linear all;
+  -ms-transition: .5s linear all;
+  -o-transition: .5s linear all;
+  transition: .5s linear all;
+}
+
+.cps-animate-repeat.ng-enter {
+  opacity: 0;
+}
+
+.cps-animate-repeat.ng-enter.ng-enter-active {
+  opacity:1;
+}
+
+.cps-animate-repeat.ng-leave {
+  opacity:1;
+}
+
+.cps-animate-repeat.ng-leave.ng-leave-active {
+  opacity:0;
+}
+
+.cps-animate-repeat.ng-enter, .cps-animate-repeat.ng-leave td > span {
+  -webkit-transition: .5s linear all;
+  -moz-transition: .5s linear all;
+  -ms-transition: .5s linear all;
+  -o-transition: .5s linear all;
+  transition: .5s linear all;
+  display:block;
+  overflow: hidden;
+}
+
+.cps-animate-repeat.ng-enter td > span {
+  max-height: 0;
+}
+
+.cps-animate-repeat.ng-enter.ng-enter-active td > span {
+  max-height: 200px;
+}
+
+.cps-animate-repeat.ng-leave td > span {
+  max-height: 200px;
+}
+
+.cps-animate-repeat.ng-leave.ng-leave-active td > span {
+  max-height: 0px;
+}
+
+/** Fade in/out ng-if statements **/
+.cps-animate-fade.ng-enter, .cps-animate-fade.ng-leave {
+  transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+}
+
+.cps-animate-fade.ng-enter,
+.cps-animate-fade.ng-leave.ng-leave-active {
+  opacity:0;
+}
+
+.cps-animate-fade.ng-leave,
+.cps-animate-fade.ng-enter.ng-enter-active {
+  opacity:1;
+}
+
+/** Slide in and out ng-if statements 100, 300, 500 versions **/
+.cps-animate-if.ng-enter, .cps-animate-if.ng-leave {
+  transition: 1s linear all;
+  overflow: hidden;
+}
+
+.cps-animate-if.ng-enter {
+  max-height: 0;
+  opacity: 0;
+}
+
+.cps-animate-if.ng-enter.ng-enter-active {
+  max-height: 999px;
+  opacity:1;
+}
+
+.cps-animate-if.ng-leave {
+  max-height: 999px;
+  opacity:1;
+}
+
+.cps-animate-if.ng-leave.ng-leave-active {
+  max-height: 0;
+  opacity:1;
+}
+
+.cps-animate-if-100.ng-enter,
+.cps-animate-if-100.ng-leave {
+	transition: 250ms linear all;
+	overflow: hidden
+}
+.cps-animate-if-100.ng-enter {
+	max-height: 0;
+	opacity: 0
+}
+.cps-animate-if-100.ng-enter.ng-enter-active,
+.cps-animate-if-100.ng-leave {
+	max-height: 100px;
+	opacity: 1
+}
+.cps-animate-if-100.ng-leave.ng-leave-active {
+	max-height: 0;
+	opacity: 1
+}
+.cps-animate-if-300.ng-enter,
+.cps-animate-if-300.ng-leave {
+	transition: 750ms linear all;
+	overflow: hidden
+}
+.cps-animate-if-300.ng-enter {
+	max-height: 0;
+	opacity: 0
+}
+.cps-animate-if-300.ng-enter.ng-enter-active,
+.cps-animate-if-300.ng-leave {
+	max-height: 300px;
+	opacity: 1
+}
+.cps-animate-if-300.ng-leave.ng-leave-active {
+	max-height: 0;
+	opacity: 1
+}
+.cps-animate-if-500.ng-enter,
+.cps-animate-if-500.ng-leave {
+	transition: 1250ms linear all;
+	overflow: hidden
+}
+.cps-animate-if-500.ng-enter {
+	max-height: 0;
+	opacity: 0
+}
+.cps-animate-if-500.ng-enter.ng-enter-active,
+.cps-animate-if-500.ng-leave {
+	max-height: 500px;
+	opacity: 1
+}
+.cps-animate-if-500.ng-leave.ng-leave-active {
+	max-height: 0;
+	opacity: 1
+}
+
+
+.cps-animate-slide-wrapper {
+	position: relative;
+}
+
+.cps-animate-slide.ng-enter,
+.cps-animate-slide.ng-leave {
+	transition: 800ms ease-in left;
+	position: absolute;
+}
+
+.cps-animate-slide.ng-enter {
+	left: 100%;
+}
+.cps-animate-slide.ng-enter.ng-enter-active {
+	left: ~'calc( 50% - 380px)';
+}
+
+.cps-animate-slide.ng-leave {
+	left: ~'calc( 50% - 380px)';
+}
+.cps-animate-slide.ng-leave.ng-leave-active{
+	left: -100%;
+}

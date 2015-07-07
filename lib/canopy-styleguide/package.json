@@ -1,0 +1,53 @@
+{
+  "name": "canopy-styleguide",
+  "version": "1.3.2",
+  "description": "Style-guide for Canopy",
+  "main": "build/styleguide.css",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node node_modules/webpack/bin/webpack.js --config webpack.config.build.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/canopytax/styleguide.git"
+  },
+  "author": {
+    "name": "Bret Little"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/canopytax/styleguide/issues"
+  },
+  "homepage": "https://github.com/canopytax/styleguide",
+  "devDependencies": {
+    "autoprefixer-loader": "^1.2.0",
+    "css-loader": "^0.9.1",
+    "extract-text-webpack-plugin": "^0.3.8",
+    "html-loader": "^0.2.3",
+    "json-loader": "^0.5.2",
+    "jsx-loader": "^0.12.2",
+    "less": "^2.4.0",
+    "less-loader": "^2.1.0",
+    "lodash": "^3.5.0",
+    "react": "^0.12.2",
+    "react-router": "^0.12.4",
+    "style-loader": "^0.8.3",
+    "webpack": "^1.7.2"
+  },
+  "dependencies": {
+    "canopy-iconography": "^1.2.0",
+    "file-loader": "^0.8.4",
+    "highlight.js": "^8.4.0",
+    "react-highlight": "^0.4.1",
+    "url-loader": "^0.5.6"
+  },
+  "publishConfig": {
+    "registry": "http://52.25.158.189:4873"
+  },
+  "readme": "# Beanstalk Style Guide\nBeanstalk Style Guide\n\n## Requirements\nNode.js or Io.js\n\n## Setup\nSetup the style-guide for development by first installing webpack: `npm install -g webpack webpack-dev-server`\n\nRun the style-guide development server by executing `webpack-dev-server` inside the root directory.\n\n## Releases\nRelease a new version of the style guide by executing from the root directory `npm run build`.\nAlso update the version within `package.json`.\n",
+  "readmeFilename": "README.md",
+  "gitHead": "96e740d8f430648a0c782a7121cad8f8782aab39",
+  "_id": "canopy-styleguide@1.3.2",
+  "_shasum": "4f1f7b1147a61d8a3ea8819ac4ae0011088cb5e4",
+  "_from": "canopy-styleguide@>=1.3.2 <2.0.0"
+}

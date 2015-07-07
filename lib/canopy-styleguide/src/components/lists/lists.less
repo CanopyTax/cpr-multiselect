@@ -1,0 +1,43 @@
+/** lists.less **/
+
+@import "../mixins/mixins.less";
+@import "../variables/variables.less";
+
+.cps-list-inline {
+	padding-left: 0;
+	margin-left: -5px;
+	list-style: none;
+
+	> li {
+		display: inline-block;
+		padding-right: 12px;
+		padding-left: 12px;
+	}
+
+	&.\+pipes {
+		> li {
+			padding: 0px 0px 0px 4px;
+		}
+		li + li::before {
+			color: @gray8;
+			content: "|";
+			padding-right: 4px;
+		}
+	}
+
+	a {
+		text-decoration: none;
+	}
+
+	&.\+underline {
+		a:hover {
+			text-decoration: underline;
+		}
+	}
+
+}
+
+.cps-list-unstyled {
+	padding-left: 0;
+	list-style: none;
+}

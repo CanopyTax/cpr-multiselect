@@ -1,0 +1,209 @@
+/** checkbox.less **/
+
+@import "../variables/variables.less";
+@import "../mixins/mixins.less";
+
+.cps-checkbox {
+	// The radio label needs to be wrapped in a span tag, so hide all other text
+	font-size: 0;
+	position: relative;
+
+	input[type="checkbox"] {
+		opacity: 0;
+		position: absolute;
+		left: 0;
+	}
+
+	input[type="checkbox"]:checked + span {
+		&:before {
+			background-color: @primary-green;
+			border-color: @primary-green;
+		}
+		&:after {
+			opacity: 1;
+		}
+	}
+
+	input[type="checkbox"]:disabled + span {
+		cursor: not-allowed;
+
+		&:before {
+			border-color: @gray9;
+			//background-color: @gray9;
+		}
+	}
+
+	input[type="checkbox"]:checked:disabled + span {
+		cursor: not-allowed;
+
+		&:before {
+			background-color: @gray9;
+		}
+	}
+
+	input[type="checkbox"]:focus + span {
+		&:before {
+			box-shadow: 0rem 0rem 0rem .4rem rgba( red(@blue-link), green(@blue-link), blue(@blue-link), 0.2);
+		}
+	}
+
+	input[type="checkbox"] + span {
+		font-size: 1.2rem;
+		padding-top: .0rem;
+		position: relative;
+		padding-left: 23px;
+		//padding-right: 16px;
+		cursor: pointer;
+
+		&:before {
+			content: " ";
+			display: table-cell;
+			position: absolute;
+			border-radius: 2px;
+			border: 2px solid @gray10;
+			width: 16px;
+			height: 16px;
+			background-color: transparent;
+			transition: .15s ease-in background-color;
+			left: 0px;
+			top: 0px;
+			user-select: none;
+		}
+
+		&:after {
+			display: table-cell;;
+			width: 16px;
+			height: 16px;
+			vertical-align: middle;
+			position: absolute;
+			top: -5px;
+			left: -.45rem;
+
+			font-family: 'canopy-icons';
+			speak: none;
+			font-style: normal;
+			font-weight: normal;
+			font-variant: normal;
+			text-transform: none;
+			line-height: 1;
+			content: "\f13e";
+			color: @white;
+			font-size: 2.6rem;
+			opacity: 0;
+			transition: .15s ease-in opacity;
+			-webkit-font-smoothing: antialiased;
+			-moz-osx-font-smoothing: grayscale;
+			user-select: none;
+		}
+	}
+}
+
+.cps-checkbox-large {
+	// The radio label needs to be wrapped in a span tag, so hide all other text
+	font-size: 0;
+	position: relative;
+
+	input[type="checkbox"] {
+		opacity: 0;
+		position: absolute;
+		left: 0;
+	}
+
+	input[type="checkbox"]:checked + span {
+		&:before {
+			background-color: @primary-green;
+			border-color: @primary-green;
+		}
+		&:after {
+			opacity: 1;
+		}
+	}
+
+	input[type="checkbox"]:disabled + span {
+		cursor: not-allowed;
+
+		&:before {
+			border-color: @gray9;
+			//background-color: @gray9;
+		}
+	}
+
+	input[type="checkbox"]:checked:disabled + span {
+		cursor: not-allowed;
+
+		&:before {
+			background-color: @gray9;
+		}
+	}
+
+	input[type="checkbox"]:focus + span {
+		&:before {
+			box-shadow: 0rem 0rem 0rem .4rem rgba( red(@blue-link), green(@blue-link), blue(@blue-link), 0.2);
+		}
+	}
+
+	input[type="checkbox"] + span {
+		font-size: 1.2rem;
+		padding-top: .3rem;
+		position: relative;
+		padding-left: 39px;
+		//padding-right: 16px;
+		cursor: pointer;
+
+		&:before {
+			content: " ";
+			display: table-cell;
+			position: absolute;
+			border-radius: 2px;
+			border: 2px solid @gray10;
+			width: 24px;
+			height: 24px;
+			background-color: transparent;
+			transition: .15s ease-in background-color;
+			left: 0px;
+			top: 0px;
+			user-select: none;
+		}
+
+		&:after {
+			display: table-cell;;
+			width: 16px;
+			height: 16px;
+			left: 0;
+			vertical-align: middle;
+			position: absolute;
+			top: 0px;
+			font-family: 'canopy-icons';
+			speak: none;
+			font-style: normal;
+			font-weight: normal;
+			font-variant: normal;
+			text-transform: none;
+			line-height: 1;
+			content: "\f126";
+			color: @white;
+			font-size: 2.4rem;
+			opacity: 0;
+			transition: .15s ease-in opacity;
+			-webkit-font-smoothing: antialiased;
+			-moz-osx-font-smoothing: grayscale;
+			user-select: none;
+		}
+	}
+}
+
+// Disable states for the checkbox in fieldsets
+fieldset[disabled] .cps-checkbox input[type="checkbox"] + span,
+fieldset[disabled] .cps-checkbox-large input[type="checkbox"] + span {
+	cursor: not-allowed;
+	&:before {
+		border-color: @gray9;
+	}
+}
+fieldset[disabled] .cps-checkbox input[type="checkbox"]:checked + span,
+fieldset[disabled] .cps-checkbox-large input[type="checkbox"]:checked + span {
+	cursor: not-allowed;
+	&:before {
+		background-color: @gray9;
+	}
+}

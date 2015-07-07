@@ -1,0 +1,128 @@
+/** utilities.less **/
+
+@import "./variables/variables.less";
+@import "./mixins/mixins.less";
+@import "../lib/for.less";
+
+.cps-clearfix {
+	.clearfix;
+}
+
+.cps-cursor-pointer {
+	cursor: pointer;
+}
+
+.cps-pull-right {
+	float: right !important;
+}
+
+.cps-pull-left {
+	float: left !important;
+}
+
+.cps-center-block {
+	.center-block;
+}
+
+.cps-text-center {
+	text-align: center!important;
+}
+
+.cps-text-right {
+	text-align: right!important;
+}
+
+.cps-text-left {
+	text-align: left!important;
+}
+
+.cps-inline-block {
+	display: inline-block!important;
+	vertical-align: top;
+}
+
+.cps-center-vertical {
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.cps-show {
+	display: block !important;
+}
+
+.cps-hidden {
+	display: none !important;
+	visibility: hidden !important;
+}
+
+.cps-ellipsis {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+/* make sure to have `ngVisible` just add the extra CSS class */
+.ng-visible.ng-hide:not(.ng-hide-animate) {
+  visibility: hidden;
+}
+
+.cps-row:before,
+.cps-row:after,
+.cps-form-horizontal .cps-form-group:before, .cps-form-group-resize:before,
+.cps-form-horizontal .cps-form-group:after, .cps-form-group-resize:after {
+	display: table;
+	content: " ";
+}
+
+.cps-row:after,
+.cps-form-horizontal .cps-form-group:after, .cps-form-group-resize:after{
+	clear: both;
+}
+
+.createSizeClasses(@sizes) {
+	.for(@sizes); .-each(@size) {
+		@name: @size;
+		@scale: @size / 10;
+		.cps-margin-@{name} {
+			margin: ~"@{scale}rem!important";
+		}
+		.cps-margin-top-@{name} {
+			margin-top: ~"@{scale}rem!important";
+		}
+		.cps-margin-bottom-@{name} {
+			margin-bottom: ~"@{scale}rem!important";
+		}
+		.cps-margin-right-@{name} {
+			margin-right: ~"@{scale}rem!important";
+		}
+		.cps-margin-left-@{name} {
+			margin-left: ~"@{scale}rem!important";
+		}
+		.cps-padding-@{name} {
+			padding: ~"@{scale}rem!important";
+		}
+		.cps-padding-top-@{name} {
+			padding-top: ~"@{scale}rem!important";
+		}
+		.cps-padding-bottom-@{name} {
+			padding-bottom: ~"@{scale}rem!important";
+		}
+		.cps-padding-right-@{name} {
+			padding-right: ~"@{scale}rem!important";
+		}
+		.cps-padding-left-@{name} {
+			padding-left: ~"@{scale}rem!important";
+		}
+	}
+}
+
+@sizes: 0, 4, 8, 12, 16, 24, 32;
+.createSizeClasses(@sizes);
+
+// Depth helpers
+.cps-card.cps-depth-1, .cps-depth-1 { .depth-z1; }
+.cps-card.cps-depth-2, .cps-depth-2 { .depth-z2; }
+.cps-card.cps-depth-3, .cps-depth-3 { .depth-z3; }
+.cps-card.cps-depth-4, .cps-depth-4 { .depth-z4; }
+.cps-card.cps-depth-5, .cps-depth-5 { .depth-z5; }

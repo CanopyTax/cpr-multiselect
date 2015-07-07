@@ -1,0 +1,133 @@
+/** cards.less **/
+
+@import "./flexible-masonry.less";
+@import "../variables/variables.less";
+
+.cps-card {
+	background-color: @white;
+	border-radius: .2rem;
+	color: @dark-gray;
+	.depth-z1();
+
+	&__hr {
+		margin-left: -24px;
+		width: ~'calc(100% + 48px)';
+		margin-top: 16px;
+		margin-bottom: 16px;
+	}
+
+	&.\+thin {
+		.cps-card__header {
+			height: 3.6rem;
+			background-color: @gray2;
+			padding: .8rem 1.6rem;
+			border-radius: 2px 2px 0 0;
+		}
+
+		.cps-card__body {
+			padding:1.6rem 1.6rem;
+		}
+	}
+}
+
+.cps-fixed-masonry, .cps-flexible-focus {
+	min-width: 70.0rem;
+	max-width: 136.0rem;
+	margin: 0 auto 0 auto;
+}
+
+.cps-fixed-focus {
+  width: 76.0rem;
+  margin: 0 auto 0 auto;
+}
+
+.cps-fixed-masonry__card {
+	height:100%;
+	margin-bottom: .8rem;
+	margin-top: .8rem;
+
+	&.\+fixed-height {
+		min-height: 29.6rem;
+	}
+}
+
+
+.cps-card__banner {
+	margin: 1rem -2.4rem;
+	padding: .8rem 2.4rem;
+
+	&.\+large {
+		height: 56px;
+		padding: 1.2rem 2.4rem 1.6rem 2.4rem;
+		> i {
+			font-size:32px;
+			> span {
+				font-size: 18px;
+				color: @dark-gray;
+			}
+		}
+		&.\+bg-warning {
+			background-color:rgba(255, 138, 101, 0.2);
+		}
+	}
+}
+.cps-card__header + .cps-card__banner {
+	margin: 0rem;
+}
+.cps-card__header {
+	padding: 1.6rem 2.4rem 1.6rem 2.4rem;
+	border-bottom: .1rem solid @breakline-light;
+	font-weight: 400;
+
+	&.\+no-border {
+		border-bottom: 0;
+	}
+
+	h3,h4 {
+		margin: 0;
+		color: @dark-gray;
+	}
+
+}
+
+.cps-content-footer {
+	padding:16px 2.4rem;
+	border-top: .1rem solid @breakline-light;
+	a {
+		color: @dark-gray;
+		text-decoration: none;
+		padding: .4rem .8rem;
+		&:hover {
+			border: .1rem solid #E9E9E9;
+			border-radius: .2rem;
+		}
+	}
+}
+
+.cps-card__banner {
+	margin: 1rem -2.4rem;
+	padding: .8rem 2.4rem;
+}
+
+.cps-card__body {
+	padding:16px 24px;
+}
+
+.cps-card__footer {
+	padding: 16px 24px 16px 24px;
+	border-top: 1px solid @breakline-light;
+}
+
+.cps-card__inset-body {
+	padding:16px 24px;
+	background-color: @inset-background;
+	box-shadow: inset 2px 5px 6px -6px rgba(153, 153, 153, 0.51);
+}
+
+.cps-centered-card {
+	background-color: @white;
+	max-width: 800px;
+	margin: 88px auto 0 auto;
+	border-radius: 3px;
+	box-shadow: 0px 2px 5px 0px rgba(153,153,153,.3);
+}

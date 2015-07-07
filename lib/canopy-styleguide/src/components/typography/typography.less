@@ -1,0 +1,94 @@
+/** typography.less **/
+
+@import "../variables/variables.less";
+@import "../mixins/mixins.less";
+
+input, textarea, keygen, select, button {
+	font-family: @font-stack;
+}
+
+h1,h2,h3,h4,h5,h6 {
+	font-weight: 400;
+}
+
+.cps-header {
+	font-size: 4rem !important;
+	line-height: 5.2rem !important;
+}
+.cps-header-sm {
+	font-size: 3.2rem !important;
+	line-height: 4.4rem !important;
+}
+.cps-subheader {
+	font-size: 2.4rem !important;
+	line-height: 3.2rem !important;
+}
+.cps-subheader-sm {
+	font-size: 1.8rem !important;
+	line-height: 2.8rem !important;
+}
+.cps-body {
+	font-size: 1.6rem !important;
+	line-height: 2.4rem !important;
+}
+.cps-body-sm {
+	font-size: 1.4rem !important;
+	line-height: 2.0rem !important;
+}
+.cps-caption {
+	font-size: 1.2rem !important;
+	line-height: 1.6rem !important;
+}
+
+.cps-wt-light {
+	font-weight: 300;
+}
+
+.cps-wt-regular {
+	font-weight: 400;
+}
+
+.cps-wt-semibold {
+	font-weight: 600;
+}
+
+.cps-wt-bold {
+	font-weight: 700;
+}
+
+strong {
+	.cps-wt-semibold;
+}
+
+.gen-color-class(warning, @warning);
+.gen-color-class(info, @info);
+.gen-color-class(general, @general);
+.gen-color-class(success, @success);
+.gen-color-class(blue-link, @blue-link);
+.gen-color-class(medium-blue, @medium-blue);
+.gen-color-class(light-blue, @light-blue);
+
+.gen-color-class(primary-green, @primary-green);
+.gen-color-class(dark-green, @dark-green);
+.gen-color-class(medium-green, @medium-green);
+.gen-color-class(light-green, @light-green);
+
+.gen-color-class(white, @white);
+.gen-color-class(dark-gray, @dark-gray);
+.gen-color-class(light-gray, @light-gray);
+.gen-color-class(medium-gray, @medium-gray);
+
+.gen-color-class(gray-1, @gray1);
+.gen-color-class(gray-2, @gray2);
+.gen-color-class(gray-3, @gray3);
+.gen-color-class(gray-4, @gray4);
+.gen-color-class(gray-5, @gray5);
+.gen-color-class(gray-6, @gray6);
+.gen-color-class(gray-7, @gray7);
+.gen-color-class(gray-8, @gray8);
+.gen-color-class(gray-9, @gray9);
+.gen-color-class(gray-10, @gray10);
+
+.gen-color-class(red, @red);
+
+

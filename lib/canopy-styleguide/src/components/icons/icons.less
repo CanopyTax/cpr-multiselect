@@ -1,0 +1,76 @@
+/** icons.less **/
+
+@import "../variables/variables.less";
+@import "../mixins/mixins.less";
+
+#cps-app {
+	[class^="cps-icon-"], [class*=" cps-icon-"] {
+		font-family: inherit;
+		speak: inherit;
+		font-style: inherit;
+		font-weight: inherit;
+		font-variant: inherit;
+		text-transform: inherit;
+
+		&:before {
+			font-family: 'canopy-icons';
+			speak: none;
+			font-style: normal;
+			font-weight: normal;
+			font-variant: normal;
+			text-transform: none;
+			line-height: 1;
+
+			/* Better Font Rendering =========== */
+			-webkit-font-smoothing: antialiased;
+			-moz-osx-font-smoothing: grayscale;
+		}
+	}
+}
+
+.cps-icon {
+	font-size: 2.4rem;
+	color: @light-gray;
+	font-family: 'canopy-icons';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.cps-icon.\+round::before {
+	position: relative;
+	z-index:1;
+	visibility:visible;
+}
+
+.cps-icon.\+round {
+	visibility: hidden;
+	position: relative;
+}
+
+.cps-icon.\+round::after {
+	visibility:visible;
+	background-color: inherit;
+	content: " ";
+	display: inline-block;
+	height: 32px;
+	width: 32px;
+	color: white;
+	border-radius: 16px;
+	position:absolute;
+	left:-4px;
+	top:-.5rem;
+	z-index:0;
+}
+
+.cps-icon span {
+	position: relative;
+	top: -5px;
+	left: 6px;
+	font-size: 14px;
+}

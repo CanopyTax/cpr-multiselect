@@ -1,0 +1,83 @@
+/** pickers.less **/
+
+@import "../variables/variables.less";
+@import "../mixins/mixins.less";
+
+/**** BSS Guide - BOOTSTRAP DATEPICKER OVERRIDE ****/
+#cps-app .datepicker {
+	font-size: 1.0rem;
+	font-family: @font-stack;
+
+	&.datepicker-orient-top:before, &.datepicker-orient-top:after,
+	&.datepicker-orient-right:before, &.datepicker-orient-right:after,
+	&.datepicker-orient-left:before, &.datepicker-orient-left:after,
+	&.datepicker-orient-bottom:before, &.datepicker-orient-bottom:after, {
+		display: none;
+	}
+}
+
+#cps-app .datepicker table tr td,
+#cps-app .datepicker table tr th {
+  width: 24px;
+  height: 24px;
+  border-radius: 12px;
+  border: none;
+}
+
+#cps-app .datepicker table tr td.old,
+#cps-app .datepicker table tr td.new {
+	color: @gray10;
+}
+
+#cps-app {
+	.datepicker table tr td.active:hover,
+	.datepicker table tr td.active:hover:hover,
+	.datepicker table tr td.active.disabled:hover,
+	.datepicker table tr td.active.disabled:hover:hover,
+	.datepicker table tr td.active:focus,
+	.datepicker table tr td.active:hover:focus,
+	.datepicker table tr td.active.disabled:focus,
+	.datepicker table tr td.active.disabled:hover:focus,
+	.datepicker table tr td.active:active,
+	.datepicker table tr td.active:hover:active,
+	.datepicker table tr td.active.disabled:active,
+	.datepicker table tr td.active.disabled:hover:active,
+	.datepicker table tr td.active.active,
+	.datepicker table tr td.active:hover.active,
+	.datepicker table tr td.active.disabled.active,
+	.datepicker table tr td.active.disabled:hover.active,
+	.open .dropdown-toggle.datepicker table tr td.active,
+	.open .dropdown-toggle.datepicker table tr td.active:hover,
+	.open .dropdown-toggle.datepicker table tr td.active.disabled,
+	.open .dropdown-toggle.datepicker table tr td.active.disabled:hover {
+		color: #ffffff;
+		background-color: @primary-green;
+		text-shadow: none;
+	}
+}
+
+#cps-app {
+	.datepicker {
+		padding: 0;
+		border-radius: 2px;
+		border: 0;
+		width: 200px;
+		padding: 0 8px 6px 8px;
+		.depth-z2;
+		.dow {
+			color: @gray10;
+		}
+
+		thead tr:first-child {
+			font-weight: 600;
+			font-size: 1.2rem;
+		}
+
+		table {
+			border-spacing: 2px 2px;
+		}
+		tfoot {
+			display: none;
+		}
+	}
+}

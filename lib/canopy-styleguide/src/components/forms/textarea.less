@@ -1,0 +1,27 @@
+/** textarea.less **/
+
+@import "../variables/variables.less";
+@import "../mixins/mixins.less";
+
+textarea {
+	margin: 0;
+	font-family: inherit;
+	font-size: inherit;
+	line-height: inherit;
+	font: inherit;
+	color: inherit;
+	overflow: auto;
+}
+
+textarea.cps-form-control {
+	min-height: 56px;
+	min-width: 320px;
+	border: 1px solid @gray8;
+	border-radius: 2px;
+	padding-top:5px;
+
+	&.\+no-resize {
+		resize: none;
+	}
+}
+

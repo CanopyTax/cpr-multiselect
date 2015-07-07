@@ -1,0 +1,38 @@
+/** external-variables.less **/
+/** variables.less **/
+/** fonts.less **/
+/************Variables************/
+/** colors.less **/
+/************Palettes************/
+:root {
+  --dark-green: #388e3c;
+  --medium-green: #43a047;
+  --light-green: #67bb6a;
+  --dark-gray: #333333;
+  --medium-gray: #5c5c5c;
+  --light-gray: #777777;
+  --gray1: #fbfbfb;
+  --gray2: #fafafa;
+  --gray3: #f9f9f9;
+  --gray4: #f7f7f7;
+  --gray5: #f2f2f2;
+  --gray6: #e9e9e9;
+  --gray7: #e2e2e2;
+  --gray8: #dfdfdf;
+  --gray9: #cfcfcf;
+  --gray10: #afafaf;
+  --blue-link: #4a90e2;
+  --white: white;
+  --font-color: #333333;
+  --hover-color: #f7f7f7;
+  --breakline-light: #e9e9e9;
+  --breakline-dark: #dfdfdf;
+  --inset-background: #fbfbfb;
+  --warning: #ff8a65;
+  --info: #45a8f8;
+  --general: #333333;
+  --success: #4caf50;
+  --primary-green: #4caf50;
+  --red: #f44336;
+  --card-color: #fffde9;
+}

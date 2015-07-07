@@ -1,0 +1,108 @@
+/** toggle.less **/
+
+@import "../variables/variables.less";
+@import "../mixins/mixins.less";
+
+
+.cps-toggle {
+	position: relative;
+
+	input[type="checkbox"] {
+		opacity: 0;
+		position: absolute;
+		left: 0;
+	}
+
+	input[type="checkbox"]:checked + span {
+		&:before {
+			background-color: @primary-green;
+			border: 0;
+		}
+
+		&:after {
+			left: 16px;
+		}
+	}
+
+	input[type="checkbox"]:disabled + span {
+
+		&:before {
+			background-color: @gray8;
+		}
+
+		&:after {
+			box-shadow: none;
+		}
+	}
+
+	input[type="checkbox"]:disabled:checked + span {
+		&:after {
+			left: 0;
+		}
+	}
+
+	input[type="checkbox"]:focus + span {
+		&:after {
+			box-shadow: 0rem 0rem 0rem .4rem rgba( red(@blue-link), green(@blue-link), blue(@blue-link), 0.2);
+		}
+	}
+
+	input[type="checkbox"] + span {
+		font-size: 1.6rem;
+		position: relative;
+		cursor: pointer;
+		padding-left: 40px;
+		top: -.4rem;
+
+		&:before {
+			content: " ";
+			display: table-cell;
+			position: absolute;
+			//z-index: 100;
+			border-radius: 8px;
+			border: 0;
+			width: 40px;
+			left: 0;
+			height: 16px;
+			background-color: @gray10;
+			transition: .15s ease-in background-color;
+			top: 6px;
+			visibility: visible;
+		}
+
+		&:after {
+			content: " ";
+			display: table-cell;
+			position: absolute;
+			height: 24px;
+			width: 24px;
+			border-radius: 12px;
+			background-color: @white;
+			border: 1px solid @gray8;
+			.depth-z1;
+			top: 2px;
+			left: 0px;
+			visibility: visible;
+			transition: .15s ease-in left;
+		}
+	}
+}
+
+// Disabled states for the toggle in fieldsets
+fieldset[disabled] .cps-toggle input[type="checkbox"] + span {
+	cursor: not-allowed;
+	&:before {
+		background-color: @gray8;
+	}
+
+	&:after {
+		box-shadow: none;
+	}
+}
+
+fieldset[disabled] .cps-toggle input[type="checkbox"]:checked + span {
+	cursor: not-allowed;
+	&:after {
+		left: 0;
+	}
+}

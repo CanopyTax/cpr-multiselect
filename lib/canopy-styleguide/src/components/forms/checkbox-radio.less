@@ -1,0 +1,31 @@
+/** checkbox-radio.less **/
+
+@import "../variables/variables.less";
+@import "../mixins/mixins.less";
+
+@import "./radio.less";
+@import "./checkbox.less";
+@import "./toggle.less";
+
+// If there are multiple inline elements, then give them a margin-right
+.cps-checkbox, .cps-checkbox-large, .cps-radio {
+	margin-right: 16px;
+	&:only-of-type {
+		margin-right: 0;
+	}
+}
+
+input[type="radio"][disabled],
+input[type="checkbox"][disabled],
+.radio[disabled],
+.radio-inline[disabled],
+.checkbox[disabled],
+.checkbox-inline[disabled],
+fieldset[disabled] input[type="radio"],
+fieldset[disabled] input[type="checkbox"],
+fieldset[disabled] .radio,
+fieldset[disabled] .radio-inline,
+fieldset[disabled] .checkbox,
+fieldset[disabled] .checkbox-inline {
+	cursor: not-allowed;
+}

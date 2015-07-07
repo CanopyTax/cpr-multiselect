@@ -1,0 +1,96 @@
+/** flexible-masonry.less **/
+
+@import "../mixins/mixins.less";
+@import "../variables/variables.less";
+
+.cps-flexible-masonry {
+	        column-gap: 16px;
+	   -moz-column-gap: 16px;
+	-webkit-column-gap: 16px;
+
+	        columns: 213px 6;
+	   -mox-columns: 213px 6;
+	-webkit-columns: 213px 6;
+}
+
+.cps-flexible-masonry-card {
+	display: inline-block;
+	margin-bottom: .8rem;
+	margin-top: .8rem;
+	background-color: @card-color;
+	.depth-z1;
+	padding: 1.6rem;
+	border-radius: .2rem;
+	width: 22.4rem;
+	position: relative;
+	text-align: left;
+
+	&__title {
+		font-weight: 600;
+		font-size: 18px;
+		margin-bottom: 16px;
+	}
+
+	&__body {
+		min-height: 13.2rem;
+		max-height: 21.0rem;//296px;
+		overflow: hidden;
+		font-weight: 200;
+		&.\+small {
+
+		}
+	}
+
+	&.\+link {
+		cursor: pointer;
+		&:hover {
+			.depth-z2;
+		}
+	}
+
+	&.\+small {
+		width: 15.5rem;
+		margin: .8rem;
+		padding: .8rem;
+		vertical-align: top;
+		height: 16rem;
+
+		.cps-flexible-masonry-card__title {
+			height: 5rem;
+			font-size: 1.6rem;
+			margin-bottom: .2rem;
+		}
+
+		.cps-flexible-masonry-card__body {
+			min-height: 9.2rem;
+			max-height: 9.2rem;
+			font-size: 1.2rem;
+			line-height: 1.6rem;
+		}
+	}
+
+	// Currently these animations cause rendering defects
+
+	//&.ng-enter,
+	//&.ng-leave {
+	//	-webkit-transition: .5s linear all;
+	//	transition: .5s linear all;
+	//	overflow: hidden;
+	//}
+	//&.ng-enter {
+	//	opacity: 0;
+	//	max-height: 0;
+	//}
+	//&.ng-enter.ng-enter-active {
+	//	opacity: 1;
+	//	max-height: 350px;
+	//}
+	//&.ng-leave {
+	//	opacity: 1;
+	//	max-height: 350px;
+	//}
+	//&.ng-leave.ng-leave-active {
+	//	opacity: 0;
+	//	max-height: 0;
+	//}
+}

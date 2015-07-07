@@ -1,0 +1,56 @@
+/** loaders.less **/
+
+.cps-loader {
+	padding:0 36px;
+	display: block;
+}
+
+.cps-loader span{
+	width:8px;
+	height:8px;
+	float:left;
+	border-radius:50%;
+	opacity:0.2;
+	background-color:#e0e0e0;
+}
+
+.cps-loader span:not(:first-child){
+	margin-left:8px;
+}
+
+.cps-loader span:first-child{
+	animation:fball 1350ms infinite linear;
+}
+
+.cps-loader span:nth-child(2){
+	animation:sball 1350ms infinite linear;
+}
+
+.cps-loader span:last-child{
+	animation:tball 1350ms infinite linear;
+}
+
+@keyframes fball{
+	0%{opacity:0;transform:scale(0.5);}
+	13%{opacity:0.9;transform:scale(1.03);}
+	26%{opacity:1;transform:scale(0.95);}
+	33%{transform:scale(1);}
+	34%{opacity:0.2;}
+}
+
+@keyframes sball{
+	32%{opacity:0.2;transform:scale(1);}
+	33%{opacity:0;transform:scale(0.5);}
+	46%{opacity:0.9;transform:scale(1.03);}
+	59%{opacity:1;transform:scale(0.95);}
+	66%{transform:scale(1);}
+	67%{opacity:0.2;}
+}
+
+@keyframes tball{
+	67%{opacity:0.2;transform:scale(1);}
+	68%{opacity:0;transform:scale(0.5);}
+	81%{opacity:0.9;transform:scale(1.03);}
+	94%{opacity:1;transform:scale(0.95);}
+	100%{transform:scale(1);}
+}

@@ -1,0 +1,101 @@
+/** menus.less **/
+
+/************Menus************/
+
+.cps-dropdown {
+	position: relative;
+
+	> a.cps-link, .cps-link  {
+		margin-top: 8px;
+		color: @light-gray;
+		font-weight: 400;
+		padding: 4px 12px 4px 12px;
+	}
+
+	> a.cps-link:hover, .cps-link:hover, a.cps-link:focus, .cps-link:focus {
+		color: @light-gray !important;
+	}
+}
+
+.cps-dropdown-menu {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	z-index: 1000;
+	display: none;
+	float: left;
+	min-width: 160px;
+	padding: 8px 0;
+	margin: 2px 0 0;
+	font-size: 14px;
+	list-style: none;
+	background-color: #fff;
+	background-clip: padding-box;
+	border-radius: 2px;
+	.depth-z2;
+
+	&.cps-pull-right {
+		right: 0;
+		left: auto;
+	}
+
+	.cps-divider {
+		height: .1rem;
+		margin: .35rem 0rem .35rem 0rem;
+		overflow: hidden;
+		background-color: #e5e5e5;
+	}
+
+	li > a {
+		display: block;
+		padding: .8rem 1.6rem;
+		clear: both;
+		font-weight: normal;
+		line-height: 1.42857143;
+		color: @dark-gray;
+		white-space: nowrap;
+		text-decoration: none;
+	}
+
+	&__icon {
+		font-size: 2.4rem;
+		display: inline-block;
+		vertical-align: middle;
+		margin-right: 2rem;
+	}
+
+
+	li > a:hover,
+	li > a:focus,
+	li.active > a,
+	.cps-active > a,
+	.cps-active > a:hover,
+	.cps-active > a:focus  {
+		color: @dark-gray;
+		text-decoration: none;
+		background-color: @gray4;
+		outline:none;
+	}
+
+}
+
+.cps-open  {
+	a.cps-link  {
+		background-color: rgba(0,0,0,.05);
+	}
+	> .cps-dropdown-menu, .cps-dropdown.open > .cps-dropdown-menu {
+		display: block;
+	}
+}
+
+.cps-caret {
+	display: inline-block;
+	width: 0;
+	height: 0;
+	margin-left: 4px;
+	vertical-align: middle;
+	border-top: 4px solid;
+	border-right: 4px solid transparent;
+	border-left: 4px solid transparent;
+}
+
