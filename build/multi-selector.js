@@ -283,7 +283,7 @@ var MultiSelector = _react2['default'].createClass({
 	}
 });
 
-if (!window.MultiSelector) window.MultiSelector = MultiSelector;
+if (window && !window.MultiSelector) window.MultiSelector = MultiSelector;
 
 exports['default'] = MultiSelector;
 module.exports = exports['default'];

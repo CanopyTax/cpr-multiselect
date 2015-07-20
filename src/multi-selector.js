@@ -217,6 +217,6 @@ const MultiSelector = React.createClass({
 	}
 });
 
-if (!window.MultiSelector) window.MultiSelector = MultiSelector;
+if (window && !window.MultiSelector) window.MultiSelector = MultiSelector;
 
 export default MultiSelector;
