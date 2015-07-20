@@ -1,6 +1,5 @@
 import React from 'react';
 import {without, contains, union, isNull} from 'lodash';
-import './multi-selector.css';
 
 const DefaultItemComponent = React.createClass({
 	render () {

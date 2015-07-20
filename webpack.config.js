@@ -8,7 +8,7 @@ var name = require('./package.json').name;
 module.exports = {
 	entry: "./src/multi-selector.js",
 	output: {
-		path: './build',
+		path: './dist',
 		filename: name + '.js'
 	},
 	module: {

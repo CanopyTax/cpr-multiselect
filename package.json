@@ -1,11 +1,13 @@
 {
   "name": "cpr-multiselect",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "React component for selecting multiple entities from a drop-down",
-  "main": "build/cpr-multiselect.js",
+  "main": "build/multi-selector.js",
   "scripts": {
     "test": "node node_modules/karma/bin/karma start",
-    "build": "webpack --optimize-minimize"
+    "dist": "webpack --optimize-minimize",
+    "compile": "node node_modules/babel/bin/babel.js src --out-dir lib",
+    "build": "npm run dist && npm run compile"
   },
   "repository": {
     "type": "git",
@@ -19,6 +21,7 @@
   "homepage": "https://github.com/CanopyTax/cpr-multiselect",
   "devDependencies": {
     "autoprefixer-loader": "^1.2.0",
+    "babel": "^5.6.23",
     "babel-core": "^4.7.13",
     "babel-loader": "^4.2.0",
     "css-loader": "^0.9.1",
