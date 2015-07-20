@@ -1,12 +1,12 @@
 {
   "name": "cpr-multiselect",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "React component for selecting multiple entities from a drop-down",
   "main": "build/multi-selector.js",
   "scripts": {
     "test": "node node_modules/karma/bin/karma start",
     "dist": "webpack --optimize-minimize",
-    "compile": "node node_modules/babel/bin/babel.js src --out-dir lib",
+    "compile": "node node_modules/babel/bin/babel.js src --out-dir build",
     "build": "npm run dist && npm run compile"
   },
   "repository": {
