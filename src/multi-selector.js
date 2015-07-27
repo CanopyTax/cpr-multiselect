@@ -193,9 +193,10 @@ const MultiSelector = React.createClass({
 		let dialog;
 
 		if (this.state.dialogDisplayed) {
+			let placeholder = this.props.placeholder ? this.props.placeholder : "Type a collaborators name...";
 			dialog = (
 				<div className="cp-multi-selector__dialog depth-z2" style={{}}>
-					<input onKeyUp={this.keyUp} className="cps-form-control cp-multi-selector__dialog__input" placeholder="Type a collaborators name..."/>
+					<input onKeyUp={this.keyUp} className="cps-form-control cp-multi-selector__dialog__input" placeholder={placeholder}/>
 					<div className="cp-multi-selector__dialog__items">
 						{this.getSearchItems(this.props.items)}
 					</div>
