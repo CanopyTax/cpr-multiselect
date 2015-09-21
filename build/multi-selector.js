@@ -255,10 +255,11 @@ var MultiSelector = _react2['default'].createClass({
 		var dialog = undefined;
 
 		if (this.state.dialogDisplayed) {
+			var placeholder = this.props.placeholder ? this.props.placeholder : "Type a collaborators name...";
 			dialog = _react2['default'].createElement(
 				'div',
 				{ className: 'cp-multi-selector__dialog depth-z2', style: {} },
-				_react2['default'].createElement('input', { onKeyUp: this.keyUp, className: 'cps-form-control cp-multi-selector__dialog__input', placeholder: 'Type a collaborators name...' }),
+				_react2['default'].createElement('input', { onKeyUp: this.keyUp, className: 'cps-form-control cp-multi-selector__dialog__input', placeholder: placeholder }),
 				_react2['default'].createElement(
 					'div',
 					{ className: 'cp-multi-selector__dialog__items' },

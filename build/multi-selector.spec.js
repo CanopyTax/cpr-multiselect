@@ -75,14 +75,14 @@ describe('multi-selector', function () {
 
 	it('Should render a dialog when clicked', function () {
 		var items = [{
-			'lastName': 'Seward',
-			'firstName': 'William'
+			"lastName": "Seward",
+			"firstName": "William"
 		}, {
-			'lastName': 'Blair',
-			'firstName': 'Montgomery'
+			"lastName": "Blair",
+			"firstName": "Montgomery"
 		}, {
-			'lastName': 'Lewis',
-			'firstName': 'Meriwether'
+			"lastName": "Lewis",
+			"firstName": "Meriwether"
 		}];
 
 		var multiSelect = _reactLibReactTestUtils2['default'].renderIntoDocument(_react2['default'].createElement(_multiSelectorJs2['default'], { items: items }));
@@ -102,14 +102,14 @@ describe('multi-selector', function () {
 
 	it('Should toggle an element', function () {
 		var items = [{
-			'lastName': 'Seward',
-			'firstName': 'William'
+			"lastName": "Seward",
+			"firstName": "William"
 		}, {
-			'lastName': 'Montgomery',
-			'firstName': 'Blair'
+			"lastName": "Montgomery",
+			"firstName": "Blair"
 		}, {
-			'lastName': 'Meriwether',
-			'firstName': 'Lewis'
+			"lastName": "Meriwether",
+			"firstName": "Lewis"
 		}];
 
 		var multiSelect = _reactLibReactTestUtils2['default'].renderIntoDocument(_react2['default'].createElement(_multiSelectorJs2['default'], { items: items }));
@@ -132,14 +132,14 @@ describe('multi-selector', function () {
 
 	it('Should render a custom item component', function () {
 		var items = [{
-			'lastName': 'Seward',
-			'firstName': 'William'
+			"lastName": "Seward",
+			"firstName": "William"
 		}, {
-			'lastName': 'Montgomery',
-			'firstName': 'Blair'
+			"lastName": "Montgomery",
+			"firstName": "Blair"
 		}, {
-			'lastName': 'Meriwether',
-			'firstName': 'Lewis'
+			"lastName": "Meriwether",
+			"firstName": "Lewis"
 		}];
 
 		var MyItemComponent = _react2['default'].createClass({
