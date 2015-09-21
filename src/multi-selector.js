@@ -67,7 +67,6 @@ const MultiSelector = React.createClass({
 	},
 
 	keyUp: function(e) {
-
 		const keycode = e.which;
 		const activeIndex = this.state.activeIndex;
 		const filterItems = this.getFilterItems(this.props.items);
@@ -99,6 +98,10 @@ const MultiSelector = React.createClass({
 		} else if(keycode === 13) { // press enter key
 			if(!isNull(activeIndex)) {
 				return this.selectItem(filterItems[activeIndex]);
+			} else if(this.props.noRestrict) {
+				// if the noRestrict prop is true it adds the input as a string to the selected items on enter
+				this.selectItem(e.currentTarget.value);
+				e.currentTarget.value = "";
 			}
 		} else if(keycode === 27) { // press escape key
 			return this.setState({
@@ -179,6 +182,7 @@ const MultiSelector = React.createClass({
 	},
 
 	render: function() {
+		//Get getItemTitle is the function that should be passed in to decide what `pill` will display on selection.
 		let getItemTitle = this.props.getItemTitle || this.getItemTitle;
 
 		let pills = this.state.selectedItems
