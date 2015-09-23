@@ -1,3 +1,5 @@
+/* */ 
+"format cjs";
 import React from 'react';
 import {without, contains, union, isNull} from 'lodash';
 
@@ -181,6 +183,10 @@ const MultiSelector = React.createClass({
 		}, 100);
 	},
 
+	prevent: function(e){
+		if(e.which === 13) e.preventDefault();
+	},
+
 	render: function() {
 		//Get getItemTitle is the function that should be passed in to decide what `pill` will display on selection.
 		let getItemTitle = this.props.getItemTitle || this.getItemTitle;
@@ -200,7 +206,7 @@ const MultiSelector = React.createClass({
 			let placeholder = this.props.placeholder ? this.props.placeholder : "Type a collaborators name...";
 			dialog = (
 				<div className="cp-multi-selector__dialog depth-z2" style={{}}>
-					<input onKeyUp={this.keyUp} className="cps-form-control cp-multi-selector__dialog__input" placeholder={placeholder}/>
+					<input onKeyUp={this.keyUp} className="cps-form-control cp-multi-selector__dialog__input" placeholder={placeholder} onKeyDown={this.prevent}/>
 					<div className="cp-multi-selector__dialog__items">
 						{this.getSearchItems(this.props.items)}
 					</div>

@@ -111,6 +111,7 @@ var MultiSelector = _react2['default'].createClass({
 	},
 
 	keyUp: function keyUp(e) {
+		e.preventDefault();
 		var keycode = e.which;
 		var activeIndex = this.state.activeIndex;
 		var filterItems = this.getFilterItems(this.props.items);
