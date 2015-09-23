@@ -117,7 +117,7 @@ var MultiSelector = _react2['default'].createClass({
 		var keycode = e.which;
 		var activeIndex = this.state.activeIndex;
 		var filterItems = this.getFilterItems(this.props.items);
-
+		this.props.onInputChange && this.props.onInputChange(e.currentTarget.value);
 		if (keycode === 40) {
 			// press down key
 			if ((0, _lodash.isNull)(activeIndex)) {

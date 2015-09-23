@@ -37,7 +37,11 @@ function itemsChanged(selectedItems) {
 	console.log(selectedItems);
 }
 
-<MultiSelect items={items} onChange={itemsChanged}></MultiSelect>
+function inputChange(input) {
+	//Input will be whatever current text is in the input
+}
+
+<MultiSelect items={items} onChange={itemsChanged} onInputChange={inputChange}></MultiSelect>
 ```
 
 ### Custom

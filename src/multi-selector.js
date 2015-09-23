@@ -72,7 +72,7 @@ const MultiSelector = React.createClass({
 		const keycode = e.which;
 		const activeIndex = this.state.activeIndex;
 		const filterItems = this.getFilterItems(this.props.items);
-
+		this.props.onInputChange && this.props.onInputChange(e.currentTarget.value);
 		if(keycode === 40) { // press down key
 			if(isNull(activeIndex)) {
 				return this.setState({
