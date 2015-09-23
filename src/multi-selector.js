@@ -146,7 +146,7 @@ const MultiSelector = React.createClass({
 
 		return this.getFilterItems(items).map((item, index) => {
 			return (
-				<div className={`cp-multi-selector-item ${this.getSelectedClass(item)} ${this.getActiveClass(index)}`} onClick={this.selectItem.bind(this, item)}>
+				<div key={index} className={`cp-multi-selector-item ${this.getSelectedClass(item)} ${this.getActiveClass(index)}`} onClick={this.selectItem.bind(this, item)}>
 					<ItemComponent item={item}/>
 				</div>
 			)
@@ -186,9 +186,9 @@ const MultiSelector = React.createClass({
 		let getItemTitle = this.props.getItemTitle || this.getItemTitle;
 
 		let pills = this.state.selectedItems
-			.map((item) => {
+			.map((item, i) => {
 				return (
-					<div className="cp-multi-selector__pill cps-white cps-bg-gray-10">
+					<div key={i} className="cp-multi-selector__pill cps-white cps-bg-gray-10">
 						<span style={{verticalAlign: 'top'}}>{getItemTitle(item)}</span><i onClick={this.removeItem.bind(this, item)} className="cps-icon cps-icon-sm-close"></i>
 					</div>
 				);

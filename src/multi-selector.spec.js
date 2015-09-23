@@ -28,7 +28,7 @@ describe('multi-selector', function() {
 		);
 
 		let pill = TestUtils.findRenderedDOMComponentWithClass(multiSelect, 'cp-multi-selector__pill');
-		expect(pill.getDOMNode().textContent).toEqual('William Seward');
+		expect(pill.textContent).toEqual('William Seward');
 	});
 
 	it('Should render a custom pill title', function() {
@@ -48,7 +48,7 @@ describe('multi-selector', function() {
 		);
 
 		let pill = TestUtils.findRenderedDOMComponentWithClass(multiSelect, 'cp-multi-selector__pill');
-		expect(pill.getDOMNode().textContent).toEqual('yo dogg William');
+		expect(pill.textContent).toEqual('yo dogg William');
 	});
 
 	it('Should remove items and trigger an event callback', function(run) {
@@ -103,9 +103,9 @@ describe('multi-selector', function() {
 
 		let itemElements = TestUtils.scryRenderedDOMComponentsWithClass(multiSelect, 'cp-multi-selector-item');
 		expect(itemElements.length).toBe(3);
-		expect(itemElements[0].getDOMNode().textContent).toBe('WSWilliam Seward');
-		expect(itemElements[1].getDOMNode().textContent).toBe('MBMontgomery Blair');
-		expect(itemElements[2].getDOMNode().textContent).toBe('MLMeriwether Lewis');
+		expect(itemElements[0].textContent).toBe('WSWilliam Seward');
+		expect(itemElements[1].textContent).toBe('MBMontgomery Blair');
+		expect(itemElements[2].textContent).toBe('MLMeriwether Lewis');
 	});
 
 	it('Should toggle an element', function() {
@@ -136,12 +136,12 @@ describe('multi-selector', function() {
 
 		// Select an item
 		itemElements = TestUtils.scryRenderedDOMComponentsWithClass(multiSelect, 'cp-multi-selector-item');
-		expect(itemElements[0].getDOMNode().classList[1]).toBe('+selected');
+		expect(itemElements[0].classList[1]).toBe('+selected');
 
 		// Deselect an item
 		TestUtils.Simulate.click(itemElements[0]);
 		itemElements = TestUtils.scryRenderedDOMComponentsWithClass(multiSelect, 'cp-multi-selector-item');
-		expect(itemElements[0].getDOMNode().classList[1]).toBeFalsy();
+		expect(itemElements[0].classList[1]).toBeFalsy();
 	});
 
 	it('Should render a custom item component', function() {

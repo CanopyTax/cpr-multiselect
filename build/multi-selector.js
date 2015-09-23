@@ -201,7 +201,7 @@ var MultiSelector = _react2['default'].createClass({
 		return this.getFilterItems(items).map(function (item, index) {
 			return _react2['default'].createElement(
 				'div',
-				{ className: 'cp-multi-selector-item ' + _this3.getSelectedClass(item) + ' ' + _this3.getActiveClass(index), onClick: _this3.selectItem.bind(_this3, item) },
+				{ key: index, className: 'cp-multi-selector-item ' + _this3.getSelectedClass(item) + ' ' + _this3.getActiveClass(index), onClick: _this3.selectItem.bind(_this3, item) },
 				_react2['default'].createElement(ItemComponent, { item: item })
 			);
 		});
@@ -243,10 +243,10 @@ var MultiSelector = _react2['default'].createClass({
 		//Get getItemTitle is the function that should be passed in to decide what `pill` will display on selection.
 		var getItemTitle = this.props.getItemTitle || this.getItemTitle;
 
-		var pills = this.state.selectedItems.map(function (item) {
+		var pills = this.state.selectedItems.map(function (item, i) {
 			return _react2['default'].createElement(
 				'div',
-				{ className: 'cp-multi-selector__pill cps-white cps-bg-gray-10' },
+				{ key: i, className: 'cp-multi-selector__pill cps-white cps-bg-gray-10' },
 				_react2['default'].createElement(
 					'span',
 					{ style: { verticalAlign: 'top' } },
