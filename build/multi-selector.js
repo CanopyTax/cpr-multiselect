@@ -1,3 +1,4 @@
+/* */
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -11,6 +12,8 @@ var _react = require('react');
 var _react2 = _interopRequireDefault(_react);
 
 var _lodash = require('lodash');
+
+"format cjs";
 
 var DefaultItemComponent = _react2['default'].createClass({
 	displayName: 'DefaultItemComponent',
@@ -111,7 +114,6 @@ var MultiSelector = _react2['default'].createClass({
 	},
 
 	keyUp: function keyUp(e) {
-		e.preventDefault();
 		var keycode = e.which;
 		var activeIndex = this.state.activeIndex;
 		var filterItems = this.getFilterItems(this.props.items);
@@ -238,6 +240,10 @@ var MultiSelector = _react2['default'].createClass({
 		}, 100);
 	},
 
+	prevent: function prevent(e) {
+		if (e.which === 13) e.preventDefault();
+	},
+
 	render: function render() {
 		var _this5 = this;
 
@@ -264,7 +270,7 @@ var MultiSelector = _react2['default'].createClass({
 			dialog = _react2['default'].createElement(
 				'div',
 				{ className: 'cp-multi-selector__dialog depth-z2', style: {} },
-				_react2['default'].createElement('input', { onKeyUp: this.keyUp, className: 'cps-form-control cp-multi-selector__dialog__input', placeholder: placeholder }),
+				_react2['default'].createElement('input', { onKeyUp: this.keyUp, className: 'cps-form-control cp-multi-selector__dialog__input', placeholder: placeholder, onKeyDown: this.prevent }),
 				_react2['default'].createElement(
 					'div',
 					{ className: 'cp-multi-selector__dialog__items' },
