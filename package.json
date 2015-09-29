@@ -22,7 +22,7 @@
   "devDependencies": {
     "autoprefixer-loader": "1.2.0",
     "babel": "5.6.23",
-    "babel-core": "4.7.13",
+    "babel-core": "5.8.25",
     "babel-loader": "4.2.0",
     "css-loader": "0.9.1",
     "jasmine-core": "2.1.3",
