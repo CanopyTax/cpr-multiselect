@@ -40,7 +40,7 @@
     "webpack": "1.4.15"
   },
   "dependencies": {
-    "lodash": "3.10.0",
+    "lodash": "3.10.1",
     "react": "^0.14.0-rc1"
   },
   "optionalDependencies": {
