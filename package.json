@@ -1,6 +1,6 @@
 {
   "name": "cpr-multiselect",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "description": "React component for selecting multiple entities from a drop-down",
   "main": "build/multi-selector.js",
   "scripts": {
@@ -9,6 +9,9 @@
     "compile": "node node_modules/babel/bin/babel.js src --out-dir build",
     "build": "npm run dist && npm run compile"
   },
+	"sofe": {
+		"authService": "http://canopytax.com/someservice.js"
+	},
   "repository": {
     "type": "git",
     "url": "https://github.com/CanopyTax/cpr-multiselect.git"
