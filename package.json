@@ -9,9 +9,9 @@
     "compile": "node node_modules/babel/bin/babel.js src --out-dir build",
     "build": "npm run dist && npm run compile"
   },
-	"sofe": {
-		"authService": "http://canopytax.com/someservice.js"
-	},
+  "sofe": {
+    "authService": "http://canopytax.com/someservice.js"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/CanopyTax/cpr-multiselect.git"
@@ -28,7 +28,7 @@
     "babel": "5.8.23",
     "babel-loader": "5.3.2",
     "css-loader": "0.20.2",
-    "jasmine-core": "2.3.4",
+    "jasmine-core": "2.4.1",
     "jsx-loader": "0.13.2",
     "karma": "0.13.11",
     "karma-chrome-launcher": "0.1.7",
