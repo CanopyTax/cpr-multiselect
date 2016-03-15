@@ -1,12 +1,11 @@
-/* */ 
-"format cjs";
 import React from 'react';
-import {without, contains, union, isNull} from 'lodash';
+import {without, includes, union, isNull} from 'lodash';
 
 const DefaultItemComponent = React.createClass({
 	render () {
 		const firstName = this.props.item.firstName;
 		const lastName = this.props.item.lastName;
+
 		return (
 			<div>
 				<div className="cp-multi-selector-item__icon cps-bg-medium-gray cps-gray-5">{`${firstName[0]}${lastName[0]}`}</div>
@@ -124,7 +123,7 @@ const MultiSelector = React.createClass({
 	},
 
 	getSelectedClass: function(item) {
-		return contains(this.state.selectedItems, item) ? '+selected' : '';
+		return includes(this.state.selectedItems, item) ? '+selected' : '';
 	},
 
 	getActiveClass: function(index) {
@@ -158,7 +157,7 @@ const MultiSelector = React.createClass({
 	selectItem: function(item, e) {
 		let selectedItems = this.state.selectedItems;
 
-		if(contains(selectedItems, item)) {
+		if(includes(selectedItems, item)) {
 			this.setState({
 				selectedItems: without(selectedItems, item)
 			});
@@ -173,7 +172,7 @@ const MultiSelector = React.createClass({
 
 	positionDialog: function() {
 		setTimeout(() => {
-			let el = React.findDOMNode(this);
+			let el = this.el;
 			let height = el.clientHeight;
 			let dialog = el.querySelector('.cp-multi-selector__dialog');
 
@@ -201,6 +200,7 @@ const MultiSelector = React.createClass({
 			});
 
 		let dialog;
+		let that = this;
 
 		if (this.state.dialogDisplayed) {
 			let placeholder = this.props.placeholder ? this.props.placeholder : "Type a collaborators name...";
@@ -217,7 +217,7 @@ const MultiSelector = React.createClass({
 		}
 
 		return (
-			<div className='cp-multi-selector'>
+			<div ref={el => { if (el) that.el = el }} className='cp-multi-selector'>
 				<input type="input" className="cp-multi-selector__hidden-input" onFocus={this.displayDialog}/>
 				<div onClick={this.displayDialog} className="cp-multi-selector__main-input cps-form-control">
 					{pills}

@@ -1,4 +1,3 @@
-/* */
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -13,14 +12,13 @@ var _react2 = _interopRequireDefault(_react);
 
 var _lodash = require('lodash');
 
-"format cjs";
-
 var DefaultItemComponent = _react2['default'].createClass({
 	displayName: 'DefaultItemComponent',
 
 	render: function render() {
 		var firstName = this.props.item.firstName;
 		var lastName = this.props.item.lastName;
+
 		return _react2['default'].createElement(
 			'div',
 			null,
@@ -173,7 +171,7 @@ var MultiSelector = _react2['default'].createClass({
 	},
 
 	getSelectedClass: function getSelectedClass(item) {
-		return (0, _lodash.contains)(this.state.selectedItems, item) ? '+selected' : '';
+		return (0, _lodash.includes)(this.state.selectedItems, item) ? '+selected' : '';
 	},
 
 	getActiveClass: function getActiveClass(index) {
@@ -213,7 +211,7 @@ var MultiSelector = _react2['default'].createClass({
 	selectItem: function selectItem(item, e) {
 		var selectedItems = this.state.selectedItems;
 
-		if ((0, _lodash.contains)(selectedItems, item)) {
+		if ((0, _lodash.includes)(selectedItems, item)) {
 			this.setState({
 				selectedItems: (0, _lodash.without)(selectedItems, item)
 			});
@@ -230,7 +228,7 @@ var MultiSelector = _react2['default'].createClass({
 		var _this4 = this;
 
 		setTimeout(function () {
-			var el = _react2['default'].findDOMNode(_this4);
+			var el = _this4.el;
 			var height = el.clientHeight;
 			var dialog = el.querySelector('.cp-multi-selector__dialog');
 
@@ -264,6 +262,7 @@ var MultiSelector = _react2['default'].createClass({
 		});
 
 		var dialog = undefined;
+		var that = this;
 
 		if (this.state.dialogDisplayed) {
 			var placeholder = this.props.placeholder ? this.props.placeholder : "Type a collaborators name...";
@@ -283,7 +282,9 @@ var MultiSelector = _react2['default'].createClass({
 
 		return _react2['default'].createElement(
 			'div',
-			{ className: 'cp-multi-selector' },
+			{ ref: function (el) {
+					if (el) that.el = el;
+				}, className: 'cp-multi-selector' },
 			_react2['default'].createElement('input', { type: 'input', className: 'cp-multi-selector__hidden-input', onFocus: this.displayDialog }),
 			_react2['default'].createElement(
 				'div',
