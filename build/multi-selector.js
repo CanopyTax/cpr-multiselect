@@ -68,11 +68,11 @@ var MultiSelector = _react2['default'].createClass({
 	displayName: 'MultiSelector',
 
 	componentWillMount: function componentWillMount() {
-		document.body.addEventListener('click', this.state.close);
+		document.addEventListener('click', this.state.close);
 	},
 
 	componentWillUnmount: function componentWillUnmount() {
-		document.body.removeEventListener('click', this.state.close);
+		document.removeEventListener('click', this.state.close);
 	},
 
 	getInitialState: function getInitialState() {
