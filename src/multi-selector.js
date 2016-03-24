@@ -26,11 +26,11 @@ function nearest(element, className) {
 const MultiSelector = React.createClass({
 
 	componentWillMount: function() {
-		document.body.addEventListener('click', this.state.close);
+		document.addEventListener('click', this.state.close);
 	},
 
 	componentWillUnmount: function() {
-		document.body.removeEventListener('click', this.state.close);
+		document.removeEventListener('click', this.state.close);
 	},
 
 	getInitialState: function() {
