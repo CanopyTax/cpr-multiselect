@@ -19,6 +19,7 @@ describe('multi-selector', function() {
 		let items = [
 			{
 				firstName: 'William',
+				label: 'Will Sew',
 				lastName: 'Seward'
 			}
 		];
@@ -28,7 +29,7 @@ describe('multi-selector', function() {
 		);
 
 		let pill = TestUtils.findRenderedDOMComponentWithClass(multiSelect, 'cp-multi-selector__pill');
-		expect(pill.textContent).toEqual('William Seward');
+		expect(pill.textContent).toEqual('Will Sew');
 	});
 
 	it('Should render a custom pill title', function() {
@@ -68,7 +69,7 @@ describe('multi-selector', function() {
 			<MultiSelector initialSelectedItems={items} onChange={callback}></MultiSelector>
 		);
 
-		let pillClose = TestUtils.findRenderedDOMComponentWithClass(multiSelect, 'cps-icon-sm-close');
+		let pillClose = TestUtils.findRenderedDOMComponentWithClass(multiSelect, 'cps-icon-close');
 		TestUtils.Simulate.click(pillClose);
 
 		let pills = TestUtils.scryRenderedDOMComponentsWithClass(multiSelect, 'cp-multi-selector__pill');
@@ -79,15 +80,18 @@ describe('multi-selector', function() {
 		let items = [
 			{
 				"lastName": "Seward",
-				"firstName": "William"
+				"firstName": "William",
+				"label": "Will Sew"
 			},
 			{
 				"lastName": "Blair",
-				"firstName": "Montgomery"
+				"firstName": "Montgomery",
+				"label": "Blair Mont"
 			},
 			{
 				"lastName": "Lewis",
-				"firstName": "Meriwether"
+				"firstName": "Meriwether",
+				"label": "Meri Lew"
 			}
 		];
 
@@ -103,23 +107,26 @@ describe('multi-selector', function() {
 
 		let itemElements = TestUtils.scryRenderedDOMComponentsWithClass(multiSelect, 'cp-multi-selector-item');
 		expect(itemElements.length).toBe(3);
-		expect(itemElements[0].textContent).toBe('WSWilliam Seward');
-		expect(itemElements[1].textContent).toBe('MBMontgomery Blair');
-		expect(itemElements[2].textContent).toBe('MLMeriwether Lewis');
+		expect(itemElements[0].textContent).toBe('Will Sew');
+		expect(itemElements[1].textContent).toBe('Blair Mont');
+		expect(itemElements[2].textContent).toBe('Meri Lew');
 	});
 
 	it('Should toggle an element', function() {
 		let items = [
 			{
 				"lastName": "Seward",
+				"label": "William Seward",
 				"firstName": "William"
 			},
 			{
 				"lastName": "Montgomery",
+				"label": "Blair Montgomery",
 				"firstName": "Blair"
 			},
 			{
 				"lastName": "Meriwether",
+				"label": "Lewis Meriwether",
 				"firstName": "Lewis"
 			}
 		];
@@ -148,14 +155,17 @@ describe('multi-selector', function() {
 		let items = [
 			{
 				"lastName": "Seward",
+				"label": "William Seward",
 				"firstName": "William"
 			},
 			{
 				"lastName": "Montgomery",
+				"label": "Blair Montgomery",
 				"firstName": "Blair"
 			},
 			{
 				"lastName": "Meriwether",
+				"label": "Lewis Meriwether",
 				"firstName": "Lewis"
 			}
 		];
