@@ -51,6 +51,12 @@ const MultiSelector = React.createClass({
 		}
 	},
 
+	componentWillReceiveProps(nextProps) {
+		this.setState({
+			selectedItems: nextProps.initialSelectedItems
+		})
+	},
+
 	displayDialog: function(e) {
 		this.setState({
 			dialogDisplayed: true
