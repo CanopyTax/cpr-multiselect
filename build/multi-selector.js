@@ -12,34 +12,27 @@ var _react2 = _interopRequireDefault(_react);
 
 var _lodash = require('lodash');
 
-var DefaultItemComponent = _react2['default'].createClass({
-	displayName: 'DefaultItemComponent',
+function DefaultItemComponent(props) {
+	var item = props.item;
+	var selectedItems = props.selectedItems;
+	var selected = (0, _lodash.includes)(selectedItems, item);
 
-	render: function render() {
-		var firstName = this.props.item.firstName;
-		var lastName = this.props.item.lastName;
-
-		return _react2['default'].createElement(
+	return _react2['default'].createElement(
+		'div',
+		{ title: '' + item.label },
+		_react2['default'].createElement(
 			'div',
-			null,
-			_react2['default'].createElement(
-				'div',
-				{ className: 'cp-multi-selector-item__icon cps-bg-medium-gray cps-gray-5' },
-				'' + firstName[0] + lastName[0]
-			),
-			_react2['default'].createElement(
-				'div',
-				{ className: 'cp-multi-selector-item__title' },
-				firstName + ' ' + lastName
-			),
-			_react2['default'].createElement(
-				'div',
-				{ className: 'cp-multi-selector-item__check' },
-				_react2['default'].createElement('i', { className: 'cps-icon cps-icon-lg-check cps-info' })
-			)
-		);
-	}
-});
+			{
+				className: 'cp-multi-selector-item__icon ' + (selected ? "cps-bg-primary-green +selected" : "") },
+			selected ? _react2['default'].createElement('i', { className: 'cps-icon cps-icon-lg-check' }) : null
+		),
+		_react2['default'].createElement(
+			'div',
+			{ className: 'cp-multi-selector-item__title' },
+			'' + item.label
+		)
+	);
+};
 
 function nearest(_x3, _x4) {
 	var _left;
@@ -68,11 +61,11 @@ var MultiSelector = _react2['default'].createClass({
 	displayName: 'MultiSelector',
 
 	componentWillMount: function componentWillMount() {
-		document.body.addEventListener('click', this.state.close);
+		document.addEventListener('click', this.state.close);
 	},
 
 	componentWillUnmount: function componentWillUnmount() {
-		document.body.removeEventListener('click', this.state.close);
+		document.removeEventListener('click', this.state.close);
 	},
 
 	getInitialState: function getInitialState() {
@@ -80,6 +73,9 @@ var MultiSelector = _react2['default'].createClass({
 
 		return {
 			selectedItems: this.props.initialSelectedItems || [],
+			mouseIndex: null,
+			mouseActive: true,
+			mouseFunc: null,
 			dialogDisplayed: false,
 			activeIndex: null,
 			searchValue: '',
@@ -108,38 +104,53 @@ var MultiSelector = _react2['default'].createClass({
 	},
 
 	getItemTitle: function getItemTitle(item) {
-		return item.firstName + ' ' + item.lastName;
+		return item.label;
 	},
+	setActiveIndex: function setActiveIndex(index) {
+		var _this2 = this;
 
-	keyUp: function keyUp(e) {
+		this.setState({
+			activeIndex: index,
+			mouseIndex: null
+		}, function () {
+			_this2.searchItems[_this2.state.activeIndex].scrollIntoView();
+			if (_this2.state.mouseActive) {
+				_this2.setState({
+					mouseActive: false,
+					mouseFunc: function mouseFunc() {
+						_this2.setState({
+							mouseActive: true
+						});
+						document.removeEventListener("mousemove", _this2.state.mouseFunc);
+					}
+				}, function () {
+					document.addEventListener("mousemove", _this2.state.mouseFunc);
+				});
+			}
+		});
+	},
+	keyDown: function keyDown(e) {
 		var keycode = e.which;
 		var activeIndex = this.state.activeIndex;
 		var filterItems = this.getFilterItems(this.props.items);
 		this.props.onInputChange && this.props.onInputChange(e.currentTarget.value);
+		if (keycode === 13) e.preventDefault();
 		if (keycode === 40) {
 			// press down key
 			if ((0, _lodash.isNull)(activeIndex)) {
-				return this.setState({
-					activeIndex: 0
-				});
+				return this.setActiveIndex(0);
 			} else {
 				if (activeIndex < filterItems.length - 1) {
-					return this.setState({
-						activeIndex: activeIndex + 1
-					});
+					return this.setActiveIndex(activeIndex + 1);
 				}
 			}
 		} else if (keycode === 38) {
 			// press up key
 			if (!activeIndex) {
-				return this.setState({
-					activeIndex: 0
-				});
+				return this.setActiveIndex(0);
 			} else {
 				if (activeIndex > 0) {
-					return this.setState({
-						activeIndex: activeIndex - 1
-					});
+					return this.setActiveIndex(activeIndex - 1);
 				}
 			}
 		} else if (keycode === 13) {
@@ -175,25 +186,23 @@ var MultiSelector = _react2['default'].createClass({
 	},
 
 	getActiveClass: function getActiveClass(index) {
-		return this.state.activeIndex === index ? '+highlighted' : '';
+		return this.state.activeIndex === index || this.state.mouseIndex === index ? '+highlighted' : '';
 	},
 
 	getFilterItems: function getFilterItems() {
-		var _this2 = this;
+		var _this3 = this;
 
 		var items = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
 
 		var getItemTitle = this.props.getItemTitle || this.getItemTitle;
 
 		return items.filter(function (item) {
-			return getItemTitle(item).toLowerCase().indexOf(_this2.state.searchValue.toLowerCase()) > -1;
-		}).filter(function (item, index) {
-			return index < 4;
+			return getItemTitle(item).toLowerCase().indexOf(_this3.state.searchValue.toLowerCase()) > -1;
 		});
 	},
 
 	getSearchItems: function getSearchItems() {
-		var _this3 = this;
+		var _this4 = this;
 
 		var items = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
 
@@ -202,8 +211,26 @@ var MultiSelector = _react2['default'].createClass({
 		return this.getFilterItems(items).map(function (item, index) {
 			return _react2['default'].createElement(
 				'div',
-				{ key: index, className: 'cp-multi-selector-item ' + _this3.getSelectedClass(item) + ' ' + _this3.getActiveClass(index), onClick: _this3.selectItem.bind(_this3, item) },
-				_react2['default'].createElement(ItemComponent, { item: item })
+				{
+					key: index,
+					ref: function (ref) {
+						if (_this4.searchItems) {
+							_this4.searchItems[index] = ref;
+						} else {
+							_this4.searchItems = [];
+							_this4.searchItems[index] = ref;
+						}
+					},
+					onMouseOver: function () {
+						if (_this4.state.mouseActive) {
+							_this4.setState({
+								mouseIndex: index
+							});
+						}
+					},
+					className: 'cp-multi-selector-item ' + _this4.getSelectedClass(item) + ' ' + _this4.getActiveClass(index),
+					onClick: _this4.selectItem.bind(_this4, item) },
+				_react2['default'].createElement(ItemComponent, { item: item, selectedItems: _this4.state.selectedItems })
 			);
 		});
 	},
@@ -225,10 +252,10 @@ var MultiSelector = _react2['default'].createClass({
 	},
 
 	positionDialog: function positionDialog() {
-		var _this4 = this;
+		var _this5 = this;
 
 		setTimeout(function () {
-			var el = _this4.el;
+			var el = _this5.el;
 			var height = el.clientHeight;
 			var dialog = el.querySelector('.cp-multi-selector__dialog');
 
@@ -243,7 +270,7 @@ var MultiSelector = _react2['default'].createClass({
 	},
 
 	render: function render() {
-		var _this5 = this;
+		var _this6 = this;
 
 		//Get getItemTitle is the function that should be passed in to decide what `pill` will display on selection.
 		var getItemTitle = this.props.getItemTitle || this.getItemTitle;
@@ -251,13 +278,19 @@ var MultiSelector = _react2['default'].createClass({
 		var pills = this.state.selectedItems.map(function (item, i) {
 			return _react2['default'].createElement(
 				'div',
-				{ key: i, className: 'cp-multi-selector__pill cps-white cps-bg-gray-10' },
+				{ key: i, className: 'cp-multi-selector__pill', title: '' + getItemTitle(item) },
 				_react2['default'].createElement(
 					'span',
-					{ style: { verticalAlign: 'top' } },
+					{
+						style: { verticalAlign: 'top', margin: "0 8px" },
+						tooltip: getItemTitle(item) },
 					getItemTitle(item)
 				),
-				_react2['default'].createElement('i', { onClick: _this5.removeItem.bind(_this5, item), className: 'cps-icon cps-icon-sm-close' })
+				_react2['default'].createElement(
+					'div',
+					{ className: 'cp-multi-selector__pill__close' },
+					_react2['default'].createElement('i', { onClick: _this6.removeItem.bind(_this6, item), className: 'cps-icon cps-icon-close' })
+				)
 			);
 		});
 
@@ -269,7 +302,14 @@ var MultiSelector = _react2['default'].createClass({
 			dialog = _react2['default'].createElement(
 				'div',
 				{ className: 'cp-multi-selector__dialog depth-z2', style: {} },
-				_react2['default'].createElement('input', { onKeyUp: this.keyUp, className: 'cps-form-control cp-multi-selector__dialog__input', placeholder: placeholder, onKeyDown: this.prevent }),
+				_react2['default'].createElement(
+					'div',
+					{ style: { padding: "16px", borderBottom: "1px solid #E9E9E9" } },
+					_react2['default'].createElement('input', {
+						onKeyDown: this.keyDown,
+						className: 'cps-form-control cp-multi-selector__dialog__input',
+						placeholder: placeholder })
+				),
 				_react2['default'].createElement(
 					'div',
 					{ className: 'cp-multi-selector__dialog__items' },

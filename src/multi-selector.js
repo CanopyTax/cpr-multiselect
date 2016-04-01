@@ -1,22 +1,21 @@
 import React from 'react';
 import {without, includes, union, isNull} from 'lodash';
 
-const DefaultItemComponent = React.createClass({
-	render () {
-		const firstName = this.props.item.firstName;
-		const lastName = this.props.item.lastName;
+function DefaultItemComponent(props) {
+	const item = props.item;
+	const selectedItems = props.selectedItems;
+	const selected = includes(selectedItems, item);
 
-		return (
-			<div>
-				<div className="cp-multi-selector-item__icon cps-bg-medium-gray cps-gray-5">{`${firstName[0]}${lastName[0]}`}</div>
-				<div className="cp-multi-selector-item__title">{`${firstName} ${lastName}`}</div>
-				<div className="cp-multi-selector-item__check">
-					<i className="cps-icon cps-icon-lg-check cps-info"></i>
-				</div>
+	return (
+		<div title={`${item.label}`}>
+			<div
+				className={`cp-multi-selector-item__icon ${selected ? "cps-bg-primary-green +selected" : ""}`}>
+				{selected ? <i className="cps-icon cps-icon-lg-check"></i> : null}
 			</div>
-		)
-	}
-});
+			<div className="cp-multi-selector-item__title">{`${item.label}`}</div>
+		</div>
+	)
+};
 
 function nearest(element, className) {
 	if (!element) return false;
@@ -36,6 +35,9 @@ const MultiSelector = React.createClass({
 	getInitialState: function() {
 		return {
 			selectedItems: this.props.initialSelectedItems || [],
+			mouseIndex: null,
+			mouseActive: true,
+			mouseFunc: null,
 			dialogDisplayed: false,
 			activeIndex: null,
 			searchValue: '',
@@ -64,36 +66,49 @@ const MultiSelector = React.createClass({
 	},
 
 	getItemTitle: function(item) {
-		return `${item.firstName} ${item.lastName}`;
+		return item.label;
 	},
-
-	keyUp: function(e) {
+	setActiveIndex(index) {
+		this.setState({
+			activeIndex: index,
+			mouseIndex: null,
+		}, () => {
+			this.searchItems[this.state.activeIndex].scrollIntoView();
+			if (this.state.mouseActive) {
+				this.setState({
+					mouseActive: false,
+					mouseFunc: () => {
+						this.setState({
+							mouseActive: true
+						})
+						document.removeEventListener("mousemove", this.state.mouseFunc);
+					}
+				}, () => {
+					document.addEventListener("mousemove", this.state.mouseFunc);
+				})
+			}
+		})
+	},
+	keyDown: function(e) {
 		const keycode = e.which;
 		const activeIndex = this.state.activeIndex;
 		const filterItems = this.getFilterItems(this.props.items);
 		this.props.onInputChange && this.props.onInputChange(e.currentTarget.value);
+		if (keycode === 13) e.preventDefault();
 		if(keycode === 40) { // press down key
 			if(isNull(activeIndex)) {
-				return this.setState({
-					activeIndex: 0
-				});
+				return this.setActiveIndex(0);
 			} else {
 				if(activeIndex < filterItems.length - 1) {
-					return this.setState({
-						activeIndex: activeIndex + 1
-					});
+					return this.setActiveIndex(activeIndex + 1);
 				}
 			}
 		} else if(keycode === 38) { // press up key
 			if(!activeIndex) {
-				return this.setState({
-					activeIndex: 0
-				});
+				return this.setActiveIndex(0);
 			} else {
 				if(activeIndex > 0) {
-					return this.setState({
-						activeIndex: activeIndex - 1
-					});
+					return this.setActiveIndex(activeIndex - 1);
 				}
 			}
 		} else if(keycode === 13) { // press enter key
@@ -127,7 +142,9 @@ const MultiSelector = React.createClass({
 	},
 
 	getActiveClass: function(index) {
-		return this.state.activeIndex === index ? '+highlighted' : '';
+		return this.state.activeIndex === index || this.state.mouseIndex === index
+			? '+highlighted'
+			: '';
 	},
 
 	getFilterItems: function(items = []) {
@@ -137,9 +154,6 @@ const MultiSelector = React.createClass({
 			.filter((item) => {
 				return getItemTitle(item).toLowerCase().indexOf(this.state.searchValue.toLowerCase()) > -1;
 			})
-			.filter((item, index) => {
-				return index < 4;
-			});
 	},
 
 	getSearchItems: function(items = []) {
@@ -147,8 +161,26 @@ const MultiSelector = React.createClass({
 
 		return this.getFilterItems(items).map((item, index) => {
 			return (
-				<div key={index} className={`cp-multi-selector-item ${this.getSelectedClass(item)} ${this.getActiveClass(index)}`} onClick={this.selectItem.bind(this, item)}>
-					<ItemComponent item={item}/>
+				<div
+					key={index}
+					ref={(ref) => {
+						if (this.searchItems) {
+							this.searchItems[index] = ref;
+						} else {
+							this.searchItems = [];
+							this.searchItems[index] = ref;
+						}
+					}}
+					onMouseOver={() => {
+						if (this.state.mouseActive) {
+							this.setState({
+								mouseIndex: index
+							})
+						}
+					}}
+					className={`cp-multi-selector-item ${this.getSelectedClass(item)} ${this.getActiveClass(index)}`}
+					onClick={this.selectItem.bind(this, item)}>
+					<ItemComponent item={item} selectedItems={this.state.selectedItems}/>
 				</div>
 			)
 		})
@@ -193,8 +225,15 @@ const MultiSelector = React.createClass({
 		let pills = this.state.selectedItems
 			.map((item, i) => {
 				return (
-					<div key={i} className="cp-multi-selector__pill cps-white cps-bg-gray-10">
-						<span style={{verticalAlign: 'top'}}>{getItemTitle(item)}</span><i onClick={this.removeItem.bind(this, item)} className="cps-icon cps-icon-sm-close"></i>
+					<div key={i} className="cp-multi-selector__pill" title={`${getItemTitle(item)}`}>
+						<span
+							style={{verticalAlign: 'top', margin: "0 8px"}}
+							tooltip={getItemTitle(item)}>
+							{getItemTitle(item)}
+						</span>
+						<div className="cp-multi-selector__pill__close">
+							<i onClick={this.removeItem.bind(this, item)} className="cps-icon cps-icon-close"></i>
+						</div>
 					</div>
 				);
 			});
@@ -206,7 +245,12 @@ const MultiSelector = React.createClass({
 			let placeholder = this.props.placeholder ? this.props.placeholder : "Type a collaborators name...";
 			dialog = (
 				<div className="cp-multi-selector__dialog depth-z2" style={{}}>
-					<input onKeyUp={this.keyUp} className="cps-form-control cp-multi-selector__dialog__input" placeholder={placeholder} onKeyDown={this.prevent}/>
+					<div style={{padding: "16px", borderBottom: "1px solid #E9E9E9"}}>
+						<input
+							onKeyDown={this.keyDown}
+							className="cps-form-control cp-multi-selector__dialog__input"
+							placeholder={placeholder}/>
+					</div>
 					<div className="cp-multi-selector__dialog__items">
 						{this.getSearchItems(this.props.items)}
 					</div>

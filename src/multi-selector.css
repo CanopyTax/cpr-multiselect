@@ -15,7 +15,6 @@
 
 .cp-multi-selector__dialog {
 	background: white;
-	padding: 16px 16px 8px 16px;
 	position: absolute;
 	top: 33px;
 	min-width: 298px;
@@ -25,7 +24,9 @@
 }
 
 .cp-multi-selector__dialog__items {
-	margin: 16px -16px 8px -16px;
+	padding: 16px 0;
+	max-height: 254px;
+	overflow-y: scroll;
 }
 
 .cp-multi-selector-item {
@@ -38,27 +39,25 @@
 	padding-right: 16px;
 }
 
-.cp-multi-selector-item:hover, .cp-multi-selector-item.\+highlighted {
+.cp-multi-selector-item.\+highlighted {
 	background-color: #F7F7F7;
 }
 
-.cp-multi-selector-item.\+selected .cp-multi-selector-item__icon {
-	background-color: #45A8F8!important;
-}
-
-.cp-multi-selector-item.\+selected .cp-multi-selector-item__check {
-	visibility: visible;
-}
-
 .cp-multi-selector-item__icon {
-	display:inline-block;
-	vertical-align: middle;
+	display: inline-flex;
+	align-items: center;
 	height: 28px;
 	width: 28px;
-	text-align: center;
-	font-weight: 600;
-	padding-top: .6rem;
-	border-radius: 2px;
+	border-radius: 1px;
+	border: solid 2px #afafaf;
+}
+
+.cp-multi-selector-item__icon.\+selected {
+	border: solid 2px #4caf50;
+}
+
+.cp-multi-selector-item__icon .cps-icon {
+	color: white;
 }
 
 .cp-multi-selector-item__title {
@@ -66,6 +65,10 @@
 	position: absolute;
 	left: 56px;
 	top: 12px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	width: calc(100% - 6.4rem);
+	overflow-x: hidden;
 }
 
 .cp-multi-selector-item__check {
@@ -80,18 +83,30 @@
 .cp-multi-selector__main-input.cps-form-control {
 	position: relative;
 	z-index: 2;
-	padding: 2px 2px 0 2px;
+	padding: 4px 4px 0 4px;
 	min-height: 32px;
 	height: auto;
 }
 
 .cp-multi-selector__pill {
-	display: inline-block;
-	padding: 2px 8px;
+	display: inline-flex;
+	align-items: center;
 	margin-right: 5px;
 	height: 25px;
 	margin-bottom: 3px;
 	vertical-align: top;
+	background-color: rgba(76, 175, 80, 0.2);
+	color: #4caf50;
+	border-radius: 2px;
+	border: solid 1px rgba(76, 175, 80, 0.5);
+	max-width: 184px;
+}
+
+.cp-multi-selector__pill span {
+	max-width: 80%;
+	white-space: nowrap;
+	overflow-x: hidden;
+	text-overflow: ellipsis;
 }
 
 .cp-multi-selector__pill.\+inline {
@@ -99,11 +114,21 @@
 	top: 3px;
 }
 
+.cp-multi-selector__pill__close {
+	padding-right: 8px;
+	border-left: solid 1px rgba(76, 175, 80, 0.5);
+	display: inline-block;
+	line-height: normal;
+	height: 100%;
+}
+
 .cp-multi-selector__pill .cps-icon {
 	position: relative;
-	top: -2px;
+	font-size: 16px;
+	top: calc(50% - 8px);
 	right: -4px;
 	cursor: pointer;
+	color: #4caf50;
 }
 
 .cp-multi-selector__icon {
