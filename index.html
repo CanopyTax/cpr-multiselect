@@ -30,10 +30,11 @@
 	<link type="text/css" href="node_modules/canopy-styleguide/build/styleguide.css" rel="stylesheet">
 	<link type="text/css" href="src/multi-selector.css" rel="stylesheet">
 	<script type="text/javascript" src="node_modules/react/dist/react.min.js"></script>
-	<script type="text/javascript" src="node_modules/lodash/index.js"></script>
+	<script type="text/javascript" src="node_modules/react-dom/dist/react-dom.min.js"></script>
+	<script type="text/javascript" src="node_modules/lodash/lodash.js"></script>
 	<script type="text/javascript" src="dist/cpr-multiselect.js"></script>
 	<script>
-		React.render(
+		ReactDOM.render(
 			React.createElement(window.MultiSelector, {items: [
 				{
 					"lastName": "Seward",

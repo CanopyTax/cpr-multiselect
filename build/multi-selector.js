@@ -24,7 +24,7 @@ function DefaultItemComponent(props) {
 			'div',
 			{
 				className: 'cp-multi-selector-item__icon ' + (selected ? "cps-bg-primary-green +selected" : "") },
-			selected ? _react2['default'].createElement('i', { className: 'cps-icon cps-icon-lg-check' }) : null
+			_react2['default'].createElement('i', { className: 'cps-icon cps-icon-lg-check', style: { opacity: selected ? "1" : "0" } })
 		),
 		_react2['default'].createElement(
 			'div',

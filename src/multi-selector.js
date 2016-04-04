@@ -10,7 +10,7 @@ function DefaultItemComponent(props) {
 		<div title={`${item.label}`}>
 			<div
 				className={`cp-multi-selector-item__icon ${selected ? "cps-bg-primary-green +selected" : ""}`}>
-				{selected ? <i className="cps-icon cps-icon-lg-check"></i> : null}
+				<i className="cps-icon cps-icon-lg-check" style={{opacity: selected ? "1" : "0"}}></i>
 			</div>
 			<div className="cp-multi-selector-item__title">{`${item.label}`}</div>
 		</div>
