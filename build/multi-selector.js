@@ -91,7 +91,7 @@ var MultiSelector = _react2['default'].createClass({
 
 	componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
 		this.setState({
-			selectedItems: nextProps.initialSelectedItems
+			selectedItems: nextProps.initialSelectedItems || []
 		});
 	},
 
