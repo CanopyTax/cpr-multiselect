@@ -1,6 +1,6 @@
 {
   "name": "cpr-multiselect",
-  "version": "2.2.7",
+  "version": "2.2.8",
   "description": "React component for selecting multiple entities from a drop-down",
   "main": "build/multi-selector.js",
   "scripts": {
@@ -8,7 +8,7 @@
     "dist": "webpack --optimize-minimize",
     "compile": "node node_modules/babel/bin/babel.js src --out-dir build",
     "build": "npm run dist && npm run compile",
-		"pre-publish": "npm run build"
+    "pre-publish": "npm run build"
   },
   "sofe": {
     "authService": "http://canopytax.com/someservice.js"
