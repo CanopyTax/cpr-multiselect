@@ -214,7 +214,7 @@ const MultiSelector = React.createClass({
 			let height = el.clientHeight;
 			let dialog = el.querySelector('.cp-multi-selector__dialog');
 
-			dialog.style.top = (height + 1) + 'px';
+			if (dialog) dialog.style.top = (height + 1) + 'px';
 
 			el.querySelector('.cp-multi-selector__dialog__input').focus();
 		}, 100);
