@@ -3,16 +3,17 @@ import {without, includes, union, isNull} from 'lodash';
 
 function DefaultItemComponent(props) {
 	const item = props.item;
+	const getItemTitle = props.getItemTitle;
 	const selectedItems = props.selectedItems;
 	const selected = includes(selectedItems, item);
 
 	return (
-		<div title={`${item.label}`}>
+		<div title={`${getItemTitle(item)}`}>
 			<div
 				className={`cp-multi-selector-item__icon ${selected ? "cps-bg-primary-green +selected" : ""}`}>
 				<i className="cps-icon cps-icon-lg-check" style={{opacity: selected ? "1" : "0"}}></i>
 			</div>
-			<div className="cp-multi-selector-item__title">{`${item.label}`}</div>
+			<div className="cp-multi-selector-item__title">{`${getItemTitle(item)}`}</div>
 		</div>
 	)
 };
@@ -164,6 +165,7 @@ const MultiSelector = React.createClass({
 
 	getSearchItems: function(items = []) {
 		let ItemComponent = this.props.ItemComponent || DefaultItemComponent;
+		let getItemTitle = this.props.getItemTitle || this.getItemTitle;
 
 		return this.getFilterItems(items).map((item, index) => {
 			return (
@@ -186,7 +188,7 @@ const MultiSelector = React.createClass({
 					}}
 					className={`cp-multi-selector-item ${this.getSelectedClass(item)} ${this.getActiveClass(index)}`}
 					onClick={this.selectItem.bind(this, item)}>
-					<ItemComponent item={item} selectedItems={this.state.selectedItems}/>
+					<ItemComponent item={item} selectedItems={this.state.selectedItems} getItemTitle={getItemTitle}/>
 				</div>
 			)
 		})
@@ -217,7 +219,7 @@ const MultiSelector = React.createClass({
 			if (dialog) {
 				dialog.style.top = (height + 1) + 'px';
 				el.querySelector('.cp-multi-selector__dialog__input').focus();
-			} 
+			}
 		}, 100);
 	},
 

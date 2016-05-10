@@ -14,12 +14,13 @@ var _lodash = require('lodash');
 
 function DefaultItemComponent(props) {
 	var item = props.item;
+	var getItemTitle = props.getItemTitle;
 	var selectedItems = props.selectedItems;
 	var selected = (0, _lodash.includes)(selectedItems, item);
 
 	return _react2['default'].createElement(
 		'div',
-		{ title: '' + item.label },
+		{ title: '' + getItemTitle(item) },
 		_react2['default'].createElement(
 			'div',
 			{
@@ -29,7 +30,7 @@ function DefaultItemComponent(props) {
 		_react2['default'].createElement(
 			'div',
 			{ className: 'cp-multi-selector-item__title' },
-			'' + item.label
+			'' + getItemTitle(item)
 		)
 	);
 };
@@ -213,6 +214,7 @@ var MultiSelector = _react2['default'].createClass({
 		var items = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
 
 		var ItemComponent = this.props.ItemComponent || DefaultItemComponent;
+		var getItemTitle = this.props.getItemTitle || this.getItemTitle;
 
 		return this.getFilterItems(items).map(function (item, index) {
 			return _react2['default'].createElement(
@@ -236,7 +238,7 @@ var MultiSelector = _react2['default'].createClass({
 					},
 					className: 'cp-multi-selector-item ' + _this4.getSelectedClass(item) + ' ' + _this4.getActiveClass(index),
 					onClick: _this4.selectItem.bind(_this4, item) },
-				_react2['default'].createElement(ItemComponent, { item: item, selectedItems: _this4.state.selectedItems })
+				_react2['default'].createElement(ItemComponent, { item: item, selectedItems: _this4.state.selectedItems, getItemTitle: getItemTitle })
 			);
 		});
 	},
