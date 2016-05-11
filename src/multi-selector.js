@@ -80,32 +80,49 @@ const MultiSelector = React.createClass({
 			activeIndex: index,
 			mouseIndex: null,
 		}, () => {
-			this.searchItems[this.state.activeIndex].scrollIntoView();
-			if (this.state.mouseActive) {
-				this.setState({
-					mouseActive: false,
-					mouseFunc: () => {
-						this.setState({
-							mouseActive: true
-						})
-						document.removeEventListener("mousemove", this.state.mouseFunc);
-					}
-				}, () => {
-					document.addEventListener("mousemove", this.state.mouseFunc);
-				})
+			if (!isNull(this.state.activeIndex) && !isNull(this.searchItems[this.state.activeIndex])) {
+				this.searchItems[this.state.activeIndex].scrollIntoView();
+				if (this.state.mouseActive) {
+					this.setState({
+						mouseActive: false,
+						mouseFunc: () => {
+							this.setState({
+								mouseActive: true
+							})
+							document.removeEventListener("mousemove", this.state.mouseFunc);
+						}
+					}, () => {
+						document.addEventListener("mousemove", this.state.mouseFunc);
+					})
+				}
 			}
 		})
+	},
+	keyUp: function(e) {
+		const filterItems = this.getFilterItems(this.props.items);
+		const activeIndex = this.state.activeIndex;
+		this.props.onInputChange && this.props.onInputChange(e.currentTarget.value);
+
+		if (isNull(activeIndex) && filterItems.length !== 0) {
+			this.setActiveIndex(0);
+		} else if (filterItems.length === 0) {
+			this.setActiveIndex(null);
+		}
+
+		this.setState({
+			searchValue: e.target.value
+		});
 	},
 	keyDown: function(e) {
 		const keycode = e.which;
 		const activeIndex = this.state.activeIndex;
 		const filterItems = this.getFilterItems(this.props.items);
-		this.props.onInputChange && this.props.onInputChange(e.currentTarget.value);
+
 		if (keycode === 13) e.preventDefault();
 		if(keycode === 40) { // press down key
-			if(isNull(activeIndex)) {
+			if (isNull(activeIndex) && filterItems.length !== 0) {
 				return this.setActiveIndex(0);
-			} else {
+		 	} else {
 				if(activeIndex < filterItems.length - 1) {
 					return this.setActiveIndex(activeIndex + 1);
 				}
@@ -132,10 +149,6 @@ const MultiSelector = React.createClass({
 				dialogDisplayed: false
 			});
 		}
-
-		this.setState({
-			searchValue: e.target.value
-		});
 	},
 
 	triggerItemChange: function() {
@@ -166,8 +179,16 @@ const MultiSelector = React.createClass({
 	getSearchItems: function(items = []) {
 		let ItemComponent = this.props.ItemComponent || DefaultItemComponent;
 		let getItemTitle = this.props.getItemTitle || this.getItemTitle;
+		let filterItems = this.getFilterItems(items);
 
-		return this.getFilterItems(items).map((item, index) => {
+		// Show a message that user can press enter to add new item
+		if (filterItems.length === 0 && this.props.noRestrict) {
+			return (
+				<div className="cp-multi-selector-item">Press Enter to add "{this.state.searchValue}"</div>
+			)
+		}
+
+		return filterItems.map((item, index) => {
 			return (
 				<div
 					key={index}
@@ -256,6 +277,7 @@ const MultiSelector = React.createClass({
 				<div className="cp-multi-selector__dialog depth-z2" style={{}}>
 					<div style={{padding: "16px", borderBottom: "1px solid #E9E9E9"}}>
 						<input
+							onKeyUp={this.keyUp}
 							onKeyDown={this.keyDown}
 							className="cps-form-control cp-multi-selector__dialog__input"
 							placeholder={placeholder}/>
