@@ -19,7 +19,7 @@ describe('multi-selector', function () {
 		var multiSelect = _reactLibReactTestUtils2['default'].renderIntoDocument(_react2['default'].createElement(_multiSelectorJs2['default'], null));
 
 		var hiddenInput = _reactLibReactTestUtils2['default'].scryRenderedDOMComponentsWithTag(multiSelect, 'input');
-		var renderedInput = _reactLibReactTestUtils2['default'].scryRenderedDOMComponentsWithClass(multiSelect, 'cp-multi-selector__main-input');
+		var renderedInput = _reactLibReactTestUtils2['default'].scryRenderedDOMComponentsWithClass(multiSelect, 'cpr-multi-selector__main-input');
 
 		expect(hiddenInput.length).toBe(1);
 		expect(renderedInput.length).toBe(1);
@@ -34,7 +34,7 @@ describe('multi-selector', function () {
 
 		var multiSelect = _reactLibReactTestUtils2['default'].renderIntoDocument(_react2['default'].createElement(_multiSelectorJs2['default'], { initialSelectedItems: items }));
 
-		var pill = _reactLibReactTestUtils2['default'].findRenderedDOMComponentWithClass(multiSelect, 'cp-multi-selector__pill');
+		var pill = _reactLibReactTestUtils2['default'].findRenderedDOMComponentWithClass(multiSelect, 'cpr-multi-selector__pill');
 		expect(pill.textContent).toEqual('Will Sew');
 	});
 
@@ -50,7 +50,7 @@ describe('multi-selector', function () {
 
 		var multiSelect = _reactLibReactTestUtils2['default'].renderIntoDocument(_react2['default'].createElement(_multiSelectorJs2['default'], { initialSelectedItems: items, getItemTitle: getItemTitle }));
 
-		var pill = _reactLibReactTestUtils2['default'].findRenderedDOMComponentWithClass(multiSelect, 'cp-multi-selector__pill');
+		var pill = _reactLibReactTestUtils2['default'].findRenderedDOMComponentWithClass(multiSelect, 'cpr-multi-selector__pill');
 		expect(pill.textContent).toEqual('yo dogg William');
 	});
 
@@ -70,7 +70,7 @@ describe('multi-selector', function () {
 		var pillClose = _reactLibReactTestUtils2['default'].findRenderedDOMComponentWithClass(multiSelect, 'cps-icon-close');
 		_reactLibReactTestUtils2['default'].Simulate.click(pillClose);
 
-		var pills = _reactLibReactTestUtils2['default'].scryRenderedDOMComponentsWithClass(multiSelect, 'cp-multi-selector__pill');
+		var pills = _reactLibReactTestUtils2['default'].scryRenderedDOMComponentsWithClass(multiSelect, 'cpr-multi-selector__pill');
 		expect(pills.length).toBe(0);
 	});
 
@@ -91,13 +91,13 @@ describe('multi-selector', function () {
 
 		var multiSelect = _reactLibReactTestUtils2['default'].renderIntoDocument(_react2['default'].createElement(_multiSelectorJs2['default'], { items: items }));
 
-		var renderedInput = _reactLibReactTestUtils2['default'].findRenderedDOMComponentWithClass(multiSelect, 'cp-multi-selector__main-input');
+		var renderedInput = _reactLibReactTestUtils2['default'].findRenderedDOMComponentWithClass(multiSelect, 'cpr-multi-selector__main-input');
 		_reactLibReactTestUtils2['default'].Simulate.click(renderedInput);
 
-		var dialog = _reactLibReactTestUtils2['default'].scryRenderedDOMComponentsWithClass(multiSelect, 'cp-multi-selector__dialog');
+		var dialog = _reactLibReactTestUtils2['default'].scryRenderedDOMComponentsWithClass(multiSelect, 'cpr-multi-selector__dialog');
 		expect(dialog.length).toBe(1);
 
-		var itemElements = _reactLibReactTestUtils2['default'].scryRenderedDOMComponentsWithClass(multiSelect, 'cp-multi-selector-item');
+		var itemElements = _reactLibReactTestUtils2['default'].scryRenderedDOMComponentsWithClass(multiSelect, 'cpr-multi-selector-item');
 		expect(itemElements.length).toBe(3);
 		expect(itemElements[0].textContent).toBe('Will Sew');
 		expect(itemElements[1].textContent).toBe('Blair Mont');
@@ -121,19 +121,19 @@ describe('multi-selector', function () {
 
 		var multiSelect = _reactLibReactTestUtils2['default'].renderIntoDocument(_react2['default'].createElement(_multiSelectorJs2['default'], { items: items }));
 
-		var renderedInput = _reactLibReactTestUtils2['default'].findRenderedDOMComponentWithClass(multiSelect, 'cp-multi-selector__main-input');
+		var renderedInput = _reactLibReactTestUtils2['default'].findRenderedDOMComponentWithClass(multiSelect, 'cpr-multi-selector__main-input');
 		_reactLibReactTestUtils2['default'].Simulate.click(renderedInput);
 
-		var itemElements = _reactLibReactTestUtils2['default'].scryRenderedDOMComponentsWithClass(multiSelect, 'cp-multi-selector-item');
+		var itemElements = _reactLibReactTestUtils2['default'].scryRenderedDOMComponentsWithClass(multiSelect, 'cpr-multi-selector-item');
 		_reactLibReactTestUtils2['default'].Simulate.click(itemElements[0]);
 
 		// Select an item
-		itemElements = _reactLibReactTestUtils2['default'].scryRenderedDOMComponentsWithClass(multiSelect, 'cp-multi-selector-item');
+		itemElements = _reactLibReactTestUtils2['default'].scryRenderedDOMComponentsWithClass(multiSelect, 'cpr-multi-selector-item');
 		expect(itemElements[0].classList[1]).toBe('+selected');
 
 		// Deselect an item
 		_reactLibReactTestUtils2['default'].Simulate.click(itemElements[0]);
-		itemElements = _reactLibReactTestUtils2['default'].scryRenderedDOMComponentsWithClass(multiSelect, 'cp-multi-selector-item');
+		itemElements = _reactLibReactTestUtils2['default'].scryRenderedDOMComponentsWithClass(multiSelect, 'cpr-multi-selector-item');
 		expect(itemElements[0].classList[1]).toBeFalsy();
 	});
 
@@ -166,7 +166,7 @@ describe('multi-selector', function () {
 
 		var multiSelect = _reactLibReactTestUtils2['default'].renderIntoDocument(_react2['default'].createElement(_multiSelectorJs2['default'], { items: items, ItemComponent: MyItemComponent }));
 
-		var renderedInput = _reactLibReactTestUtils2['default'].findRenderedDOMComponentWithClass(multiSelect, 'cp-multi-selector__main-input');
+		var renderedInput = _reactLibReactTestUtils2['default'].findRenderedDOMComponentWithClass(multiSelect, 'cpr-multi-selector__main-input');
 		_reactLibReactTestUtils2['default'].Simulate.click(renderedInput);
 
 		var itemElements = _reactLibReactTestUtils2['default'].scryRenderedDOMComponentsWithClass(multiSelect, 'heeeelo');

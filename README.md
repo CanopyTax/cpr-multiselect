@@ -90,7 +90,7 @@ let PersonComponent = React.createClass({
 		return (
 			<div>
 				<div>{`${firstName[0]}${lastName[0]}`}</div>
-				<div className="cp-multi-selector-item__title">{`${firstName} ${lastName}`}</div>
+				<div className="cpr-multi-selector-item__title">{`${firstName} ${lastName}`}</div>
 			</div>
 		)
 	}

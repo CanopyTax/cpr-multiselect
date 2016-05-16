@@ -1,8 +1,8 @@
-.cp-multi-selector {
+.cpr-multi-selector {
 	font-family: Verdana, Geneva, sans-serif;
 }
 
-.cp-multi-selector, .cp-multi-selector * {
+.cpr-multi-selector, .cpr-multi-selector * {
 	box-sizing: border-box;
 }
 
@@ -78,7 +78,7 @@
   font-smoothing: antialiased
 }
 
-.cp-multi-selector-item__icon {
+.cpr-multi-selector-item__icon {
 	font-size: 14px;
 	padding-top: 6px;
 }
