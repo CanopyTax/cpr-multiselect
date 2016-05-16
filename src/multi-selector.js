@@ -3,16 +3,17 @@ import {without, includes, union, isNull} from 'lodash';
 
 function DefaultItemComponent(props) {
 	const item = props.item;
+	const getItemTitle = props.getItemTitle;
 	const selectedItems = props.selectedItems;
 	const selected = includes(selectedItems, item);
 
 	return (
-		<div title={`${item.label}`}>
+		<div title={`${getItemTitle(item)}`}>
 			<div
 				className={`cp-multi-selector-item__icon ${selected ? "cps-bg-primary-green +selected" : ""}`}>
 				<i className="cps-icon cps-icon-lg-check" style={{opacity: selected ? "1" : "0"}}></i>
 			</div>
-			<div className="cp-multi-selector-item__title">{`${item.label}`}</div>
+			<div className="cp-multi-selector-item__title">{`${getItemTitle(item)}`}</div>
 		</div>
 	)
 };
@@ -79,30 +80,48 @@ const MultiSelector = React.createClass({
 			activeIndex: index,
 			mouseIndex: null,
 		}, () => {
-			this.searchItems[this.state.activeIndex].scrollIntoView();
-			if (this.state.mouseActive) {
-				this.setState({
-					mouseActive: false,
-					mouseFunc: () => {
-						this.setState({
-							mouseActive: true
-						})
-						document.removeEventListener("mousemove", this.state.mouseFunc);
-					}
-				}, () => {
-					document.addEventListener("mousemove", this.state.mouseFunc);
-				})
+			if (!isNull(this.state.activeIndex) && !!this.searchItems[this.state.activeIndex]) {
+				this.searchItems[this.state.activeIndex].scrollIntoView();
+				if (this.state.mouseActive) {
+					this.setState({
+						mouseActive: false,
+						mouseFunc: () => {
+							this.setState({
+								mouseActive: true
+							})
+							document.removeEventListener("mousemove", this.state.mouseFunc);
+						}
+					}, () => {
+						document.addEventListener("mousemove", this.state.mouseFunc);
+					})
+				}
 			}
 		})
+	},
+	inputChange: function(e) {
+		const filterItems = this.getFilterItems(this.props.items);
+		const activeIndex = this.state.activeIndex;
+
+		this.props.onInputChange && this.props.onInputChange(e.currentTarget.value);
+
+		if (isNull(activeIndex) && filterItems.length !== 0) {
+			this.setActiveIndex(0);
+		} else if (filterItems.length === 0) {
+			this.setActiveIndex(null);
+		}
+
+		this.setState({
+			searchValue: e.target.value
+		});
 	},
 	keyDown: function(e) {
 		const keycode = e.which;
 		const activeIndex = this.state.activeIndex;
 		const filterItems = this.getFilterItems(this.props.items);
-		this.props.onInputChange && this.props.onInputChange(e.currentTarget.value);
+
 		if (keycode === 13) e.preventDefault();
 		if(keycode === 40) { // press down key
-			if(isNull(activeIndex)) {
+			if (isNull(activeIndex) && filterItems.length !== 0) {
 				return this.setActiveIndex(0);
 			} else {
 				if(activeIndex < filterItems.length - 1) {
@@ -131,10 +150,6 @@ const MultiSelector = React.createClass({
 				dialogDisplayed: false
 			});
 		}
-
-		this.setState({
-			searchValue: e.target.value
-		});
 	},
 
 	triggerItemChange: function() {
@@ -164,8 +179,24 @@ const MultiSelector = React.createClass({
 
 	getSearchItems: function(items = []) {
 		let ItemComponent = this.props.ItemComponent || DefaultItemComponent;
+		let getItemTitle = this.props.getItemTitle || this.getItemTitle;
+		let filterItems = this.getFilterItems(items);
 
-		return this.getFilterItems(items).map((item, index) => {
+		// Show a message that user can press enter to add new item
+		if (filterItems.length === 0 && this.props.noRestrict && this.state.searchValue) {
+			return (
+				<div className="cp-multi-selector-item">Press Enter to add "{this.state.searchValue}"</div>
+			)
+		}
+
+		// If noRestrict & the search term doesn't have an exact match, append an additional "result" for the new item
+		// This is to allow adding of new items when the search term has matching filtered items but not an exact match
+		if (this.props.noRestrict && this.state.searchValue
+		&& !_.find(filterItems, (item) => getItemTitle(item).toLowerCase() === this.state.searchValue.toLowerCase())) {
+			filterItems.push(this.state.searchValue);
+		}
+
+		return filterItems.map((item, index) => {
 			return (
 				<div
 					key={index}
@@ -186,7 +217,7 @@ const MultiSelector = React.createClass({
 					}}
 					className={`cp-multi-selector-item ${this.getSelectedClass(item)} ${this.getActiveClass(index)}`}
 					onClick={this.selectItem.bind(this, item)}>
-					<ItemComponent item={item} selectedItems={this.state.selectedItems}/>
+					<ItemComponent item={item} selectedItems={this.state.selectedItems} getItemTitle={getItemTitle}/>
 				</div>
 			)
 		})
@@ -217,7 +248,7 @@ const MultiSelector = React.createClass({
 			if (dialog) {
 				dialog.style.top = (height + 1) + 'px';
 				el.querySelector('.cp-multi-selector__dialog__input').focus();
-			} 
+			}
 		}, 100);
 	},
 
@@ -254,6 +285,7 @@ const MultiSelector = React.createClass({
 				<div className="cp-multi-selector__dialog depth-z2" style={{}}>
 					<div style={{padding: "16px", borderBottom: "1px solid #E9E9E9"}}>
 						<input
+							onChange={this.inputChange}
 							onKeyDown={this.keyDown}
 							className="cps-form-control cp-multi-selector__dialog__input"
 							placeholder={placeholder}/>
