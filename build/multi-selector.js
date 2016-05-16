@@ -24,12 +24,12 @@ function DefaultItemComponent(props) {
 		_react2['default'].createElement(
 			'div',
 			{
-				className: 'cp-multi-selector-item__icon ' + (selected ? "cps-bg-primary-green +selected" : "") },
+				className: 'cpr-multi-selector-item__icon ' + (selected ? "cps-bg-primary-green +selected" : "") },
 			_react2['default'].createElement('i', { className: 'cps-icon cps-icon-lg-check', style: { opacity: selected ? "1" : "0" } })
 		),
 		_react2['default'].createElement(
 			'div',
-			{ className: 'cp-multi-selector-item__title' },
+			{ className: 'cpr-multi-selector-item__title' },
 			'' + getItemTitle(item)
 		)
 	);
@@ -81,7 +81,7 @@ var MultiSelector = _react2['default'].createClass({
 			activeIndex: null,
 			searchValue: '',
 			close: function close(e) {
-				if (!nearest(e.target, 'cp-multi-selector')) {
+				if (!nearest(e.target, 'cpr-multi-selector')) {
 					_this.setState({
 						dialogDisplayed: false
 					});
@@ -235,7 +235,7 @@ var MultiSelector = _react2['default'].createClass({
 		if (filterItems.length === 0 && this.props.noRestrict && this.state.searchValue) {
 			return _react2['default'].createElement(
 				'div',
-				{ className: 'cp-multi-selector-item' },
+				{ className: 'cpr-multi-selector-item' },
 				'Press Enter to add "',
 				this.state.searchValue,
 				'"'
@@ -270,7 +270,7 @@ var MultiSelector = _react2['default'].createClass({
 							});
 						}
 					},
-					className: 'cp-multi-selector-item ' + _this4.getSelectedClass(item) + ' ' + _this4.getActiveClass(index),
+					className: 'cpr-multi-selector-item ' + _this4.getSelectedClass(item) + ' ' + _this4.getActiveClass(index),
 					onClick: _this4.selectItem.bind(_this4, item) },
 				_react2['default'].createElement(ItemComponent, { item: item, selectedItems: _this4.state.selectedItems, getItemTitle: getItemTitle })
 			);
@@ -290,6 +290,10 @@ var MultiSelector = _react2['default'].createClass({
 			});
 		}
 
+		this.setState({
+			searchValue: ''
+		});
+
 		setTimeout(this.triggerItemChange);
 	},
 
@@ -299,11 +303,11 @@ var MultiSelector = _react2['default'].createClass({
 		setTimeout(function () {
 			var el = _this5.el;
 			var height = el.clientHeight;
-			var dialog = el.querySelector('.cp-multi-selector__dialog');
+			var dialog = el.querySelector('.cpr-multi-selector__dialog');
 
 			if (dialog) {
 				dialog.style.top = height + 1 + 'px';
-				el.querySelector('.cp-multi-selector__dialog__input').focus();
+				el.querySelector('.cpr-multi-selector__dialog__input').focus();
 			}
 		}, 100);
 	},
@@ -321,7 +325,7 @@ var MultiSelector = _react2['default'].createClass({
 		var pills = this.state.selectedItems.map(function (item, i) {
 			return _react2['default'].createElement(
 				'div',
-				{ key: i, className: 'cp-multi-selector__pill', title: '' + getItemTitle(item) },
+				{ key: i, className: 'cpr-multi-selector__pill', title: '' + getItemTitle(item) },
 				_react2['default'].createElement(
 					'span',
 					{
@@ -331,7 +335,7 @@ var MultiSelector = _react2['default'].createClass({
 				),
 				_react2['default'].createElement(
 					'div',
-					{ className: 'cp-multi-selector__pill__close' },
+					{ className: 'cpr-multi-selector__pill__close' },
 					_react2['default'].createElement('i', { onClick: _this6.removeItem.bind(_this6, item), className: 'cps-icon cps-icon-close' })
 				)
 			);
@@ -344,19 +348,19 @@ var MultiSelector = _react2['default'].createClass({
 			var placeholder = this.props.placeholder ? this.props.placeholder : "Type a collaborators name...";
 			dialog = _react2['default'].createElement(
 				'div',
-				{ className: 'cp-multi-selector__dialog depth-z2', style: {} },
+				{ className: 'cpr-multi-selector__dialog depth-z2', style: {} },
 				_react2['default'].createElement(
 					'div',
 					{ style: { padding: "16px", borderBottom: "1px solid #E9E9E9" } },
 					_react2['default'].createElement('input', {
 						onChange: this.inputChange,
 						onKeyDown: this.keyDown,
-						className: 'cps-form-control cp-multi-selector__dialog__input',
+						className: 'cps-form-control cpr-multi-selector__dialog__input',
 						placeholder: placeholder })
 				),
 				_react2['default'].createElement(
 					'div',
-					{ className: 'cp-multi-selector__dialog__items' },
+					{ className: 'cpr-multi-selector__dialog__items' },
 					this.getSearchItems(this.props.items)
 				)
 			);
@@ -368,11 +372,11 @@ var MultiSelector = _react2['default'].createClass({
 			'div',
 			{ ref: function (el) {
 					if (el) that.el = el;
-				}, className: 'cp-multi-selector' },
-			_react2['default'].createElement('input', { type: 'input', className: 'cp-multi-selector__hidden-input', onFocus: this.displayDialog }),
+				}, className: 'cpr-multi-selector' },
+			_react2['default'].createElement('input', { type: 'input', className: 'cpr-multi-selector__hidden-input', onFocus: this.displayDialog }),
 			_react2['default'].createElement(
 				'div',
-				{ onClick: this.displayDialog, className: 'cp-multi-selector__main-input cps-form-control' },
+				{ onClick: this.displayDialog, className: 'cpr-multi-selector__main-input cps-form-control' },
 				pills
 			),
 			dialog
