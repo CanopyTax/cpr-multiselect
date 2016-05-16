@@ -181,11 +181,10 @@ var MultiSelector = _react2['default'].createClass({
 		} else if (keycode === 13) {
 			// press enter key
 			if (!(0, _lodash.isNull)(activeIndex)) {
-				return this.selectItem(filterItems[activeIndex]);
+				return this.selectItem(filterItems[activeIndex], e);
 			} else if (this.props.noRestrict) {
 				// if the noRestrict prop is true it adds the input as a string to the selected items on enter
-				this.selectItem(e.currentTarget.value);
-				e.currentTarget.value = "";
+				return this.selectItem(e.currentTarget.value, e);
 			}
 		} else if (keycode === 27) {
 			// press escape key
@@ -290,9 +289,9 @@ var MultiSelector = _react2['default'].createClass({
 			});
 		}
 
-		this.setState({
-			searchValue: ''
-		});
+		if (e && e.currentTarget) {
+			e.currentTarget.value = "";
+		}
 
 		setTimeout(this.triggerItemChange);
 	},
