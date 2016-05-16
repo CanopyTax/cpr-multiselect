@@ -14,6 +14,16 @@ Canopy React Multi-select Component
 
 ## Usage
 
+### Props
++ `items`: Items to choose from
++ `initialSelectedItems`: The selected items
++ `onInputChange`: Called when the text input changes
++ `ItemComponent`: Custom component for each item in the dialog
++ `getItemTitle`: Called to display the title of each item
++ `placeholder`: Placeholder for the text input
++ `onChange`: Called when selected items change
++ `noRestrict`: Pass this if you don't want to restrict the input so users can enter custom values. Custom values will be appended to `selectedItems` as strings.
+
 ### Basic
 ```jsx
 import MultiSelect from 'cpr-multiselect';
@@ -44,7 +54,7 @@ function inputChange(input) {
 <MultiSelect items={items} onChange={itemsChanged} onInputChange={inputChange}></MultiSelect>
 ```
 
-### Custom
+### Custom Components
 ```jsx
 import MultiSelect from 'cpr-multiselect';
 
