@@ -80,7 +80,7 @@ const MultiSelector = React.createClass({
 			activeIndex: index,
 			mouseIndex: null,
 		}, () => {
-			if (!isNull(this.state.activeIndex) && !isNull(this.searchItems[this.state.activeIndex])) {
+			if (!isNull(this.state.activeIndex) && !!this.searchItems[this.state.activeIndex]) {
 				this.searchItems[this.state.activeIndex].scrollIntoView();
 				if (this.state.mouseActive) {
 					this.setState({
@@ -101,7 +101,6 @@ const MultiSelector = React.createClass({
 	keyUp: function(e) {
 		const filterItems = this.getFilterItems(this.props.items);
 		const activeIndex = this.state.activeIndex;
-		this.props.onInputChange && this.props.onInputChange(e.currentTarget.value);
 
 		if (isNull(activeIndex) && filterItems.length !== 0) {
 			this.setActiveIndex(0);
@@ -117,6 +116,8 @@ const MultiSelector = React.createClass({
 		const keycode = e.which;
 		const activeIndex = this.state.activeIndex;
 		const filterItems = this.getFilterItems(this.props.items);
+
+		this.props.onInputChange && this.props.onInputChange(e.currentTarget.value);
 
 		if (keycode === 13) e.preventDefault();
 		if(keycode === 40) { // press down key
@@ -182,10 +183,17 @@ const MultiSelector = React.createClass({
 		let filterItems = this.getFilterItems(items);
 
 		// Show a message that user can press enter to add new item
-		if (filterItems.length === 0 && this.props.noRestrict) {
+		if (filterItems.length === 0 && this.props.noRestrict && this.state.searchValue) {
 			return (
 				<div className="cp-multi-selector-item">Press Enter to add "{this.state.searchValue}"</div>
 			)
+		}
+
+		// If noRestrict & the search term doesn't have an exact match, append an additional "result" for the new item
+		// This is to allow adding of new items when the search term has matching filtered items but not an exact match
+		if (this.props.noRestrict && this.state.searchValue
+		&& !_.find(filterItems, (item) => getItemTitle(item).toLowerCase() === this.state.searchValue.toLowerCase())) {
+			filterItems.push(this.state.searchValue);
 		}
 
 		return filterItems.map((item, index) => {

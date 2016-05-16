@@ -120,7 +120,7 @@ var MultiSelector = _react2['default'].createClass({
 			activeIndex: index,
 			mouseIndex: null
 		}, function () {
-			if (!(0, _lodash.isNull)(_this2.state.activeIndex) && !(0, _lodash.isNull)(_this2.searchItems[_this2.state.activeIndex])) {
+			if (!(0, _lodash.isNull)(_this2.state.activeIndex) && !!_this2.searchItems[_this2.state.activeIndex]) {
 				_this2.searchItems[_this2.state.activeIndex].scrollIntoView();
 				if (_this2.state.mouseActive) {
 					_this2.setState({
@@ -141,7 +141,6 @@ var MultiSelector = _react2['default'].createClass({
 	keyUp: function keyUp(e) {
 		var filterItems = this.getFilterItems(this.props.items);
 		var activeIndex = this.state.activeIndex;
-		this.props.onInputChange && this.props.onInputChange(e.currentTarget.value);
 
 		if ((0, _lodash.isNull)(activeIndex) && filterItems.length !== 0) {
 			this.setActiveIndex(0);
@@ -157,6 +156,8 @@ var MultiSelector = _react2['default'].createClass({
 		var keycode = e.which;
 		var activeIndex = this.state.activeIndex;
 		var filterItems = this.getFilterItems(this.props.items);
+
+		this.props.onInputChange && this.props.onInputChange(e.currentTarget.value);
 
 		if (keycode === 13) e.preventDefault();
 		if (keycode === 40) {
@@ -231,7 +232,7 @@ var MultiSelector = _react2['default'].createClass({
 		var filterItems = this.getFilterItems(items);
 
 		// Show a message that user can press enter to add new item
-		if (filterItems.length === 0 && this.props.noRestrict) {
+		if (filterItems.length === 0 && this.props.noRestrict && this.state.searchValue) {
 			return _react2['default'].createElement(
 				'div',
 				{ className: 'cp-multi-selector-item' },
@@ -239,6 +240,14 @@ var MultiSelector = _react2['default'].createClass({
 				this.state.searchValue,
 				'"'
 			);
+		}
+
+		// If noRestrict & the search term doesn't have an exact match, append an additional "result" for the new item
+		// This is to allow adding of new items when the search term has matching filtered items but not an exact match
+		if (this.props.noRestrict && this.state.searchValue && !_.find(filterItems, function (item) {
+			return getItemTitle(item).toLowerCase() === _this4.state.searchValue.toLowerCase();
+		})) {
+			filterItems.push(this.state.searchValue);
 		}
 
 		return filterItems.map(function (item, index) {
