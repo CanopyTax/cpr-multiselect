@@ -138,9 +138,11 @@ var MultiSelector = _react2['default'].createClass({
 			}
 		});
 	},
-	keyUp: function keyUp(e) {
+	inputChange: function inputChange(e) {
 		var filterItems = this.getFilterItems(this.props.items);
 		var activeIndex = this.state.activeIndex;
+
+		this.props.onInputChange && this.props.onInputChange(e.currentTarget.value);
 
 		if ((0, _lodash.isNull)(activeIndex) && filterItems.length !== 0) {
 			this.setActiveIndex(0);
@@ -156,8 +158,6 @@ var MultiSelector = _react2['default'].createClass({
 		var keycode = e.which;
 		var activeIndex = this.state.activeIndex;
 		var filterItems = this.getFilterItems(this.props.items);
-
-		this.props.onInputChange && this.props.onInputChange(e.currentTarget.value);
 
 		if (keycode === 13) e.preventDefault();
 		if (keycode === 40) {
@@ -349,7 +349,7 @@ var MultiSelector = _react2['default'].createClass({
 					'div',
 					{ style: { padding: "16px", borderBottom: "1px solid #E9E9E9" } },
 					_react2['default'].createElement('input', {
-						onKeyUp: this.keyUp,
+						onChange: this.inputChange,
 						onKeyDown: this.keyDown,
 						className: 'cps-form-control cp-multi-selector__dialog__input',
 						placeholder: placeholder })

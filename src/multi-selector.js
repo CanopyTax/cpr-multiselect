@@ -98,9 +98,11 @@ const MultiSelector = React.createClass({
 			}
 		})
 	},
-	keyUp: function(e) {
+	inputChange: function(e) {
 		const filterItems = this.getFilterItems(this.props.items);
 		const activeIndex = this.state.activeIndex;
+
+		this.props.onInputChange && this.props.onInputChange(e.currentTarget.value);
 
 		if (isNull(activeIndex) && filterItems.length !== 0) {
 			this.setActiveIndex(0);
@@ -117,13 +119,11 @@ const MultiSelector = React.createClass({
 		const activeIndex = this.state.activeIndex;
 		const filterItems = this.getFilterItems(this.props.items);
 
-		this.props.onInputChange && this.props.onInputChange(e.currentTarget.value);
-
 		if (keycode === 13) e.preventDefault();
 		if(keycode === 40) { // press down key
 			if (isNull(activeIndex) && filterItems.length !== 0) {
 				return this.setActiveIndex(0);
-		 	} else {
+			} else {
 				if(activeIndex < filterItems.length - 1) {
 					return this.setActiveIndex(activeIndex + 1);
 				}
@@ -285,7 +285,7 @@ const MultiSelector = React.createClass({
 				<div className="cp-multi-selector__dialog depth-z2" style={{}}>
 					<div style={{padding: "16px", borderBottom: "1px solid #E9E9E9"}}>
 						<input
-							onKeyUp={this.keyUp}
+							onChange={this.inputChange}
 							onKeyDown={this.keyDown}
 							className="cps-form-control cp-multi-selector__dialog__input"
 							placeholder={placeholder}/>
