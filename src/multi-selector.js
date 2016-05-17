@@ -45,7 +45,8 @@ const MultiSelector = React.createClass({
 			close: (e) => {
 				if (!nearest(e.target, 'cpr-multi-selector')) {
 					this.setState({
-						dialogDisplayed: false
+						dialogDisplayed: false,
+						searchValue: ''
 					});
 				}
 			}
