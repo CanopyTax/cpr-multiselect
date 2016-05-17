@@ -182,7 +182,7 @@ var MultiSelector = _react2['default'].createClass({
 			// press enter key
 			if (!(0, _lodash.isNull)(activeIndex)) {
 				return this.selectItem(filterItems[activeIndex], e);
-			} else if (this.props.noRestrict) {
+			} else if (this.props.noRestrict && e.currentTarget.value) {
 				// if the noRestrict prop is true it adds the input as a string to the selected items on enter
 				return this.selectItem(e.currentTarget.value, e);
 			}
