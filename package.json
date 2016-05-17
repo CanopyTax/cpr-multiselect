@@ -1,6 +1,6 @@
 {
   "name": "cpr-multiselect",
-  "version": "2.2.14",
+  "version": "2.2.15",
   "description": "React component for selecting multiple entities from a drop-down",
   "main": "build/multi-selector.js",
   "scripts": {
