@@ -10,10 +10,10 @@ function DefaultItemComponent(props) {
 	return (
 		<div title={`${getItemTitle(item)}`}>
 			<div
-				className={`cp-multi-selector-item__icon ${selected ? "cps-bg-primary-green +selected" : ""}`}>
+				className={`cpr-multi-selector-item__icon ${selected ? "cps-bg-primary-green +selected" : ""}`}>
 				<i className="cps-icon cps-icon-lg-check" style={{opacity: selected ? "1" : "0"}}></i>
 			</div>
-			<div className="cp-multi-selector-item__title">{`${getItemTitle(item)}`}</div>
+			<div className="cpr-multi-selector-item__title">{`${getItemTitle(item)}`}</div>
 		</div>
 	)
 };
@@ -43,7 +43,7 @@ const MultiSelector = React.createClass({
 			activeIndex: null,
 			searchValue: '',
 			close: (e) => {
-				if (!nearest(e.target, 'cp-multi-selector')) {
+				if (!nearest(e.target, 'cpr-multi-selector')) {
 					this.setState({
 						dialogDisplayed: false,
 						searchValue: ''
@@ -139,11 +139,10 @@ const MultiSelector = React.createClass({
 			}
 		} else if(keycode === 13) { // press enter key
 			if(!isNull(activeIndex)) {
-				return this.selectItem(filterItems[activeIndex]);
-			} else if(this.props.noRestrict) {
+				return this.selectItem(filterItems[activeIndex], e);
+			} else if(this.props.noRestrict && e.currentTarget.value) {
 				// if the noRestrict prop is true it adds the input as a string to the selected items on enter
-				this.selectItem(e.currentTarget.value);
-				e.currentTarget.value = "";
+				return this.selectItem(e.currentTarget.value, e);
 			}
 		} else if(keycode === 27) { // press escape key
 			return this.setState({
@@ -186,7 +185,7 @@ const MultiSelector = React.createClass({
 		// Show a message that user can press enter to add new item
 		if (filterItems.length === 0 && this.props.noRestrict && this.state.searchValue) {
 			return (
-				<div className="cp-multi-selector-item">Press Enter to add "{this.state.searchValue}"</div>
+				<div className="cpr-multi-selector-item">Press Enter to add "{this.state.searchValue}"</div>
 			)
 		}
 
@@ -216,7 +215,7 @@ const MultiSelector = React.createClass({
 							})
 						}
 					}}
-					className={`cp-multi-selector-item ${this.getSelectedClass(item)} ${this.getActiveClass(index)}`}
+					className={`cpr-multi-selector-item ${this.getSelectedClass(item)} ${this.getActiveClass(index)}`}
 					onClick={this.selectItem.bind(this, item)}>
 					<ItemComponent item={item} selectedItems={this.state.selectedItems} getItemTitle={getItemTitle}/>
 				</div>
@@ -237,6 +236,10 @@ const MultiSelector = React.createClass({
 			});
 		}
 
+		if (e && e.currentTarget) {
+			e.currentTarget.value = "";
+		}
+
 		setTimeout(this.triggerItemChange);
 	},
 
@@ -244,11 +247,11 @@ const MultiSelector = React.createClass({
 		setTimeout(() => {
 			let el = this.el;
 			let height = el.clientHeight;
-			let dialog = el.querySelector('.cp-multi-selector__dialog');
+			let dialog = el.querySelector('.cpr-multi-selector__dialog');
 
 			if (dialog) {
 				dialog.style.top = (height + 1) + 'px';
-				el.querySelector('.cp-multi-selector__dialog__input').focus();
+				el.querySelector('.cpr-multi-selector__dialog__input').focus();
 			}
 		}, 100);
 	},
@@ -264,13 +267,13 @@ const MultiSelector = React.createClass({
 		let pills = this.state.selectedItems
 			.map((item, i) => {
 				return (
-					<div key={i} className="cp-multi-selector__pill" title={`${getItemTitle(item)}`}>
+					<div key={i} className="cpr-multi-selector__pill" title={`${getItemTitle(item)}`}>
 						<span
 							style={{verticalAlign: 'top', margin: "0 8px"}}
 							tooltip={getItemTitle(item)}>
 							{getItemTitle(item)}
 						</span>
-						<div className="cp-multi-selector__pill__close">
+						<div className="cpr-multi-selector__pill__close">
 							<i onClick={this.removeItem.bind(this, item)} className="cps-icon cps-icon-close"></i>
 						</div>
 					</div>
@@ -283,15 +286,15 @@ const MultiSelector = React.createClass({
 		if (this.state.dialogDisplayed) {
 			let placeholder = this.props.placeholder ? this.props.placeholder : "Type a collaborators name...";
 			dialog = (
-				<div className="cp-multi-selector__dialog depth-z2" style={{}}>
+				<div className="cpr-multi-selector__dialog depth-z2" style={{}}>
 					<div style={{padding: "16px", borderBottom: "1px solid #E9E9E9"}}>
 						<input
 							onChange={this.inputChange}
 							onKeyDown={this.keyDown}
-							className="cps-form-control cp-multi-selector__dialog__input"
+							className="cps-form-control cpr-multi-selector__dialog__input"
 							placeholder={placeholder}/>
 					</div>
-					<div className="cp-multi-selector__dialog__items">
+					<div className="cpr-multi-selector__dialog__items">
 						{this.getSearchItems(this.props.items)}
 					</div>
 				</div>
@@ -301,9 +304,9 @@ const MultiSelector = React.createClass({
 		}
 
 		return (
-			<div ref={el => { if (el) that.el = el }} className='cp-multi-selector'>
-				<input type="input" className="cp-multi-selector__hidden-input" onFocus={this.displayDialog}/>
-				<div onClick={this.displayDialog} className="cp-multi-selector__main-input cps-form-control">
+			<div ref={el => { if (el) that.el = el }} className='cpr-multi-selector'>
+				<input type="input" className="cpr-multi-selector__hidden-input" onFocus={this.displayDialog}/>
+				<div onClick={this.displayDialog} className="cpr-multi-selector__main-input cps-form-control">
 					{pills}
 				</div>
 				{dialog}

@@ -9,7 +9,7 @@ describe('multi-selector', function() {
 		);
 
 		let hiddenInput = TestUtils.scryRenderedDOMComponentsWithTag(multiSelect, 'input');
-		let renderedInput = TestUtils.scryRenderedDOMComponentsWithClass(multiSelect, 'cp-multi-selector__main-input');
+		let renderedInput = TestUtils.scryRenderedDOMComponentsWithClass(multiSelect, 'cpr-multi-selector__main-input');
 
 		expect(hiddenInput.length).toBe(1);
 		expect(renderedInput.length).toBe(1);
@@ -28,7 +28,7 @@ describe('multi-selector', function() {
 			<MultiSelector initialSelectedItems={items}></MultiSelector>
 		);
 
-		let pill = TestUtils.findRenderedDOMComponentWithClass(multiSelect, 'cp-multi-selector__pill');
+		let pill = TestUtils.findRenderedDOMComponentWithClass(multiSelect, 'cpr-multi-selector__pill');
 		expect(pill.textContent).toEqual('Will Sew');
 	});
 
@@ -48,7 +48,7 @@ describe('multi-selector', function() {
 			<MultiSelector initialSelectedItems={items} getItemTitle={getItemTitle}></MultiSelector>
 		);
 
-		let pill = TestUtils.findRenderedDOMComponentWithClass(multiSelect, 'cp-multi-selector__pill');
+		let pill = TestUtils.findRenderedDOMComponentWithClass(multiSelect, 'cpr-multi-selector__pill');
 		expect(pill.textContent).toEqual('yo dogg William');
 	});
 
@@ -72,7 +72,7 @@ describe('multi-selector', function() {
 		let pillClose = TestUtils.findRenderedDOMComponentWithClass(multiSelect, 'cps-icon-close');
 		TestUtils.Simulate.click(pillClose);
 
-		let pills = TestUtils.scryRenderedDOMComponentsWithClass(multiSelect, 'cp-multi-selector__pill');
+		let pills = TestUtils.scryRenderedDOMComponentsWithClass(multiSelect, 'cpr-multi-selector__pill');
 		expect(pills.length).toBe(0);
 	});
 
@@ -99,13 +99,13 @@ describe('multi-selector', function() {
 			<MultiSelector items={items}></MultiSelector>
 		);
 
-		let renderedInput = TestUtils.findRenderedDOMComponentWithClass(multiSelect, 'cp-multi-selector__main-input');
+		let renderedInput = TestUtils.findRenderedDOMComponentWithClass(multiSelect, 'cpr-multi-selector__main-input');
 		TestUtils.Simulate.click(renderedInput);
 
-		let dialog = TestUtils.scryRenderedDOMComponentsWithClass(multiSelect, 'cp-multi-selector__dialog');
+		let dialog = TestUtils.scryRenderedDOMComponentsWithClass(multiSelect, 'cpr-multi-selector__dialog');
 		expect(dialog.length).toBe(1);
 
-		let itemElements = TestUtils.scryRenderedDOMComponentsWithClass(multiSelect, 'cp-multi-selector-item');
+		let itemElements = TestUtils.scryRenderedDOMComponentsWithClass(multiSelect, 'cpr-multi-selector-item');
 		expect(itemElements.length).toBe(3);
 		expect(itemElements[0].textContent).toBe('Will Sew');
 		expect(itemElements[1].textContent).toBe('Blair Mont');
@@ -135,19 +135,19 @@ describe('multi-selector', function() {
 			<MultiSelector items={items}></MultiSelector>
 		);
 
-		let renderedInput = TestUtils.findRenderedDOMComponentWithClass(multiSelect, 'cp-multi-selector__main-input');
+		let renderedInput = TestUtils.findRenderedDOMComponentWithClass(multiSelect, 'cpr-multi-selector__main-input');
 		TestUtils.Simulate.click(renderedInput);
 
-		let itemElements = TestUtils.scryRenderedDOMComponentsWithClass(multiSelect, 'cp-multi-selector-item');
+		let itemElements = TestUtils.scryRenderedDOMComponentsWithClass(multiSelect, 'cpr-multi-selector-item');
 		TestUtils.Simulate.click(itemElements[0]);
 
 		// Select an item
-		itemElements = TestUtils.scryRenderedDOMComponentsWithClass(multiSelect, 'cp-multi-selector-item');
+		itemElements = TestUtils.scryRenderedDOMComponentsWithClass(multiSelect, 'cpr-multi-selector-item');
 		expect(itemElements[0].classList[1]).toBe('+selected');
 
 		// Deselect an item
 		TestUtils.Simulate.click(itemElements[0]);
-		itemElements = TestUtils.scryRenderedDOMComponentsWithClass(multiSelect, 'cp-multi-selector-item');
+		itemElements = TestUtils.scryRenderedDOMComponentsWithClass(multiSelect, 'cpr-multi-selector-item');
 		expect(itemElements[0].classList[1]).toBeFalsy();
 	});
 
@@ -180,7 +180,7 @@ describe('multi-selector', function() {
 			<MultiSelector items={items} ItemComponent={MyItemComponent}></MultiSelector>
 		);
 
-		let renderedInput = TestUtils.findRenderedDOMComponentWithClass(multiSelect, 'cp-multi-selector__main-input');
+		let renderedInput = TestUtils.findRenderedDOMComponentWithClass(multiSelect, 'cpr-multi-selector__main-input');
 		TestUtils.Simulate.click(renderedInput);
 
 		let itemElements = TestUtils.scryRenderedDOMComponentsWithClass(multiSelect, 'heeeelo');
