@@ -31,4 +31,4 @@ node_modules
 
 # Remove build
 build
-dist
+dist/cpr-multiselect.js
