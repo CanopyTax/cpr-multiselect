@@ -1,5 +1,5 @@
 import React from 'react';
-import {without, includes, union, isNull} from 'lodash';
+import {without, includes, union, isNull, find} from 'lodash';
 
 function DefaultItemComponent(props) {
 	const item = props.item;
@@ -197,7 +197,7 @@ const MultiSelector = React.createClass({
 		// If noRestrict & the search term doesn't have an exact match, append an additional "result" for the new item
 		// This is to allow adding of new items when the search term has matching filtered items but not an exact match
 		if (this.props.noRestrict && this.state.searchValue
-		&& !_.find(filterItems, (item) => getItemTitle(item).toLowerCase() === this.state.searchValue.toLowerCase())) {
+		&& !find(filterItems, (item) => getItemTitle(item).toLowerCase() === this.state.searchValue.toLowerCase())) {
 			filterItems.push(this.state.searchValue);
 		}
 
