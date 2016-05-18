@@ -1,5 +1,5 @@
 import React from 'react';
-import {without, includes, union, isNull} from 'lodash';
+import {without, includes, union, isNull, find} from 'lodash';
 
 function DefaultItemComponent(props) {
 	const item = props.item;
@@ -18,12 +18,28 @@ function DefaultItemComponent(props) {
 	)
 };
 
+DefaultItemComponent.propTypes = {
+	item: React.PropTypes.object.isRequired,
+	getItemTitle: React.PropTypes.func,
+	selectedItems: React.PropTypes.array.isRequired
+};
+
 function nearest(element, className) {
 	if (!element) return false;
 	return element.className.indexOf(className) > -1 || nearest(element.parentElement, className);
 }
 
 const MultiSelector = React.createClass({
+	propTypes: {
+		items: React.PropTypes.array.isRequired,
+		initialSelectedItems: React.PropTypes.array,
+		onInputChange: React.PropTypes.func,
+		onChange: React.PropTypes.func,
+		getItemTitle: React.PropTypes.func,
+		ItemComponent: React.PropTypes.element,
+		placeholder: React.PropTypes.string,
+		noRestrict: React.PropTypes.bool
+	},
 
 	componentWillMount: function() {
 		document.addEventListener('click', this.state.close);
@@ -192,7 +208,7 @@ const MultiSelector = React.createClass({
 		// If noRestrict & the search term doesn't have an exact match, append an additional "result" for the new item
 		// This is to allow adding of new items when the search term has matching filtered items but not an exact match
 		if (this.props.noRestrict && this.state.searchValue
-		&& !_.find(filterItems, (item) => getItemTitle(item).toLowerCase() === this.state.searchValue.toLowerCase())) {
+		&& !find(filterItems, (item) => getItemTitle(item).toLowerCase() === this.state.searchValue.toLowerCase())) {
 			filterItems.push(this.state.searchValue);
 		}
 
@@ -281,7 +297,6 @@ const MultiSelector = React.createClass({
 			});
 
 		let dialog;
-		let that = this;
 
 		if (this.state.dialogDisplayed) {
 			let placeholder = this.props.placeholder ? this.props.placeholder : "Type a collaborators name...";
@@ -304,7 +319,7 @@ const MultiSelector = React.createClass({
 		}
 
 		return (
-			<div ref={el => { if (el) that.el = el }} className='cpr-multi-selector'>
+			<div ref={el => { if (el) this.el = el }} className='cpr-multi-selector'>
 				<input type="input" className="cpr-multi-selector__hidden-input" onFocus={this.displayDialog}/>
 				<div onClick={this.displayDialog} className="cpr-multi-selector__main-input cps-form-control">
 					{pills}
