@@ -163,7 +163,7 @@ const MultiSelector = React.createClass({
 				}
 			}
 		} else if(keycode === 13) { // press enter key
-			if(!isNull(activeIndex) && filterItems.length  !==0) {
+			if(!isNull(activeIndex) && filterItems.length !==0) {
 				return this.selectItem(filterItems[activeIndex], e);
 			} else if(this.props.noRestrict && e.currentTarget.value) {
 				// if the noRestrict prop is true it adds the input as a string to the selected items on enter
