@@ -143,12 +143,12 @@ describe('multi-selector', function() {
 
 		// Select an item
 		itemElements = TestUtils.scryRenderedDOMComponentsWithClass(multiSelect, 'cpr-multi-selector-item');
-		expect(itemElements[0].classList[1]).toBe('+selected');
+		expect(itemElements[0].classList).toContain('+selected');
 
 		// Deselect an item
 		TestUtils.Simulate.click(itemElements[0]);
 		itemElements = TestUtils.scryRenderedDOMComponentsWithClass(multiSelect, 'cpr-multi-selector-item');
-		expect(itemElements[0].classList[1]).toBeFalsy();
+		expect(itemElements[0].classList).not.toContain('+selected');
 	});
 
 	it('Should render a custom item component', function() {

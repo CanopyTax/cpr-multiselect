@@ -117,7 +117,11 @@ const MultiSelector = React.createClass({
 			}
 		})
 	},
-	inputChange: function(e) {
+	handleChange: function(e) {
+		this.inputChange(e.target.value);
+	},
+
+	inputChange: function(newVal) {
 		const filterItems = this.getFilterItems(this.props.items);
 		const activeIndex = this.state.activeIndex;
 
@@ -130,9 +134,10 @@ const MultiSelector = React.createClass({
 		}
 
 		this.setState({
-			searchValue: e.target.value
+			searchValue: newVal
 		});
 	},
+
 	keyDown: function(e) {
 		const keycode = e.which;
 		const activeIndex = this.state.activeIndex;
@@ -255,7 +260,8 @@ const MultiSelector = React.createClass({
 		}
 
 		if (e && e.currentTarget) {
-			e.currentTarget.value = "";
+			e.currentTarget.value = '';
+			this.inputChange('');
 		}
 
 		setTimeout(this.triggerItemChange);
@@ -306,7 +312,7 @@ const MultiSelector = React.createClass({
 				<div className="cpr-multi-selector__dialog depth-z2" style={{}}>
 					<div style={{padding: "16px", borderBottom: "1px solid #E9E9E9"}}>
 						<input
-							onChange={this.inputChange}
+							onChange={this.handleChange}
 							onKeyDown={this.keyDown}
 							className="cps-form-control cpr-multi-selector__dialog__input"
 							placeholder={placeholder}/>
