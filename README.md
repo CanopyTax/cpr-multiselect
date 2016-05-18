@@ -17,11 +17,12 @@ Canopy React Multi-select Component
 ### Props
 + `items`: Items to choose from
 + `initialSelectedItems`: The selected items
++ `onChange`: Called when selected items change
 + `onInputChange`: Called when the text input changes
 + `ItemComponent`: Custom component for each item in the dialog
 + `getItemTitle`: Called to display the title of each item
 + `placeholder`: Placeholder for the text input
-+ `onChange`: Called when selected items change
++ `maxLength`: Maximum length for the text input
 + `noRestrict`: Pass this if you don't want to restrict the input so users can enter custom values. Custom values will be appended to `selectedItems` as strings.
 
 ### Basic
