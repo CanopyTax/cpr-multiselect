@@ -18,12 +18,28 @@ function DefaultItemComponent(props) {
 	)
 };
 
+DefaultItemComponent.propTypes = {
+	item: React.PropTypes.object.isRequired,
+	getItemTitle: React.PropTypes.func,
+	selectedItems: React.PropTypes.array.isRequired
+};
+
 function nearest(element, className) {
 	if (!element) return false;
 	return element.className.indexOf(className) > -1 || nearest(element.parentElement, className);
 }
 
 const MultiSelector = React.createClass({
+	propTypes: {
+		items: React.PropTypes.array.isRequired,
+		initialSelectedItems: React.PropTypes.array,
+		onInputChange: React.PropTypes.func,
+		onChange: React.PropTypes.func,
+		getItemTitle: React.PropTypes.func,
+		ItemComponent: React.PropTypes.element,
+		placeholder: React.PropTypes.string,
+		noRestrict: React.PropTypes.bool
+	},
 
 	componentWillMount: function() {
 		document.addEventListener('click', this.state.close);
