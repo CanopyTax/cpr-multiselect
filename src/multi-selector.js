@@ -310,7 +310,7 @@ const MultiSelector = React.createClass({
 
 		if (this.state.dialogDisplayed) {
 			let placeholder = this.props.placeholder ? this.props.placeholder : "Type a collaborators name...";
-			let maxLength = this.props.maxLength ? this.props.maxLength : '';
+			let maxLength = this.props.maxLength;
 			dialog = (
 				<div className="cpr-multi-selector__dialog depth-z2" style={{}}>
 					<div style={{padding: "16px", borderBottom: "1px solid #E9E9E9"}}>
@@ -319,7 +319,7 @@ const MultiSelector = React.createClass({
 							onKeyDown={this.keyDown}
 							className="cps-form-control cpr-multi-selector__dialog__input"
 							placeholder={placeholder}
-							maxLength={maxLength}/>
+							{...(maxLength ? {maxLength} : {})}/>
 					</div>
 					<div className="cpr-multi-selector__dialog__items">
 						{this.getSearchItems(this.props.items)}
