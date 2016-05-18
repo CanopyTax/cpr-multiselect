@@ -36,7 +36,9 @@ const MultiSelector = React.createClass({
 		onInputChange: React.PropTypes.func,
 		onChange: React.PropTypes.func,
 		getItemTitle: React.PropTypes.func,
-		ItemComponent: React.PropTypes.element,
+		ItemComponent: React.PropTypes.oneOfType(
+			[React.PropTypes.element, React.PropTypes.func]
+		),
 		placeholder: React.PropTypes.string,
 		noRestrict: React.PropTypes.bool
 	},
