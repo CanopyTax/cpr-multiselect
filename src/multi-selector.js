@@ -40,6 +40,7 @@ const MultiSelector = React.createClass({
 			[React.PropTypes.element, React.PropTypes.func]
 		),
 		placeholder: React.PropTypes.string,
+		maxLength: React.PropTypes.number,
 		noRestrict: React.PropTypes.bool
 	},
 
@@ -77,6 +78,15 @@ const MultiSelector = React.createClass({
 		})
 	},
 
+	shouldComponentUpdate: function(nextProps, nextState) {
+		return nextState.searchValue !== this.state.searchValue
+			|| nextProps.initialSelectedItems !== this.state.selectedItems
+			|| nextProps.items !== this.props.items
+			|| nextState.dialogDisplayed !== this.state.dialogDisplayed
+			|| nextState.activeIndex !== this.state.activeIndex
+			|| nextState.mouseIndex !== this.state.mouseIndex;
+	},
+
 	displayDialog: function(e) {
 		this.setState({
 			dialogDisplayed: true
@@ -94,6 +104,7 @@ const MultiSelector = React.createClass({
 	getItemTitle: function(item) {
 		return item.label;
 	},
+
 	setActiveIndex(index) {
 		this.setState({
 			activeIndex: index,
@@ -122,16 +133,7 @@ const MultiSelector = React.createClass({
 	},
 
 	inputChange: function(newVal) {
-		const filterItems = this.getFilterItems(this.props.items);
-		const activeIndex = this.state.activeIndex;
-
 		this.props.onInputChange && this.props.onInputChange(e.currentTarget.value);
-
-		if (isNull(activeIndex) && filterItems.length !== 0) {
-			this.setActiveIndex(0);
-		} else if (filterItems.length === 0) {
-			this.setActiveIndex(null);
-		}
 
 		this.setState({
 			searchValue: newVal
@@ -161,7 +163,7 @@ const MultiSelector = React.createClass({
 				}
 			}
 		} else if(keycode === 13) { // press enter key
-			if(!isNull(activeIndex)) {
+			if(!isNull(activeIndex) && filterItems.length  !==0) {
 				return this.selectItem(filterItems[activeIndex], e);
 			} else if(this.props.noRestrict && e.currentTarget.value) {
 				// if the noRestrict prop is true it adds the input as a string to the selected items on enter
@@ -308,6 +310,7 @@ const MultiSelector = React.createClass({
 
 		if (this.state.dialogDisplayed) {
 			let placeholder = this.props.placeholder ? this.props.placeholder : "Type a collaborators name...";
+			let maxLength = this.props.maxLength ? this.props.maxLength : '';
 			dialog = (
 				<div className="cpr-multi-selector__dialog depth-z2" style={{}}>
 					<div style={{padding: "16px", borderBottom: "1px solid #E9E9E9"}}>
@@ -315,7 +318,8 @@ const MultiSelector = React.createClass({
 							onChange={this.handleChange}
 							onKeyDown={this.keyDown}
 							className="cps-form-control cpr-multi-selector__dialog__input"
-							placeholder={placeholder}/>
+							placeholder={placeholder}
+							maxLength={maxLength}/>
 					</div>
 					<div className="cpr-multi-selector__dialog__items">
 						{this.getSearchItems(this.props.items)}
