@@ -78,15 +78,6 @@ const MultiSelector = React.createClass({
 		})
 	},
 
-	shouldComponentUpdate: function(nextProps, nextState) {
-		return nextState.searchValue !== this.state.searchValue
-			|| nextProps.initialSelectedItems !== this.state.selectedItems
-			|| nextProps.items !== this.props.items
-			|| nextState.dialogDisplayed !== this.state.dialogDisplayed
-			|| nextState.activeIndex !== this.state.activeIndex
-			|| nextState.mouseIndex !== this.state.mouseIndex;
-	},
-
 	displayDialog: function(e) {
 		this.setState({
 			dialogDisplayed: true
