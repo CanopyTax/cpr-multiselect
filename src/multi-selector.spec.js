@@ -69,7 +69,7 @@ describe('multi-selector', function() {
 			<MultiSelector initialSelectedItems={items} onChange={callback}></MultiSelector>
 		);
 
-		let pillClose = TestUtils.findRenderedDOMComponentWithClass(multiSelect, 'cps-icon-close');
+		let pillClose = TestUtils.findRenderedDOMComponentWithClass(multiSelect, 'cps-icon-sm-neg');
 		TestUtils.Simulate.click(pillClose);
 
 		let pills = TestUtils.scryRenderedDOMComponentsWithClass(multiSelect, 'cpr-multi-selector__pill');
