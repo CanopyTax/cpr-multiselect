@@ -291,7 +291,7 @@ const MultiSelector = React.createClass({
 							{getItemTitle(item)}
 						</span>
 						<div className="cpr-multi-selector__pill__close">
-							<i onClick={this.removeItem.bind(this, item)} className="cps-icon cps-icon-close"></i>
+							<i onClick={this.removeItem.bind(this, item)} className="cps-icon cps-icon-sm-neg"></i>
 						</div>
 					</div>
 				);
