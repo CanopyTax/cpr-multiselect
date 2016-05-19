@@ -136,6 +136,12 @@ const MultiSelector = React.createClass({
 		const activeIndex = this.state.activeIndex;
 		const filterItems = this.getFilterItems(this.props.items);
 
+		if (isNull(activeIndex) && filterItems.length !== 0) {
+			this.setActiveIndex(0);
+		} else if (filterItems.length === 0) {
+			this.setActiveIndex(null);
+		}
+
 		if (keycode === 13) e.preventDefault();
 		if(keycode === 40) { // press down key
 			if (isNull(activeIndex) && filterItems.length !== 0) {
@@ -291,7 +297,7 @@ const MultiSelector = React.createClass({
 							{getItemTitle(item)}
 						</span>
 						<div className="cpr-multi-selector__pill__close">
-							<i onClick={this.removeItem.bind(this, item)} className="cps-icon cps-icon-close"></i>
+							<i onClick={this.removeItem.bind(this, item)} className="cps-icon cps-icon-sm-neg"></i>
 						</div>
 					</div>
 				);

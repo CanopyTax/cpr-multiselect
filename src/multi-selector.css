@@ -125,7 +125,7 @@
 .cpr-multi-selector__pill .cps-icon {
 	position: relative;
 	font-size: 16px;
-	top: calc(50% - 8px);
+	top: calc(50% - 9px);
 	right: -4px;
 	cursor: pointer;
 	color: #4caf50;
