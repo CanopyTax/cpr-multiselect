@@ -63,10 +63,7 @@ const MultiSelector = React.createClass({
 			searchValue: '',
 			close: (e) => {
 				if (!nearest(e.target, 'cpr-multi-selector')) {
-					this.setState({
-						dialogDisplayed: false,
-						searchValue: ''
-					});
+					this.closeDialog();
 				}
 			}
 		}
@@ -82,6 +79,13 @@ const MultiSelector = React.createClass({
 		this.setState({
 			dialogDisplayed: true
 		})
+	},
+
+	closeDialog: function() {
+		this.setState({
+			dialogDisplayed: false,
+			searchValue: ''
+		});
 	},
 
 	removeItem: function(item, e) {
@@ -310,13 +314,18 @@ const MultiSelector = React.createClass({
 			let maxLength = this.props.maxLength;
 			dialog = (
 				<div className="cpr-multi-selector__dialog depth-z2" style={{}}>
-					<div style={{padding: "16px", borderBottom: "1px solid #E9E9E9"}}>
-						<input
-							onChange={this.handleChange}
-							onKeyDown={this.keyDown}
-							className="cps-form-control cpr-multi-selector__dialog__input"
-							placeholder={placeholder}
-							{...(maxLength ? {maxLength} : {})}/>
+					<div className="cps-row" style={{padding: "16px", borderBottom: "1px solid #E9E9E9"}}>
+						<div className="cps-col-xs-9">
+							<input
+								onChange={this.handleChange}
+								onKeyDown={this.keyDown}
+								className="cps-form-control cpr-multi-selector__dialog__input"
+								placeholder={placeholder}
+								{...(maxLength ? {maxLength} : {})}/>
+						</div>
+						<div className="cps-col-xs-3">
+							<a className="cps-link cps-pull-right" onClick={this.closeDialog}>DONE</a>
+						</div>
 					</div>
 					<div className="cpr-multi-selector__dialog__items">
 						{this.getSearchItems(this.props.items)}
