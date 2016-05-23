@@ -41,7 +41,8 @@ const MultiSelector = React.createClass({
 		),
 		placeholder: React.PropTypes.string,
 		maxLength: React.PropTypes.number,
-		noRestrict: React.PropTypes.bool
+		noRestrict: React.PropTypes.bool,
+		pressEnterToAddPhrase: React.PropTypes.string
 	},
 
 	componentWillMount: function() {
@@ -206,8 +207,10 @@ const MultiSelector = React.createClass({
 
 		// Show a message that user can press enter to add new item
 		if (filterItems.length === 0 && this.props.noRestrict && this.state.searchValue) {
+			const pressEnterToAddPhrase = this.props.pressEnterToAddPhrase || 'Press Enter to add';
+
 			return (
-				<div className="cpr-multi-selector-item">Press Enter to add "{this.state.searchValue}"</div>
+				<div className="cpr-multi-selector-item">{pressEnterToAddPhrase} "{this.state.searchValue}"</div>
 			)
 		}
 
