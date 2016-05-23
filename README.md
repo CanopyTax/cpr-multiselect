@@ -24,6 +24,7 @@ Canopy React Multi-select Component
 + `placeholder`: Placeholder for the text input
 + `maxLength`: Maximum length for the text input
 + `noRestrict`: Pass this if you don't want to restrict the input so users can enter custom values. Custom values will be appended to `selectedItems` as strings.
++ `pressEnterToAddPhrase`: If `noRestrict` is true, this phrase will be displayed when users enter custom values. The default is "Press Enter to add".
 
 ### Basic
 ```jsx
