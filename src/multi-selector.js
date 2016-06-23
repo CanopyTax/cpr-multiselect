@@ -25,7 +25,7 @@ DefaultItemComponent.propTypes = {
 };
 
 function nearest(element, className) {
-	if (!element) return false;
+	if (!element || !element.className) return false;
 	return element.className.indexOf(className) > -1 || nearest(element.parentElement, className);
 }
 
@@ -42,7 +42,8 @@ const MultiSelector = React.createClass({
 		placeholder: React.PropTypes.string,
 		maxLength: React.PropTypes.number,
 		noRestrict: React.PropTypes.bool,
-		pressEnterToAddPhrase: React.PropTypes.string
+		pressEnterToAddPhrase: React.PropTypes.string,
+		noResultsPhrase: React.PropTypes.string,
 	},
 
 	componentWillMount: function() {
@@ -206,12 +207,18 @@ const MultiSelector = React.createClass({
 		let filterItems = this.getFilterItems(items);
 
 		// Show a message that user can press enter to add new item
-		if (filterItems.length === 0 && this.props.noRestrict && this.state.searchValue) {
-			const pressEnterToAddPhrase = this.props.pressEnterToAddPhrase || 'Press Enter to add';
-
-			return (
-				<div className="cpr-multi-selector-item">{pressEnterToAddPhrase} "{this.state.searchValue}"</div>
-			)
+		if (filterItems.length === 0) {
+			if (this.props.noRestrict && this.state.searchValue) {
+				const pressEnterToAddPhrase = this.props.pressEnterToAddPhrase || 'Press Enter to add';
+				return (
+					<div className="cpr-multi-selector-item">{pressEnterToAddPhrase} "{this.state.searchValue}"</div>
+				)
+			} else {
+				const noResultsPhrase = this.props.noResultsPhrase || 'No items found.';
+				return (
+					<div className="cpr-multi-selector-item">{noResultsPhrase}</div>
+				)
+			}
 		}
 
 		// If noRestrict & the search term doesn't have an exact match, append an additional "result" for the new item
