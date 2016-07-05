@@ -16,10 +16,10 @@ function DefaultItemComponent(props) {
 			<div className="cpr-multi-selector-item__title">{`${getItemTitle(item)}`}</div>
 		</div>
 	)
-};
+}
 
 DefaultItemComponent.propTypes = {
-	item: React.PropTypes.object.isRequired,
+	item: React.PropTypes.any.isRequired,
 	getItemTitle: React.PropTypes.func,
 	selectedItems: React.PropTypes.array.isRequired
 };
@@ -126,7 +126,7 @@ const MultiSelector = React.createClass({
 	},
 
 	inputChange: function(newVal) {
-		this.props.onInputChange && this.props.onInputChange(e.currentTarget.value);
+		this.props.onInputChange && this.props.onInputChange(newVal);
 
 		this.setState({
 			searchValue: newVal
