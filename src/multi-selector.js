@@ -65,6 +65,8 @@ const MultiSelector = React.createClass({
 			searchValue: '',
 			close: (e) => {
 				if (!nearest(e.target, 'cpr-multi-selector')) {
+					if (this.state.dialogDisplayed)
+						this.props.onBlur && this.props.onBlur();
 					this.setState({
 						dialogDisplayed: false,
 						searchValue: ''
@@ -81,6 +83,8 @@ const MultiSelector = React.createClass({
 	},
 
 	displayDialog: function(e) {
+		if (!this.state.dialogDisplayed)
+			this.props.onFocus && this.props.onFocus();
 		this.setState({
 			dialogDisplayed: true
 		})
@@ -307,7 +311,12 @@ const MultiSelector = React.createClass({
 							{getItemTitle(item)}
 						</span>
 						<div className="cpr-multi-selector__pill__close">
-							<i onClick={this.removeItem.bind(this, item)} className="cps-icon cps-icon-sm-neg"></i>
+							<i
+								onClick={e => {
+									e.stopPropagation();
+									this.removeItem(item)
+								}}
+								className="cps-icon cps-icon-sm-neg"></i>
 						</div>
 					</div>
 				);
