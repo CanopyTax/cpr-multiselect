@@ -72,7 +72,8 @@ const MultiSelector = React.createClass({
 						searchValue: ''
 					});
 				}
-			}
+			},
+			invalid: false,
 		}
 	},
 
@@ -125,8 +126,19 @@ const MultiSelector = React.createClass({
 			}
 		})
 	},
+
 	handleChange: function(e) {
-		this.inputChange(e.target.value);
+		e.persist();
+		if (this.state.invalid) {
+			this.setState({
+				invalid: !this.props.validate(e.target.value),
+			});
+		}
+		this.setState({
+			disabled: this.props.disableInput(e.target.value),
+		}, () => {
+			this.inputChange(e.target.value);
+		});
 	},
 
 	inputChange: function(newVal) {
@@ -170,7 +182,8 @@ const MultiSelector = React.createClass({
 				return this.selectItem(filterItems[activeIndex], e);
 			} else if(this.props.noRestrict && e.currentTarget.value) {
 				// if the noRestrict prop is true it adds the input as a string to the selected items on enter
-				return this.selectItem(e.currentTarget.value, e);
+				e.persist();
+				return this.validateInput(e.currentTarget.value, e);
 			}
 		} else if(keycode === 27) { // press escape key
 			return this.setState({
@@ -264,20 +277,31 @@ const MultiSelector = React.createClass({
 
 		if(includes(selectedItems, item)) {
 			this.setState({
-				selectedItems: without(selectedItems, item)
-			});
+				selectedItems: without(selectedItems, item),
+				invalid: false,
+			}, this.triggerItemChange);
 		} else {
 			this.setState({
-				selectedItems: union(selectedItems, [ item ])
-			});
+				selectedItems: union(selectedItems, [ item ]),
+				invalid: false,
+			}, this.triggerItemChange);
 		}
 
 		if (e && e.currentTarget) {
 			e.currentTarget.value = '';
 			this.inputChange('');
 		}
+	},
 
-		setTimeout(this.triggerItemChange);
+	validateInput: function(input, e) {
+		if (this.state.disabled) return;
+		if (this.props.validate) {
+			const valid = this.props.validate(input);
+			if (valid) this.selectItem(input, e);
+			else this.setState({invalid: true});
+		} else {
+			this.selectItem(input, e);
+		}
 	},
 
 	positionDialog: function() {
@@ -329,16 +353,31 @@ const MultiSelector = React.createClass({
 			let maxLength = this.props.maxLength;
 			dialog = (
 				<div className="cpr-multi-selector__dialog depth-z2" style={{}}>
-					<div style={{padding: "16px", borderBottom: "1px solid #E9E9E9"}}>
+					<div
+						className={`${this.state.invalid ? "cps-has-error" : ""}`}
+						style={{padding: "16px", borderBottom: "1px solid #E9E9E9"}}>
 						<input
 							onChange={this.handleChange}
 							onKeyDown={this.keyDown}
-							className="cps-form-control cpr-multi-selector__dialog__input"
+							className={`cps-form-control cpr-multi-selector__dialog__input`}
 							placeholder={placeholder}
 							{...(maxLength ? {maxLength} : {})}/>
+						{this.state.invalid &&
+							<span className="cps-error-block">{this.props.invalidMsg}</span>}
 					</div>
 					<div className="cpr-multi-selector__dialog__items">
 						{this.getSearchItems(this.props.items)}
+						{this.state.searchValue &&
+							<div
+								style={{padding: "16px 24px"}}
+								className={"cps-bg-gray-3"}>
+								<button
+									disabled={this.state.diabled}
+									onClick={this.validateInput.bind(this, this.state.searchValue)}
+									className={`cps-btn +primary ${this.state.disabled ? "+disabled" : ""}`}>
+									DONE
+								</button>
+							</div>}
 					</div>
 				</div>
 			)
