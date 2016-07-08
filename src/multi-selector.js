@@ -365,11 +365,14 @@ const MultiSelector = React.createClass({
 						{this.state.invalid &&
 							<span className="cps-error-block">{this.props.invalidMsg}</span>}
 					</div>
-					<div className="cpr-multi-selector__dialog__items">
+					<div
+						style={this.props.dialogHeight ? {maxHeight: this.props.dialogHeight} : {}}
+						className="cpr-multi-selector__dialog__items">
 						{this.getSearchItems(this.props.items)}
-						{this.state.searchValue &&
+					</div>
+						{(this.state.searchValue && this.props.doneButton) &&
 							<div
-								style={{padding: "16px 24px"}}
+								style={{padding: "8px 16px", borderTop: "1px solid rgb(233, 233, 233)"}}
 								className={"cps-bg-gray-3"}>
 								<button
 									disabled={this.state.diabled}
@@ -378,7 +381,6 @@ const MultiSelector = React.createClass({
 									DONE
 								</button>
 							</div>}
-					</div>
 				</div>
 			)
 
