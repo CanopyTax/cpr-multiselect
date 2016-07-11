@@ -26,7 +26,7 @@
 .cpr-multi-selector__dialog__items {
 	padding: 16px 0;
 	max-height: 254px;
-	overflow-y: scroll;
+	overflow-y: auto;
 }
 
 .cpr-multi-selector-item {
