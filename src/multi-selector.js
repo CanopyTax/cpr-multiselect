@@ -331,7 +331,7 @@ const MultiSelector = React.createClass({
 					<div key={i} className="cpr-multi-selector__pill" title={`${getItemTitle(item)}`}>
 						<span
 							style={{verticalAlign: 'top', margin: "0 8px"}}
-							tooltip={getItemTitle(item)}>
+							title={getItemTitle(item)}>
 							{getItemTitle(item)}
 						</span>
 						<div className="cpr-multi-selector__pill__close">
