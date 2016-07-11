@@ -134,13 +134,11 @@ const MultiSelector = React.createClass({
 				invalid: !this.props.validate(e.target.value),
 			});
 		}
-		if (this.props.disableInput) {
-			this.setState({
-				disabled: this.props.disableInput(e.target.value),
-			}, () => {
-				this.inputChange(e.target.value);
-			});
-		}
+		this.setState({
+			disabled: this.props.disableInput ? this.props.disableInput(e.target.value) : false,
+		}, () => {
+			this.inputChange(e.target.value);
+		});
 	},
 
 	inputChange: function(newVal) {
