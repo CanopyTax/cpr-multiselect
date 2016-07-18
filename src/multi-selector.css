@@ -54,7 +54,7 @@
 }
 
 .cpr-multi-selector-item__icon.\+selected {
-	border: solid 2px #4caf50;
+	border: solid 2px #00BF4B;
 }
 
 .cpr-multi-selector-item__icon .cps-icon {
@@ -97,7 +97,7 @@
 	margin-bottom: 3px;
 	vertical-align: top;
 	background-color: rgba(76, 175, 80, 0.2);
-	color: #4caf50;
+	color: #00BF4B;
 	border-radius: 2px;
 	border: solid 1px rgba(76, 175, 80, 0.5);
 	max-width: 184px;
@@ -125,7 +125,7 @@
 .cpr-multi-selector__pill .cps-icon {
 	position: relative;
 	cursor: pointer;
-	color: #4caf50;
+	color: #00BF4B;
 }
 
 .cpr-multi-selector__icon {
