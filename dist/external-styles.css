@@ -25,7 +25,7 @@
 .cps-form-control:focus {
   outline: 0;
   border-color: transparent;
-  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.3);
+  box-shadow: 0 0 0 2px rgba(0, 191, 75, 0.3);
 }
 
 .depth-z2 {
