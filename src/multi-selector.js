@@ -44,6 +44,7 @@ const MultiSelector = React.createClass({
 		noRestrict: React.PropTypes.bool,
 		pressEnterToAddPhrase: React.PropTypes.string,
 		noResultsPhrase: React.PropTypes.string,
+		searchValueToItem: React.PropTypes.func,
 	},
 
 	componentWillMount: function() {
@@ -99,8 +100,14 @@ const MultiSelector = React.createClass({
 		setTimeout(this.triggerItemChange);
 	},
 
+	// Default implementation
 	getItemTitle: function(item) {
 		return item.label;
+	},
+
+	// Default implementation
+	searchValueToItem(searchValue) {
+		return {label: searchValue}
 	},
 
 	setActiveIndex(index) {
@@ -242,7 +249,8 @@ const MultiSelector = React.createClass({
 		// This is to allow adding of new items when the search term has matching filtered items but not an exact match
 		if (this.props.noRestrict && this.state.searchValue
 		&& !find(filterItems, (item) => getItemTitle(item).toLowerCase() === this.state.searchValue.toLowerCase())) {
-			filterItems.push(this.state.searchValue);
+			const searchValueToItem = this.props.searchValueToItem || this.searchValueToItem;
+			filterItems.push(searchValueToItem(this.state.searchValue));
 		}
 
 		return filterItems.map((item, index) => {
