@@ -188,9 +188,10 @@ const MultiSelector = React.createClass({
 			if(!isNull(activeIndex) && filterItems.length !==0) {
 				return this.selectItem(filterItems[activeIndex], e);
 			} else if(this.props.noRestrict && e.currentTarget.value) {
-				// if the noRestrict prop is true it adds the input as a string to the selected items on enter
+				// if the noRestrict prop is true it adds the input to the selected items on enter
 				e.persist();
-				return this.validateInput(e.currentTarget.value, e);
+				const searchValueToItem = this.props.searchValueToItem || this.searchValueToItem;
+				return this.validateInput(searchValueToItem(e.currentTarget.value), e);
 			}
 		} else if(keycode === 27) { // press escape key
 			return this.setState({
