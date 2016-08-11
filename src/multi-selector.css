@@ -12,6 +12,7 @@
 .cpr-multi-selector__hidden-input {
 	max-width: 100%;
 	position: absolute;
+	border-radius: 5px;
 }
 
 .cpr-multi-selector__dialog {
