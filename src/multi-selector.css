@@ -2,11 +2,12 @@
 	display: inline-block;
 	position: relative;
 	font-size: 1.4rem;
-}
-
-.cpr-multi-selector {
 	width: 340px;
 	z-index: 1;
+}
+
+.cpr-multi-selector--active {
+	z-index: 8;
 }
 
 .cpr-multi-selector__hidden-input {

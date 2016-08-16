@@ -24,11 +24,6 @@ DefaultItemComponent.propTypes = {
 	selectedItems: React.PropTypes.array.isRequired
 };
 
-function nearest(element, className) {
-	if (!element || !element.className) return false;
-	return element.className.indexOf(className) > -1 || nearest(element.parentElement, className);
-}
-
 const MultiSelector = React.createClass({
 	propTypes: {
 		items: React.PropTypes.array.isRequired,
@@ -64,7 +59,8 @@ const MultiSelector = React.createClass({
 			activeIndex: null,
 			searchValue: '',
 			close: (e) => {
-				if (!nearest(e.target, 'cpr-multi-selector')) {
+				const eventOccurredInsideOfThisComponent = this.el ? this.el.contains(e.target) : false;
+				if (!eventOccurredInsideOfThisComponent) {
 					setTimeout(() => {
 						if (this.state.dialogDisplayed && this.isMounted()) {
 							this.props.onBlur && this.props.onBlur();
@@ -391,7 +387,7 @@ const MultiSelector = React.createClass({
 		}
 
 		return (
-			<div ref={el => { if (el) this.el = el }} className='cpr-multi-selector'>
+			<div ref={el => { if (el) this.el = el }} className={`cpr-multi-selector ${this.state.dialogDisplayed ? 'cpr-multi-selector--active' : ''}`}>
 				<input type="input" className="cpr-multi-selector__hidden-input" onFocus={this.displayDialog}/>
 				<div onClick={this.displayDialog} className="cpr-multi-selector__main-input cps-form-control">
 					{pills}
