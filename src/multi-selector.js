@@ -39,6 +39,7 @@ const MultiSelector = React.createClass({
 		noRestrict: React.PropTypes.bool,
 		pressEnterToAddPhrase: React.PropTypes.string,
 		noResultsPhrase: React.PropTypes.string,
+		customCSSClass: React.PropTypes.string,
 	},
 
 	componentWillMount: function() {
@@ -387,7 +388,7 @@ const MultiSelector = React.createClass({
 		}
 
 		return (
-			<div ref={el => { if (el) this.el = el }} className={`cpr-multi-selector ${this.state.dialogDisplayed ? 'cpr-multi-selector--active' : ''}`}>
+			<div ref={el => { if (el) this.el = el }} className={`cpr-multi-selector ${this.state.dialogDisplayed ? 'cpr-multi-selector--active' : ''} ${this.props.customCSSClass || ''}`}>
 				<input type="input" className="cpr-multi-selector__hidden-input" onFocus={this.displayDialog}/>
 				<div onClick={this.displayDialog} className="cpr-multi-selector__main-input cps-form-control">
 					{pills}

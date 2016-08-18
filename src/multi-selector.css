@@ -135,5 +135,5 @@
 }
 
 .cpr-multi-selector__done {
-	border-radius: 5px 0px;
+	border-radius: 0 0 5px 5px;
 }

@@ -26,6 +26,7 @@ Canopy React Multi-select Component
 + `noRestrict`: Pass this if you don't want to restrict the input so users can enter custom values. Custom values will be appended to `selectedItems` as strings.
 + `noResultsPhrase`: The phrase to show when there are no matching results, or when `items` is empty. The default is "No items found."
 + `pressEnterToAddPhrase`: If `noRestrict` is true, this phrase will be displayed when users enter custom values. The default is "Press Enter to add".
++ `customCSSClass`: A css class to be put on the cpr-multiselector element
 
 ### Basic
 ```jsx
