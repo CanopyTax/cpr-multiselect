@@ -133,3 +133,7 @@
 .cpr-multi-selector__icon {
 	position: relative;
 }
+
+.cpr-multi-selector__done {
+	border-radius: 5px 0px;
+}

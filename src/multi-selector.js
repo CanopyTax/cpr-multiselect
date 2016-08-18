@@ -372,7 +372,7 @@ const MultiSelector = React.createClass({
 						{(this.state.searchValue && this.props.doneButton) &&
 							<div
 								style={{padding: "8px 16px", borderTop: "1px solid rgb(233, 233, 233)"}}
-								className={"cps-bg-gray-3"}>
+								className={"cps-bg-gray-3 cpr-multi-selector__done"}>
 								<button
 									disabled={this.state.diabled}
 									onClick={this.validateInput.bind(this, this.state.searchValue)}
