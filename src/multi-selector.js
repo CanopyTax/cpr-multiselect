@@ -77,7 +77,7 @@ const MultiSelector = React.createClass({
 		}
 	},
 
-	compnentWillReceiveProps(nextProps) {
+	componentWillReceiveProps(nextProps) {
 		this.setState({
 			selectedItems: nextProps.initialSelectedItems || []
 		})
