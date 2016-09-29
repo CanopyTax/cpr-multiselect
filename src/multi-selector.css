@@ -137,3 +137,11 @@
 .cpr-multi-selector__done {
 	border-radius: 0 0 5px 5px;
 }
+
+.cpr-multi-selector__empty_text.cps-form-control.cpr-multi-selector__main-input {
+	color: #cfcfcf;
+	display: flex;
+	align-items: center;
+	padding-top: 0px;
+	padding-left: 11px;
+}

@@ -77,7 +77,7 @@ const MultiSelector = React.createClass({
 		}
 	},
 
-	componentWillReceiveProps(nextProps) {
+	compnentWillReceiveProps(nextProps) {
 		this.setState({
 			selectedItems: nextProps.initialSelectedItems || []
 		})
@@ -324,6 +324,7 @@ const MultiSelector = React.createClass({
 	render: function() {
 		//Get getItemTitle is the function that should be passed in to decide what `pill` will display on selection.
 		let getItemTitle = this.props.getItemTitle || this.getItemTitle;
+		let outerPlaceholder = this.props.outerPlaceholder || '';
 
 		let pills = this.state.selectedItems
 			.map((item, i) => {
@@ -338,7 +339,7 @@ const MultiSelector = React.createClass({
 							<i
 								onClick={e => {
 									e.stopPropagation();
-									this.removeItem(item)
+									this.removeItem(item);
 								}}
 								className="cps-icon cps-icon-sm-neg"></i>
 						</div>
@@ -387,11 +388,13 @@ const MultiSelector = React.createClass({
 			this.positionDialog();
 		}
 
+		let displayPlaceholder = pills.length > 0;
+
 		return (
 			<div ref={el => { if (el) this.el = el }} className={`cpr-multi-selector ${this.state.dialogDisplayed ? 'cpr-multi-selector--active' : ''} ${this.props.customCSSClass || ''}`}>
 				<input type="input" className="cpr-multi-selector__hidden-input" onFocus={this.displayDialog}/>
-				<div onClick={this.displayDialog} className="cpr-multi-selector__main-input cps-form-control">
-					{pills}
+				<div onClick={this.displayDialog} className={`cpr-multi-selector__main-input cps-form-control ${ displayPlaceholder ? '' : 'cpr-multi-selector__empty_text' }`}>
+					{ displayPlaceholder ? pills : outerPlaceholder}
 				</div>
 				{dialog}
 			</div>
