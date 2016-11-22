@@ -1,6 +1,6 @@
 import MultiSelector from './multi-selector.js';
 import React from 'react';
-import TestUtils from 'react/lib/ReactTestUtils';
+import TestUtils from 'react-addons-test-utils';
 
 describe('multi-selector', function() {
 	it('Should render an empty component', function() {

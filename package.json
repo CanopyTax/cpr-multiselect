@@ -43,8 +43,9 @@
     "phantomjs": "^2.1.3",
     "phantomjs-polyfill": "0.0.1",
     "phantomjs-prebuilt": "^2.1.5",
-    "react": "^15.0.0-rc.2",
-    "react-dom": "^15.0.0-rc.2",
+    "react": "^15.4.0",
+    "react-addons-test-utils": "^15.4.0",
+    "react-dom": "^15.4.0",
     "style-loader": "0.13.0",
     "webpack": "^1.4.15"
   },
