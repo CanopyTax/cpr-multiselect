@@ -4,7 +4,7 @@ cpr-multiselect [![Build Status](https://travis-ci.org/CanopyTax/cpr-multiselect
 Canopy React Multi-select Component
 
 ## Requirements
- - React 0.13.3
+ - React >=0.13.3
  - Lodash methods without, contains, union, isNull
 
 ## Installation
