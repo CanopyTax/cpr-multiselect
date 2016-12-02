@@ -1,6 +1,6 @@
 {
   "name": "cpr-multiselect",
-  "version": "2.7.0",
+  "version": "2.7.1-alpha",
   "description": "React component for selecting multiple entities from a drop-down",
   "main": "build/multi-selector.js",
   "scripts": {
@@ -51,6 +51,6 @@
   },
   "peerDependencies": {
     "lodash": "^4.6.1",
-    "react": "^15.4.1"
+    "react": ">=0.13.3"
   }
 }
