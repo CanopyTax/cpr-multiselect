@@ -10,7 +10,7 @@ Canopy React Multi-select Component
 ## Installation
 1. Install through `npm install --save cpr-multiselect`
 2. Load the required stylesheet `src/multi-selector.css`
-3. Optional - if you want some default styling use the stylesheet: `build/external-styles.css`
+3. Optional - if you want some default styling use the stylesheet: `dist/external-styles.css`
 
 ## Usage
 
