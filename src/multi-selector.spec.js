@@ -186,4 +186,40 @@ describe('multi-selector', function() {
 		let itemElements = TestUtils.scryRenderedDOMComponentsWithClass(multiSelect, 'heeeelo');
 		expect(itemElements.length).toBe(3);
 	});
+
+	it('Should render max list of items in search dialog', function() {
+		let items = [
+			{
+				"lastName": "Seward",
+				"label": "William Seward",
+				"firstName": "William"
+			},
+			{
+				"lastName": "Montgomery",
+				"label": "Blair Montgomery",
+				"firstName": "Blair"
+			},
+			{
+				"lastName": "Meriwether",
+				"label": "Lewis Meriwether",
+				"firstName": "Lewis"
+			}
+		];
+
+		let MyItemComponent = React.createClass({
+			render: function() {
+				return <div className="heeeelo">{this.props.item.firstName}</div>
+			}
+		});
+
+		let multiSelect = TestUtils.renderIntoDocument(
+			<MultiSelector maxSearchItems={1} items={items} ItemComponent={MyItemComponent}></MultiSelector>
+		);
+
+		let renderedInput = TestUtils.findRenderedDOMComponentWithClass(multiSelect, 'cpr-multi-selector__main-input');
+		TestUtils.Simulate.click(renderedInput);
+
+		let itemElements = TestUtils.scryRenderedDOMComponentsWithClass(multiSelect, 'heeeelo');
+		expect(itemElements.length).toBe(1);
+	});
 });

@@ -16,6 +16,7 @@ Canopy React Multi-select Component
 
 ### Props
 + `items`: Items to choose from
++ `maxSearchItems`: Limit the number of items rendered in the dialog
 + `initialSelectedItems`: The selected items
 + `onChange`: Called when selected items change
 + `onInputChange`: Called when the text input changes
