@@ -245,6 +245,12 @@ const MultiSelector = React.createClass({
 			filterItems.push(this.state.searchValue);
 		}
 
+		if (this.props.maxSearchItems) {
+			filterItems.length = filterItems.length > this.props.maxSearchItems
+				? this.props.maxSearchItems
+				: filterItems.length;
+		}
+
 		return filterItems.map((item, index) => {
 			return (
 				<div
