@@ -285,14 +285,12 @@ const MultiSelector = React.createClass({
 		let selectedItems = this.state.selectedItems;
 
 		if(includes(selectedItems, item)) {
-			console.log(this.props.closeOnSelect);
 			this.setState({
 				selectedItems: without(selectedItems, item),
 				invalid: false,
 				dialogDisplayed: !this.props.closeOnSelect,
 			}, this.triggerItemChange);
 		} else {
-			console.log(this.props.closeOnSelect);
 			this.setState({
 				selectedItems: union(selectedItems, [ item ]),
 				invalid: false,
@@ -321,11 +319,11 @@ const MultiSelector = React.createClass({
 		setTimeout(() => {
 			let el = this.el;
 			let height = el.clientHeight;
-			let dialog = el.querySelector('.cpr-multi-selector__dialog');
+			let dialog = el.querySelector(`.${styles['cpr-multi-selector__dialog']}`);
 
 			if (dialog) {
 				dialog.style.top = (height + 1) + 'px';
-				el.querySelector('.cpr-multi-selector__dialog__input').focus();
+				el.querySelector(`.${styles['cpr-multi-selector__dialog__input']}`).focus();
 			}
 		}, 100);
 	},

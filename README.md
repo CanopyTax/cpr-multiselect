@@ -31,7 +31,7 @@ Canopy React Multi-select Component
 + `validate`: function to validate the input. Return true or false.
 + `invalidMsg`: message to display when input is invalidated
 + `doneButton`: add a done button to the dialog when entering input
-+ `color`: Color for the pills. Supports blue and green currently.
++ `color`: Color for the pills. Supports `blue` and `green` currently.
 + `closeOnSelect`: Close the dialog after selection.
 
 ### Basic
