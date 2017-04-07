@@ -4,7 +4,6 @@
   "description": "React component for selecting multiple entities from a drop-down",
   "main": "build/multi-selector.js",
   "scripts": {
-    "test": "node node_modules/karma/bin/karma start",
     "build": "webpack",
     "prepublish": "npm run build",
     "watch": "webpack --watch"
@@ -45,7 +44,7 @@
     "react-dom": "^15.4.1",
     "style-loader": "^0.13.0",
     "webpack": "^2.3.3"
-  },
+	},
 	"peerDependencies": {
 		"lodash": "^4.6.1",
 		"react": ">=0.13.3"
