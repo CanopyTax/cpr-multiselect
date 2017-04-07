@@ -42,6 +42,7 @@ const MultiSelector = React.createClass({
 		noResultsPhrase: React.PropTypes.string,
 		customCSSClass: React.PropTypes.string,
 		color: React.PropTypes.string,
+		closeOnSelect: React.PropTypes.bool,
 	},
 
 	componentWillMount: function() {
@@ -284,14 +285,18 @@ const MultiSelector = React.createClass({
 		let selectedItems = this.state.selectedItems;
 
 		if(includes(selectedItems, item)) {
+			console.log(this.props.closeOnSelect);
 			this.setState({
 				selectedItems: without(selectedItems, item),
 				invalid: false,
+				dialogDisplayed: !this.props.closeOnSelect,
 			}, this.triggerItemChange);
 		} else {
+			console.log(this.props.closeOnSelect);
 			this.setState({
 				selectedItems: union(selectedItems, [ item ]),
 				invalid: false,
+				dialogDisplayed: !this.props.closeOnSelect,
 			}, this.triggerItemChange);
 		}
 
