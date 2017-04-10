@@ -1,39 +1,56 @@
 var path = require('path');
 var webpack = require('webpack');
-var ngminPlugin = require('ngmin-webpack-plugin');
-
-var version = require('./package.json').version;
-var name = require('./package.json').name;
 
 module.exports = {
 	entry: "./src/multi-selector.js",
 	output: {
-		path: './dist',
-		filename: name + '.js'
+		path: __dirname + '/build',
+		filename: 'multi-selector.js',
+		library: 'cpr-multiselect',
+		libraryTarget: 'amd',
 	},
 	module: {
-		loaders: [{
-			test: /\.js$/,
-			exclude: /node_modules/,
-			loader: 'babel-loader'
-		}, {
-			test: /\.css$/,
-			loader: "style-loader!css-loader!autoprefixer"
-		}, {
-			test: /\.html$/,
-			loader: "html-loader"
-		}]
+		rules: [
+			{
+				test: /\.js$/,
+				exclude: /node_modules/,
+				loader: 'babel-loader'
+			},
+			{
+				test: /\.css$/,
+				exclude: [path.resolve(__dirname, 'node_modules')],
+				use: [
+					'style-loader',
+					{
+						loader: 'css-loader',
+						options: {
+							modules: true,
+							localIdentName: '[path][name]__[local]',
+						},
+					},
+					{
+						loader: 'postcss-loader',
+						options: {
+							plugins() {
+								return [
+									require('autoprefixer')
+								];
+							},
+						},
+					},
+				],
+			},
+		]
 	},
-	externals: {
-		"react": "React",
-		"lodash": "_"
+	resolve: {
+		modules: [
+			__dirname,
+			'node_modules',
+		],
 	},
-	plugins: [
-		new webpack.BannerPlugin("\
-" + name + "\n\
-author: Bret Little\n\
-copyright: 2015\n\
-license: MIT\n\
-version: " + version)
-	]
+	devtool: 'source-map',
+	externals: [
+		/^lodash$/,
+		/^react$/,
+	],
 };

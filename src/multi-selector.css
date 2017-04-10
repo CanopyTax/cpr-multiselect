@@ -42,7 +42,7 @@
 	padding-right: 16px;
 }
 
-.cpr-multi-selector-item.\+highlighted {
+.cpr-multi-selector-item--highlighted {
 	background-color: #F7F7F7;
 }
 
@@ -55,11 +55,7 @@
 	border: solid 2px #afafaf;
 }
 
-.cpr-multi-selector-item__icon.\+selected {
-	border: solid 2px #00BF4B;
-}
-
-.cpr-multi-selector-item__icon .cps-icon {
+.cpr-multi-selector-item__icon :global(.cps-icon) {
 	color: white;
 }
 
@@ -83,7 +79,7 @@
 	right: .2rem;
 }
 
-.cpr-multi-selector__main-input.cps-form-control {
+.cpr-multi-selector__main-input {
 	position: relative;
 	z-index: 2;
 	padding: 4px 4px 0 4px;
@@ -98,11 +94,20 @@
 	height: 25px;
 	margin-bottom: 3px;
 	vertical-align: top;
+	border-radius: 5px;
+	max-width: 184px;
+}
+
+.cpr-multi-selector__pill--green {
 	background-color: rgba(0, 191, 75, 0.2);
 	color: #00BF4B;
-	border-radius: 5px;
 	border: solid 1px rgba(0, 191, 75, 0.5);
-	max-width: 184px;
+}
+
+.cpr-multi-selector__pill--blue {
+	background-color: rgba(59, 155, 252, 0.2);
+	color: rgb(59,155,252);
+	border: solid 1px rgba(59,155,252, 0.5);
 }
 
 .cpr-multi-selector__pill span {
@@ -118,16 +123,30 @@
 }
 
 .cpr-multi-selector__pill__close {
-	border-left: solid 1px rgba(0, 191, 75, 0.5);
 	display: inline-block;
 	line-height: normal;
 	height: 100%;
 }
 
-.cpr-multi-selector__pill .cps-icon {
+.cpr-multi-selector__pill--green .cpr-multi-selector__pill__close {
+	border-left: solid 1px rgba(0, 191, 75, 0.5);
+}
+
+.cpr-multi-selector__pill--blue .cpr-multi-selector__pill__close {
+	border-left: solid 1px rgba(59,155,252, 0.5);
+}
+
+.cpr-multi-selector__pill :global(.cps-icon) {
 	position: relative;
 	cursor: pointer;
+}
+
+.cpr-multi-selector__pill--green :global(.cps-icon) {
 	color: #00BF4B;
+}
+
+.cpr-multi-selector__pill--blue :global(.cps-icon) {
+	color: rgb(59,155,252);
 }
 
 .cpr-multi-selector__icon {

@@ -1,5 +1,6 @@
 import React from 'react';
 import {without, includes, union, isNull, find} from 'lodash';
+import styles from './multi-selector.css';
 
 function DefaultItemComponent(props) {
 	const item = props.item;
@@ -10,10 +11,10 @@ function DefaultItemComponent(props) {
 	return (
 		<div title={`${getItemTitle(item)}`}>
 			<div
-				className={`cpr-multi-selector-item__icon ${selected ? "cps-bg-primary-green +selected" : ""}`}>
+				className={`${styles['cpr-multi-selector-item__icon']} ${selected ? `cps-bg-primary-green ${styles[`cpr-multi-selector-item__icon--selected`]}` : ""}`}>
 				<i className="cps-icon cps-icon-lg-check" style={{opacity: selected ? "1" : "0"}}></i>
 			</div>
-			<div className="cpr-multi-selector-item__title">{`${getItemTitle(item)}`}</div>
+			<div className={`${styles['cpr-multi-selector-item__title']}`}>{`${getItemTitle(item)}`}</div>
 		</div>
 	)
 }
@@ -40,6 +41,8 @@ const MultiSelector = React.createClass({
 		pressEnterToAddPhrase: React.PropTypes.string,
 		noResultsPhrase: React.PropTypes.string,
 		customCSSClass: React.PropTypes.string,
+		color: React.PropTypes.string,
+		closeOnSelect: React.PropTypes.bool,
 	},
 
 	componentWillMount: function() {
@@ -205,7 +208,7 @@ const MultiSelector = React.createClass({
 
 	getActiveClass: function(index) {
 		return this.state.activeIndex === index || this.state.mouseIndex === index
-			? '+highlighted'
+			? styles['cpr-multi-selector-item--highlighted']
 			: '';
 	},
 
@@ -228,12 +231,12 @@ const MultiSelector = React.createClass({
 			if (this.props.noRestrict && this.state.searchValue) {
 				const pressEnterToAddPhrase = this.props.pressEnterToAddPhrase || 'Press Enter to add';
 				return (
-					<div className="cpr-multi-selector-item">{pressEnterToAddPhrase} "{this.state.searchValue}"</div>
+					<div className={`${styles['cpr-multi-selector-item']}`}>{pressEnterToAddPhrase} "{this.state.searchValue}"</div>
 				)
 			} else {
 				const noResultsPhrase = this.props.noResultsPhrase || 'No items found.';
 				return (
-					<div className="cpr-multi-selector-item">{noResultsPhrase}</div>
+					<div className={`${styles['cpr-multi-selector-item']}`}>{noResultsPhrase}</div>
 				)
 			}
 		}
@@ -270,7 +273,7 @@ const MultiSelector = React.createClass({
 							})
 						}
 					}}
-					className={`cpr-multi-selector-item ${this.getSelectedClass(item)} ${this.getActiveClass(index)}`}
+					className={`${styles['cpr-multi-selector-item']} ${this.getSelectedClass(item)} ${this.getActiveClass(index)}`}
 					onClick={this.selectItem.bind(this, item)}>
 					<ItemComponent item={item} selectedItems={this.state.selectedItems} getItemTitle={getItemTitle}/>
 				</div>
@@ -285,11 +288,13 @@ const MultiSelector = React.createClass({
 			this.setState({
 				selectedItems: without(selectedItems, item),
 				invalid: false,
+				dialogDisplayed: !this.props.closeOnSelect,
 			}, this.triggerItemChange);
 		} else {
 			this.setState({
 				selectedItems: union(selectedItems, [ item ]),
 				invalid: false,
+				dialogDisplayed: !this.props.closeOnSelect,
 			}, this.triggerItemChange);
 		}
 
@@ -314,11 +319,11 @@ const MultiSelector = React.createClass({
 		setTimeout(() => {
 			let el = this.el;
 			let height = el.clientHeight;
-			let dialog = el.querySelector('.cpr-multi-selector__dialog');
+			let dialog = el.querySelector(`.${styles['cpr-multi-selector__dialog']}`);
 
 			if (dialog) {
 				dialog.style.top = (height + 1) + 'px';
-				el.querySelector('.cpr-multi-selector__dialog__input').focus();
+				el.querySelector(`.${styles['cpr-multi-selector__dialog__input']}`).focus();
 			}
 		}, 100);
 	},
@@ -334,13 +339,16 @@ const MultiSelector = React.createClass({
 		let pills = this.state.selectedItems
 			.map((item, i) => {
 				return (
-					<div key={i} className="cpr-multi-selector__pill" title={`${getItemTitle(item)}`}>
+					<div
+						key={i}
+						className={`${styles['cpr-multi-selector__pill']} ${styles[`cpr-multi-selector__pill--${this.props.color || "green"}`]}`}
+						title={`${getItemTitle(item)}`}>
 						<span
 							style={{verticalAlign: 'top', margin: "0 8px"}}
 							title={getItemTitle(item)}>
 							{getItemTitle(item)}
 						</span>
-						<div className="cpr-multi-selector__pill__close">
+						<div className={`${styles['cpr-multi-selector__pill__close']}`}>
 							<i
 								onClick={e => {
 									e.stopPropagation();
@@ -358,14 +366,14 @@ const MultiSelector = React.createClass({
 			let placeholder = this.props.placeholder ? this.props.placeholder : "Type a collaborators name...";
 			let maxLength = this.props.maxLength;
 			dialog = (
-				<div className="cpr-multi-selector__dialog depth-z2" style={{}}>
+				<div className={`${styles['cpr-multi-selector__dialog']} depth-z2`} style={{}}>
 					<div
 						className={`${this.state.invalid ? "cps-has-error" : ""}`}
 						style={{padding: "16px", borderBottom: "1px solid #E9E9E9"}}>
 						<input
 							onChange={this.handleChange}
 							onKeyDown={this.keyDown}
-							className={`cps-form-control cpr-multi-selector__dialog__input`}
+							className={`cps-form-control ${styles['cpr-multi-selector__dialog__input']}`}
 							placeholder={placeholder}
 							{...(maxLength ? {maxLength} : {})}/>
 						{this.state.invalid &&
@@ -373,13 +381,13 @@ const MultiSelector = React.createClass({
 					</div>
 					<div
 						style={this.props.dialogHeight ? {maxHeight: this.props.dialogHeight} : {}}
-						className="cpr-multi-selector__dialog__items">
+						className={`${styles['cpr-multi-selector__dialog__items']}`}>
 						{this.getSearchItems(this.props.items)}
 					</div>
 						{(this.state.searchValue && this.props.doneButton) &&
 							<div
 								style={{padding: "8px 16px", borderTop: "1px solid rgb(233, 233, 233)"}}
-								className={"cps-bg-gray-3 cpr-multi-selector__done"}>
+								className={`cps-bg-gray-3 ${styles['cpr-multi-selector__done']}`}>
 								<button
 									disabled={this.state.diabled}
 									onClick={this.validateInput.bind(this, this.state.searchValue)}
@@ -394,9 +402,15 @@ const MultiSelector = React.createClass({
 		}
 
 		return (
-			<div ref={el => { if (el) this.el = el }} className={`cpr-multi-selector ${this.state.dialogDisplayed ? 'cpr-multi-selector--active' : ''} ${this.props.customCSSClass || ''}`}>
-				<input type="input" className="cpr-multi-selector__hidden-input" onFocus={this.displayDialog}/>
-				<div onClick={this.displayDialog} className="cpr-multi-selector__main-input cps-form-control">
+			<div
+				ref={el => { if (el) this.el = el }}
+				className={`${styles['cpr-multi-selector']} ${this.state.dialogDisplayed ? styles['cpr-multi-selector--active'] : ''} ${this.props.customCSSClass || ''}`}>
+				<input
+					type="input" className={`${styles['cpr-multi-selector__hidden-input']}`}
+					onFocus={this.displayDialog}/>
+				<div
+					onClick={this.displayDialog}
+					className={`${styles['cpr-multi-selector__main-input']} cps-form-control`}>
 					{pills}
 				</div>
 				{dialog}
