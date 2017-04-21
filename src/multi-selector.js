@@ -41,6 +41,7 @@ const MultiSelector = React.createClass({
 		pressEnterToAddPhrase: React.PropTypes.string,
 		noResultsPhrase: React.PropTypes.string,
 		customCSSClass: React.PropTypes.string,
+		hasError: React.PropTypes.bool,
 		color: React.PropTypes.string,
 		closeOnSelect: React.PropTypes.bool,
 	},
@@ -406,7 +407,7 @@ const MultiSelector = React.createClass({
 				ref={el => { if (el) this.el = el }}
 				className={`${styles['cpr-multi-selector']} ${this.state.dialogDisplayed ? styles['cpr-multi-selector--active'] : ''} ${this.props.customCSSClass || ''}`}>
 				<input
-					type="input" className={`${styles['cpr-multi-selector__hidden-input']}`}
+					type="input" className={`${styles['cpr-multi-selector__hidden-input']} ${this.props.hasError ? styles['cpr-multi-selector__has-error'] : ''}`}
 					onFocus={this.displayDialog}/>
 				<div
 					onClick={this.displayDialog}

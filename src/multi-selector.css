@@ -156,3 +156,8 @@
 .cpr-multi-selector__done {
 	border-radius: 0 0 5px 5px;
 }
+
+.cps-multi-selector__has-error {
+	border: 2px solid hsla(18,99%,71%,.3);
+	box-shadow: none;
+}
