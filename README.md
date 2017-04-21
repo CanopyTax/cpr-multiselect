@@ -28,6 +28,7 @@ Canopy React Multi-select Component
 + `noResultsPhrase`: The phrase to show when there are no matching results, or when `items` is empty. The default is "No items found."
 + `pressEnterToAddPhrase`: If `noRestrict` is true, this phrase will be displayed when users enter custom values. The default is "Press Enter to add".
 + `customCSSClass`: A css class to be put on the cpr-multiselector element
++ `hasError`: pass in true to dispaly a orange error boarder around the input div 
 + `validate`: function to validate the input. Return true or false.
 + `invalidMsg`: message to display when input is invalidated
 + `doneButton`: add a done button to the dialog when entering input
