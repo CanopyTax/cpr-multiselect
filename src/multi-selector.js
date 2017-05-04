@@ -194,6 +194,10 @@ const MultiSelector = React.createClass({
 				activeIndex: null,
 				dialogDisplayed: false
 			});
+		} else if(keycode === 9) { //tab key
+			this.setState({
+				dialogDisplayed: false,
+			});
 		}
 	},
 
