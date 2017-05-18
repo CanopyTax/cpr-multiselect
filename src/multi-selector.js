@@ -36,6 +36,7 @@ const MultiSelector = React.createClass({
 			[React.PropTypes.element, React.PropTypes.func]
 		),
 		placeholder: React.PropTypes.string,
+		pillPlaceholder: React.PropTypes.string,
 		maxLength: React.PropTypes.number,
 		noRestrict: React.PropTypes.bool,
 		pressEnterToAddPhrase: React.PropTypes.string,
@@ -416,7 +417,10 @@ const MultiSelector = React.createClass({
 				<div
 					onClick={this.displayDialog}
 					className={`${styles['cpr-multi-selector__main-input']} cps-form-control`}>
-					{pills}
+					{ pills && pills.length
+						? pills
+						: <div style={{padding:'2px 12px 1px', color:'grey'}}>{this.props.pillPlaceholder}</div>
+					}
 				</div>
 				{dialog}
 			</div>
