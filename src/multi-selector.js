@@ -419,7 +419,7 @@ const MultiSelector = React.createClass({
 					className={`${styles['cpr-multi-selector__main-input']} cps-form-control`}>
 					{ pills && pills.length
 						? pills
-						: <div style={{padding:'2px 12px 1px', color:'grey'}}>{this.props.pillPlaceholder}</div>
+						: <div style={{padding:'2px 8px 1px', color:'grey'}}>{this.props.pillPlaceholder}</div>
 					}
 				</div>
 				{dialog}
