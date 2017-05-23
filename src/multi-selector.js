@@ -99,9 +99,7 @@ const MultiSelector = React.createClass({
 	removeItem: function(item, e) {
 		this.setState({
 			selectedItems: without(this.state.selectedItems, item)
-		});
-
-		setTimeout(this.triggerItemChange);
+		}, this.triggerItemChange);
 	},
 
 	getItemTitle: function(item) {
