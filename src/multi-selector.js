@@ -69,17 +69,21 @@ const MultiSelector = React.createClass({
 				if (!eventOccurredInsideOfThisComponent) {
 					setTimeout(() => {
 						if (this.state.dialogDisplayed && this.isMounted()) {
-							this.props.onBlur && this.props.onBlur();
-							this.setState({
-								dialogDisplayed: false,
-								searchValue: ''
-							});
+							this.closeDialog();
 						}
 					})
 				}
 			},
 			invalid: false,
 		}
+	},
+
+	closeDialog: function() {
+		this.props.onBlur && this.props.onBlur();
+		this.setState({
+			dialogDisplayed: false,
+			searchValue: ''
+		});
 	},
 
 	componentWillReceiveProps(nextProps) {
@@ -388,16 +392,15 @@ const MultiSelector = React.createClass({
 						className={`${styles['cpr-multi-selector__dialog__items']}`}>
 						{this.getSearchItems(this.props.items)}
 					</div>
-						{(this.state.searchValue && this.props.doneButton) &&
+						{this.props.doneButton &&
 							<div
 								style={{padding: "8px 16px", borderTop: "1px solid rgb(233, 233, 233)"}}
 								className={`cps-bg-gray-3 ${styles['cpr-multi-selector__done']}`}>
-								<button
-									disabled={this.state.diabled}
-									onClick={this.validateInput.bind(this, this.state.searchValue)}
-									className={`cps-btn +primary ${this.state.disabled ? "+disabled" : ""}`}>
-									DONE
-								</button>
+								<a
+									onClick={this.closeDialog.bind(this)}
+									className={`cps-link +primary`}>
+									Done
+								</a>
 							</div>}
 				</div>
 			)
