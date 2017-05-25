@@ -81,6 +81,7 @@
 
 .cpr-multi-selector__main-input {
 	position: relative;
+	white-space: normal;
 	z-index: 2;
 	padding: 4px 4px 0 4px;
 	min-height: 32px;
