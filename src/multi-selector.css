@@ -112,7 +112,6 @@
 }
 
 .cpr-multi-selector__pill span {
-	max-width: 80%;
 	white-space: nowrap;
 	overflow-x: hidden;
 	text-overflow: ellipsis;
