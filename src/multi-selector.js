@@ -45,6 +45,7 @@ const MultiSelector = React.createClass({
 		hasError: React.PropTypes.bool,
 		color: React.PropTypes.string,
 		closeOnSelect: React.PropTypes.bool,
+		keepSearchTextOnSelect: React.PropTypes.bool,
 	},
 
 	componentWillMount: function() {
@@ -306,7 +307,7 @@ const MultiSelector = React.createClass({
 			}, this.triggerItemChange);
 		}
 
-		if (e && e.currentTarget) {
+		if (!this.props.keepSearchTextOnSelect && e && e.currentTarget) {
 			e.currentTarget.value = '';
 			this.inputChange('');
 		}
