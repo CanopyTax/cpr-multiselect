@@ -35,6 +35,7 @@ Canopy React Multi-select Component
 + `doneButton`: add a done button to the dialog when entering input
 + `color`: Color for the pills. Supports `blue` and `green` currently.
 + `closeOnSelect`: Close the dialog after selection.
++ `keepSearchTextOnSelect`: by default, search text is cleared on select. Pass this as true if you want the search text to remain on select.
 
 ### Basic
 ```jsx
