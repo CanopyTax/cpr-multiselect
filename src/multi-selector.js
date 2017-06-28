@@ -94,7 +94,7 @@ const MultiSelector = React.createClass({
 			dialogDisplayed: false,
 			activeIndex: null,
 			searchValue: '',
-			lastModifiedItem: 'Helloooo!',
+			lastModifiedItem: null,
 			close: (e) => {
 				const eventOccurredInsideOfThisComponent = this.el ? this.el.contains(e.target) : false;
 				if (!eventOccurredInsideOfThisComponent) {
