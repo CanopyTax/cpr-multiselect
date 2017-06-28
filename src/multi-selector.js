@@ -25,6 +25,33 @@ DefaultItemComponent.propTypes = {
 	selectedItems: React.PropTypes.array.isRequired
 };
 
+function DefaultPillBoxComponent(props) {
+	const pills = props.pills;
+
+	return (
+		<div>
+			<input
+				type="input" className={`${styles['cpr-multi-selector__hidden-input']} ${props.hasError ? styles['cpr-multi-selector__has-error'] : ''}`}
+				onFocus={props.displayDialog}/>
+			<div
+				onClick={props.displayDialog}
+				className={`${styles['cpr-multi-selector__main-input']} cps-form-control`}>
+                { pills && pills.length
+                    ? pills
+                    : <div style={{padding:'2px 8px 1px', color:'grey'}}>{props.pillPlaceholder}</div>
+                }
+			</div>
+		</div>
+	)
+}
+
+DefaultPillBoxComponent.propTypes = {
+	pills: React.PropTypes.array,
+	pillPlaceholder: React.PropTypes.string,
+	hasError: React.PropTypes.bool,
+	displayDialog: React.PropTypes.func
+};
+
 const MultiSelector = React.createClass({
 	propTypes: {
 		items: React.PropTypes.array.isRequired,
@@ -35,6 +62,9 @@ const MultiSelector = React.createClass({
 		ItemComponent: React.PropTypes.oneOfType(
 			[React.PropTypes.element, React.PropTypes.func]
 		),
+        CustomPillboxComponent: React.PropTypes.oneOfType(
+            [React.PropTypes.element, React.PropTypes.func]
+        ),
 		placeholder: React.PropTypes.string,
 		pillPlaceholder: React.PropTypes.string,
 		maxLength: React.PropTypes.number,
@@ -65,6 +95,7 @@ const MultiSelector = React.createClass({
 			dialogDisplayed: false,
 			activeIndex: null,
 			searchValue: '',
+			lastModifiedItem: null,
 			close: (e) => {
 				const eventOccurredInsideOfThisComponent = this.el ? this.el.contains(e.target) : false;
 				if (!eventOccurredInsideOfThisComponent) {
@@ -207,7 +238,7 @@ const MultiSelector = React.createClass({
 
 	triggerItemChange: function() {
 		if (this.props.onChange) {
-			this.props.onChange.call(null, this.state.selectedItems);
+			this.props.onChange.call(null, this.state.selectedItems, this.state.lastModifiedItem);
 		}
 	},
 
@@ -298,12 +329,14 @@ const MultiSelector = React.createClass({
 				selectedItems: without(selectedItems, item),
 				invalid: false,
 				dialogDisplayed: !this.props.closeOnSelect,
+				lastModifiedItem: item,
 			}, this.triggerItemChange);
 		} else {
 			this.setState({
 				selectedItems: union(selectedItems, [ item ]),
 				invalid: false,
 				dialogDisplayed: !this.props.closeOnSelect,
+				lastModifiedItem: item,
 			}, this.triggerItemChange);
 		}
 
@@ -344,7 +377,7 @@ const MultiSelector = React.createClass({
 	render: function() {
 		//Get getItemTitle is the function that should be passed in to decide what `pill` will display on selection.
 		let getItemTitle = this.props.getItemTitle || this.getItemTitle;
-
+        let PillBoxComponent = this.props.CustomPillboxComponent || DefaultPillBoxComponent;
 		let pills = this.state.selectedItems
 			.map((item, i) => {
 				return (
@@ -413,17 +446,12 @@ const MultiSelector = React.createClass({
 			<div
 				ref={el => { if (el) this.el = el }}
 				className={`${styles['cpr-multi-selector']} ${this.state.dialogDisplayed ? styles['cpr-multi-selector--active'] : ''} ${this.props.customCSSClass || ''}`}>
-				<input
-					type="input" className={`${styles['cpr-multi-selector__hidden-input']} ${this.props.hasError ? styles['cpr-multi-selector__has-error'] : ''}`}
-					onFocus={this.displayDialog}/>
-				<div
-					onClick={this.displayDialog}
-					className={`${styles['cpr-multi-selector__main-input']} cps-form-control`}>
-					{ pills && pills.length
-						? pills
-						: <div style={{padding:'2px 8px 1px', color:'grey'}}>{this.props.pillPlaceholder}</div>
-					}
-				</div>
+
+				<PillBoxComponent
+					pills={pills}
+					displayDialog={this.displayDialog}
+					pillPlaceholder={this.props.pillPlaceholder}
+					hasError={this.props.hasError}/>
 				{dialog}
 			</div>
 		)
