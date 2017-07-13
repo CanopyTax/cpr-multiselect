@@ -36,6 +36,8 @@ Canopy React Multi-select Component
 + `color`: Color for the pills. Supports `blue` and `green` currently.
 + `closeOnSelect`: Close the dialog after selection.
 + `keepSearchTextOnSelect`: by default, search text is cleared on select. Pass this as true if you want the search text to remain on select.
++ `CustomPillboxComponent`: custom component that triggers the dialog opening rather than using the pill box default
++ `onBlur`: called when dialog is closed
 
 ### Basic
 ```jsx
