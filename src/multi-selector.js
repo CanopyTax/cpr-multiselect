@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { without, includes, union, isNull, find } from 'lodash';
+import { without, includes, union, isNull, find, partial } from 'lodash';
 import styles from './multi-selector.css';
 
 function DefaultItemComponent(props) {
@@ -341,7 +341,7 @@ const MultiSelector = React.createClass({
 					className={`${styles['cpr-multi-selector-item']} ${this.getSelectedClass(
 						item
 					)} ${this.getActiveClass(index)}`}
-					onClick={this.selectItem.bind(this, item)}>
+					onClick={partial(this.selectItem, item)}>
 					<ItemComponent item={item} selectedItems={this.state.selectedItems} getItemTitle={getItemTitle} />
 				</div>
 			);
@@ -463,7 +463,7 @@ const MultiSelector = React.createClass({
 						<div
 							style={{ padding: '8px 16px', borderTop: '1px solid rgb(233, 233, 233)' }}
 							className={`cps-bg-gray-3 ${styles['cpr-multi-selector__done']}`}>
-							<a onClick={this.closeDialog.bind(this)} className={`cps-link +primary`}>
+							<a onClick={this.closeDialog} className={`cps-link +primary`}>
 								Done
 							</a>
 						</div>
