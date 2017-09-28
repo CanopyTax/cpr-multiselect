@@ -60,8 +60,30 @@ DefaultPillBoxComponent.propTypes = {
 	displayDialog: PropTypes.func,
 };
 
-const MultiSelector = React.createClass({
-	propTypes: {
+export default class MultiSelector extends React.Component {
+	state = {
+		selectedItems: this.props.initialSelectedItems || [],
+		mouseIndex: null,
+		mouseActive: true,
+		mouseFunc: null,
+		dialogDisplayed: false,
+		activeIndex: null,
+		searchValue: '',
+		lastModifiedItem: null,
+		close: e => {
+			const eventOccurredInsideOfThisComponent = this.el ? this.el.contains(e.target) : false;
+			if (!eventOccurredInsideOfThisComponent) {
+				setTimeout(() => {
+					if (this.state.dialogDisplayed && this.isMounted()) {
+						this.closeDialog();
+					}
+				});
+			}
+		},
+		invalid: false,
+	};
+
+	propTypes = {
 		items: PropTypes.array.isRequired,
 		initialSelectedItems: PropTypes.array,
 		onInputChange: PropTypes.func,
@@ -80,75 +102,51 @@ const MultiSelector = React.createClass({
 		color: PropTypes.string,
 		closeOnSelect: PropTypes.bool,
 		keepSearchTextOnSelect: PropTypes.bool,
-	},
+	};
 
-	componentWillMount: function() {
+	componentWillMount() {
 		document.addEventListener('click', this.state.close);
-	},
+	};
 
-	componentWillUnmount: function() {
+	componentWillUnmount() {
 		document.removeEventListener('click', this.state.close);
-	},
+	};
 
-	getInitialState: function() {
-		return {
-			selectedItems: this.props.initialSelectedItems || [],
-			mouseIndex: null,
-			mouseActive: true,
-			mouseFunc: null,
-			dialogDisplayed: false,
-			activeIndex: null,
-			searchValue: '',
-			lastModifiedItem: null,
-			close: e => {
-				const eventOccurredInsideOfThisComponent = this.el ? this.el.contains(e.target) : false;
-				if (!eventOccurredInsideOfThisComponent) {
-					setTimeout(() => {
-						if (this.state.dialogDisplayed && this.isMounted()) {
-							this.closeDialog();
-						}
-					});
-				}
-			},
-			invalid: false,
-		};
-	},
-
-	closeDialog: function() {
+	closeDialog = () => {
 		this.props.onBlur && this.props.onBlur();
 		this.setState({
 			dialogDisplayed: false,
 			searchValue: '',
 		});
-	},
+	};
 
 	componentWillReceiveProps(nextProps) {
 		this.setState({
 			selectedItems: nextProps.initialSelectedItems || [],
 		});
-	},
+	};
 
-	displayDialog: function(e) {
+	displayDialog = (e) => {
 		if (!this.state.dialogDisplayed) this.props.onFocus && this.props.onFocus();
 		this.setState({
 			dialogDisplayed: true,
 		});
-	},
+	};
 
-	removeItem: function(item, e) {
+	removeItem = (item, e) => {
 		this.setState(
 			{
 				selectedItems: without(this.state.selectedItems, item),
 			},
 			this.triggerItemChange
 		);
-	},
+	};
 
-	getItemTitle: function(item) {
+	getItemTitle = (item) => {
 		return item.label;
-	},
+	};
 
-	setActiveIndex(index) {
+	setActiveIndex = (index) => {
 		this.setState(
 			{
 				activeIndex: index,
@@ -176,9 +174,9 @@ const MultiSelector = React.createClass({
 				}
 			}
 		);
-	},
+	};
 
-	handleChange: function(e) {
+	handleChange = (e) => {
 		e.persist();
 		if (this.state.invalid && this.props.validate) {
 			this.setState({
@@ -193,17 +191,17 @@ const MultiSelector = React.createClass({
 				this.inputChange(e.target.value);
 			}
 		);
-	},
+	};
 
-	inputChange: function(newVal) {
+	inputChange = (newVal) => {
 		this.props.onInputChange && this.props.onInputChange(newVal);
 
 		this.setState({
 			searchValue: newVal,
 		});
-	},
+	};
 
-	keyDown: function(e) {
+	keyDown = (e) => {
 		const keycode = e.which;
 		const activeIndex = this.state.activeIndex;
 		const filterItems = this.getFilterItems(this.props.items);
@@ -254,25 +252,25 @@ const MultiSelector = React.createClass({
 				dialogDisplayed: false,
 			});
 		}
-	},
+	};
 
-	triggerItemChange: function() {
+	triggerItemChange = () => {
 		if (this.props.onChange) {
 			this.props.onChange.call(null, this.state.selectedItems, this.state.lastModifiedItem);
 		}
-	},
+	};
 
-	getSelectedClass: function(item) {
+	getSelectedClass = (item) => {
 		return includes(this.state.selectedItems, item) ? '+selected' : '';
-	},
+	};
 
-	getActiveClass: function(index) {
+	getActiveClass = (index) => {
 		return this.state.activeIndex === index || this.state.mouseIndex === index
 			? styles['cpr-multi-selector-item--highlighted']
 			: '';
-	},
+	};
 
-	getFilterItems: function(items = []) {
+	getFilterItems = (items = []) => {
 		let getItemTitle = this.props.getItemTitle || this.getItemTitle;
 
 		return items.filter(item => {
@@ -282,9 +280,9 @@ const MultiSelector = React.createClass({
 					.indexOf(this.state.searchValue.toLowerCase()) > -1
 			);
 		});
-	},
+	};
 
-	getSearchItems: function(items = []) {
+	getSearchItems = (items = []) => {
 		let ItemComponent = this.props.ItemComponent || DefaultItemComponent;
 		let getItemTitle = this.props.getItemTitle || this.getItemTitle;
 		let filterItems = this.getFilterItems(items);
@@ -346,9 +344,9 @@ const MultiSelector = React.createClass({
 				</div>
 			);
 		});
-	},
+	};
 
-	selectItem: function(item, e) {
+	selectItem = (item, e) => {
 		let selectedItems = this.state.selectedItems;
 
 		if (includes(selectedItems, item)) {
@@ -377,9 +375,9 @@ const MultiSelector = React.createClass({
 			e.currentTarget.value = '';
 			this.inputChange('');
 		}
-	},
+	};
 
-	validateInput: function(input, e) {
+	validateInput = (input, e) => {
 		if (this.state.disabled) return;
 		if (this.props.validate) {
 			const valid = this.props.validate(input);
@@ -388,9 +386,9 @@ const MultiSelector = React.createClass({
 		} else {
 			this.selectItem(input, e);
 		}
-	},
+	};
 
-	positionDialog: function() {
+	positionDialog = () => {
 		setTimeout(() => {
 			let el = this.el;
 			let height = el.clientHeight;
@@ -401,13 +399,13 @@ const MultiSelector = React.createClass({
 				el.querySelector(`.${styles['cpr-multi-selector__dialog__input']}`).focus();
 			}
 		}, 100);
-	},
+	};
 
-	prevent: function(e) {
+	prevent = (e) => {
 		if (e.which === 13) e.preventDefault();
-	},
+	};
 
-	render: function() {
+	render() {
 		//Get getItemTitle is the function that should be passed in to decide what `pill` will display on selection.
 		let getItemTitle = this.props.getItemTitle || this.getItemTitle;
 		let PillBoxComponent = this.props.CustomPillboxComponent || DefaultPillBoxComponent;
@@ -491,9 +489,7 @@ const MultiSelector = React.createClass({
 				{dialog}
 			</div>
 		);
-	},
-});
+	};
+};
 
 if (window && !window.MultiSelector) window.MultiSelector = MultiSelector;
-
-export default MultiSelector;
