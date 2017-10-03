@@ -79,27 +79,6 @@ export default class MultiSelector extends React.Component {
 		};
 	};
 
-	propTypes = {
-		items: PropTypes.array.isRequired,
-		initialSelectedItems: PropTypes.array,
-		onInputChange: PropTypes.func,
-		onChange: PropTypes.func,
-		getItemTitle: PropTypes.func,
-		ItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-		CustomPillboxComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-		placeholder: PropTypes.string,
-		pillPlaceholder: PropTypes.string,
-		maxLength: PropTypes.number,
-		noRestrict: PropTypes.bool,
-		pressEnterToAddPhrase: PropTypes.string,
-		noResultsPhrase: PropTypes.string,
-		customCSSClass: PropTypes.string,
-		hasError: PropTypes.bool,
-		color: PropTypes.string,
-		closeOnSelect: PropTypes.bool,
-		keepSearchTextOnSelect: PropTypes.bool,
-	};
-
 	componentWillMount() {
 		document.addEventListener('click', this.close);
 	};
@@ -502,6 +481,27 @@ export default class MultiSelector extends React.Component {
 			});
 		}
 	};
+};
+
+MultiSelector.propTypes = {
+	items: PropTypes.array.isRequired,
+	initialSelectedItems: PropTypes.array,
+	onInputChange: PropTypes.func,
+	onChange: PropTypes.func,
+	getItemTitle: PropTypes.func,
+	ItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+	CustomPillboxComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+	placeholder: PropTypes.string,
+	pillPlaceholder: PropTypes.string,
+	maxLength: PropTypes.number,
+	noRestrict: PropTypes.bool,
+	pressEnterToAddPhrase: PropTypes.string,
+	noResultsPhrase: PropTypes.string,
+	customCSSClass: PropTypes.string,
+	hasError: PropTypes.bool,
+	color: PropTypes.string,
+	closeOnSelect: PropTypes.bool,
+	keepSearchTextOnSelect: PropTypes.bool,
 };
 
 if (window && !window.MultiSelector) window.MultiSelector = MultiSelector;
