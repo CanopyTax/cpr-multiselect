@@ -61,26 +61,22 @@ DefaultPillBoxComponent.propTypes = {
 };
 
 export default class MultiSelector extends React.Component {
-	state = {
-		selectedItems: this.props.initialSelectedItems || [],
-		mouseIndex: null,
-		mouseActive: true,
-		mouseFunc: null,
-		dialogDisplayed: false,
-		activeIndex: null,
-		searchValue: '',
-		lastModifiedItem: null,
-		close: e => {
-			const eventOccurredInsideOfThisComponent = this.el ? this.el.contains(e.target) : false;
-			if (!eventOccurredInsideOfThisComponent) {
-				setTimeout(() => {
-					if (this.state.dialogDisplayed && this.isMounted()) {
-						this.closeDialog();
-					}
-				});
-			}
-		},
-		invalid: false,
+	constructor(props) {
+		super();
+
+		this.isMounted = false;
+
+		this.state = {
+			selectedItems: props.initialSelectedItems || [],
+			mouseIndex: null,
+			mouseActive: true,
+			mouseFunc: null,
+			dialogDisplayed: false,
+			activeIndex: null,
+			searchValue: '',
+			lastModifiedItem: null,
+			invalid: false,
+		};
 	};
 
 	propTypes = {
@@ -105,11 +101,16 @@ export default class MultiSelector extends React.Component {
 	};
 
 	componentWillMount() {
-		document.addEventListener('click', this.state.close);
+		document.addEventListener('click', this.close);
+	};
+
+	componentDidMount() {
+		this.isMounted = true;
 	};
 
 	componentWillUnmount() {
-		document.removeEventListener('click', this.state.close);
+		this.isMounted = false;
+		document.removeEventListener('click', this.close);
 	};
 
 	closeDialog = () => {
@@ -489,6 +490,17 @@ export default class MultiSelector extends React.Component {
 				{dialog}
 			</div>
 		);
+	};
+
+	close = e => {
+		const eventOccurredInsideOfThisComponent = this.el ? this.el.contains(e.target) : false;
+		if (!eventOccurredInsideOfThisComponent) {
+			setTimeout(() => {
+				if (this.state.dialogDisplayed && this.isMounted) {
+					this.closeDialog();
+				}
+			});
+		}
 	};
 };
 
