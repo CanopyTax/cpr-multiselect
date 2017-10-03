@@ -64,7 +64,7 @@ export default class MultiSelector extends React.Component {
 	constructor(props) {
 		super();
 
-		this.isMounted = false;
+		this.gotMounted = false;
 
 		this.state = {
 			selectedItems: props.initialSelectedItems || [],
@@ -84,11 +84,11 @@ export default class MultiSelector extends React.Component {
 	};
 
 	componentDidMount() {
-		this.isMounted = true;
+		this.gotMounted = true;
 	};
 
 	componentWillUnmount() {
-		this.isMounted = false;
+		this.gotMounted = false;
 		document.removeEventListener('click', this.close);
 	};
 
