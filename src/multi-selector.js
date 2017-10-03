@@ -62,6 +62,8 @@ DefaultPillBoxComponent.propTypes = {
 
 export default class MultiSelector extends React.Component {
 	constructor(props) {
+		super();
+
 		this.isMounted = false;
 
 		this.state = {
