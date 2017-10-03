@@ -64,7 +64,7 @@ export default class MultiSelector extends React.Component {
 	constructor(props) {
 		super();
 
-		this.isMounted = false;
+		this.gotMounted = false;
 
 		this.state = {
 			selectedItems: props.initialSelectedItems || [],
@@ -79,37 +79,16 @@ export default class MultiSelector extends React.Component {
 		};
 	};
 
-	propTypes = {
-		items: PropTypes.array.isRequired,
-		initialSelectedItems: PropTypes.array,
-		onInputChange: PropTypes.func,
-		onChange: PropTypes.func,
-		getItemTitle: PropTypes.func,
-		ItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-		CustomPillboxComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-		placeholder: PropTypes.string,
-		pillPlaceholder: PropTypes.string,
-		maxLength: PropTypes.number,
-		noRestrict: PropTypes.bool,
-		pressEnterToAddPhrase: PropTypes.string,
-		noResultsPhrase: PropTypes.string,
-		customCSSClass: PropTypes.string,
-		hasError: PropTypes.bool,
-		color: PropTypes.string,
-		closeOnSelect: PropTypes.bool,
-		keepSearchTextOnSelect: PropTypes.bool,
-	};
-
 	componentWillMount() {
 		document.addEventListener('click', this.close);
 	};
 
 	componentDidMount() {
-		this.isMounted = true;
+		this.gotMounted = true;
 	};
 
 	componentWillUnmount() {
-		this.isMounted = false;
+		this.gotMounted = false;
 		document.removeEventListener('click', this.close);
 	};
 
@@ -496,12 +475,33 @@ export default class MultiSelector extends React.Component {
 		const eventOccurredInsideOfThisComponent = this.el ? this.el.contains(e.target) : false;
 		if (!eventOccurredInsideOfThisComponent) {
 			setTimeout(() => {
-				if (this.state.dialogDisplayed && this.isMounted) {
+				if (this.state.dialogDisplayed && this.gotMounted) {
 					this.closeDialog();
 				}
 			});
 		}
 	};
+};
+
+MultiSelector.propTypes = {
+	items: PropTypes.array.isRequired,
+	initialSelectedItems: PropTypes.array,
+	onInputChange: PropTypes.func,
+	onChange: PropTypes.func,
+	getItemTitle: PropTypes.func,
+	ItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+	CustomPillboxComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+	placeholder: PropTypes.string,
+	pillPlaceholder: PropTypes.string,
+	maxLength: PropTypes.number,
+	noRestrict: PropTypes.bool,
+	pressEnterToAddPhrase: PropTypes.string,
+	noResultsPhrase: PropTypes.string,
+	customCSSClass: PropTypes.string,
+	hasError: PropTypes.bool,
+	color: PropTypes.string,
+	closeOnSelect: PropTypes.bool,
+	keepSearchTextOnSelect: PropTypes.bool,
 };
 
 if (window && !window.MultiSelector) window.MultiSelector = MultiSelector;
