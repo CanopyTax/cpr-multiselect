@@ -61,26 +61,30 @@ DefaultPillBoxComponent.propTypes = {
 };
 
 export default class MultiSelector extends React.Component {
-	state = {
-		selectedItems: this.props.initialSelectedItems || [],
-		mouseIndex: null,
-		mouseActive: true,
-		mouseFunc: null,
-		dialogDisplayed: false,
-		activeIndex: null,
-		searchValue: '',
-		lastModifiedItem: null,
-		close: e => {
-			const eventOccurredInsideOfThisComponent = this.el ? this.el.contains(e.target) : false;
-			if (!eventOccurredInsideOfThisComponent) {
-				setTimeout(() => {
-					if (this.state.dialogDisplayed && this.isMounted()) {
-						this.closeDialog();
-					}
-				});
-			}
-		},
-		invalid: false,
+	constructor(props) {
+		this.isMounted = false;
+
+		this.state = {
+			selectedItems: props.initialSelectedItems || [],
+			mouseIndex: null,
+			mouseActive: true,
+			mouseFunc: null,
+			dialogDisplayed: false,
+			activeIndex: null,
+			searchValue: '',
+			lastModifiedItem: null,
+			close: e => {
+				const eventOccurredInsideOfThisComponent = this.el ? this.el.contains(e.target) : false;
+				if (!eventOccurredInsideOfThisComponent) {
+					setTimeout(() => {
+						if (this.state.dialogDisplayed && this.isMounted) {
+							this.closeDialog();
+						}
+					});
+				}
+			},
+			invalid: false,
+		};
 	};
 
 	propTypes = {
@@ -108,7 +112,12 @@ export default class MultiSelector extends React.Component {
 		document.addEventListener('click', this.state.close);
 	};
 
+	componentDidMount() {
+		this.isMounted = true;
+	};
+
 	componentWillUnmount() {
+		this.isMounted = false;
 		document.removeEventListener('click', this.state.close);
 	};
 
