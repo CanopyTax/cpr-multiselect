@@ -75,16 +75,6 @@ export default class MultiSelector extends React.Component {
 			activeIndex: null,
 			searchValue: '',
 			lastModifiedItem: null,
-			close: e => {
-				const eventOccurredInsideOfThisComponent = this.el ? this.el.contains(e.target) : false;
-				if (!eventOccurredInsideOfThisComponent) {
-					setTimeout(() => {
-						if (this.state.dialogDisplayed && this.isMounted) {
-							this.closeDialog();
-						}
-					});
-				}
-			},
 			invalid: false,
 		};
 	};
@@ -111,7 +101,7 @@ export default class MultiSelector extends React.Component {
 	};
 
 	componentWillMount() {
-		document.addEventListener('click', this.state.close);
+		document.addEventListener('click', this.close);
 	};
 
 	componentDidMount() {
@@ -120,7 +110,7 @@ export default class MultiSelector extends React.Component {
 
 	componentWillUnmount() {
 		this.isMounted = false;
-		document.removeEventListener('click', this.state.close);
+		document.removeEventListener('click', this.close);
 	};
 
 	closeDialog = () => {
@@ -500,6 +490,17 @@ export default class MultiSelector extends React.Component {
 				{dialog}
 			</div>
 		);
+	};
+
+	close = e => {
+		const eventOccurredInsideOfThisComponent = this.el ? this.el.contains(e.target) : false;
+		if (!eventOccurredInsideOfThisComponent) {
+			setTimeout(() => {
+				if (this.state.dialogDisplayed && this.isMounted) {
+					this.closeDialog();
+				}
+			});
+		}
 	};
 };
 
