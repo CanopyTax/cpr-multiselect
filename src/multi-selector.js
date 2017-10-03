@@ -475,7 +475,7 @@ export default class MultiSelector extends React.Component {
 		const eventOccurredInsideOfThisComponent = this.el ? this.el.contains(e.target) : false;
 		if (!eventOccurredInsideOfThisComponent) {
 			setTimeout(() => {
-				if (this.state.dialogDisplayed && this.isMounted) {
+				if (this.state.dialogDisplayed && this.gotMounted) {
 					this.closeDialog();
 				}
 			});
