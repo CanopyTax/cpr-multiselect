@@ -38,6 +38,7 @@ Canopy React Multi-select Component
 + `keepSearchTextOnSelect`: by default, search text is cleared on select. Pass this as true if you want the search text to remain on select.
 + `CustomPillboxComponent`: custom component that triggers the dialog opening rather than using the pill box default
 + `onBlur`: called when dialog is closed
++ `showSearch`: defaults to `true`, allows you to control if the search bar is present.
 
 ### Basic
 ```jsx

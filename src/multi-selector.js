@@ -79,6 +79,10 @@ export default class MultiSelector extends React.Component {
 		};
 	};
 
+  static defaultProps = {
+    showSearch: true,
+  }
+
 	componentWillMount() {
 		document.addEventListener('click', this.close);
 	};
@@ -369,14 +373,17 @@ export default class MultiSelector extends React.Component {
 	};
 
 	positionDialog = () => {
+    const showSearch = this.props.showSearch
 		setTimeout(() => {
 			let el = this.el;
 			let height = el.clientHeight;
 			let dialog = el.querySelector(`.${styles['cpr-multi-selector__dialog']}`);
 
-			if (dialog) {
+      if (dialog) {
 				dialog.style.top = height + 1 + 'px';
-				el.querySelector(`.${styles['cpr-multi-selector__dialog__input']}`).focus();
+        if (showSearch) {
+          el.querySelector(`.${styles['cpr-multi-selector__dialog__input']}`).focus();
+        }
 			}
 		}, 100);
 	};
@@ -420,18 +427,22 @@ export default class MultiSelector extends React.Component {
 			let maxLength = this.props.maxLength;
 			dialog = (
 				<div className={`${styles['cpr-multi-selector__dialog']} depth-z2`} style={{}}>
-					<div
-						className={`${this.state.invalid ? 'cps-has-error' : ''}`}
-						style={{ padding: '16px', borderBottom: '1px solid #E9E9E9' }}>
-						<input
-							onChange={this.handleChange}
-							onKeyDown={this.keyDown}
-							className={`cps-form-control ${styles['cpr-multi-selector__dialog__input']}`}
-							placeholder={placeholder}
-							{...(maxLength ? { maxLength } : {})}
-						/>
-						{this.state.invalid && <span className="cps-error-block">{this.props.invalidMsg}</span>}
-					</div>
+          {
+            this.props.showSearch ? (
+              <div
+                className={`${this.state.invalid ? 'cps-has-error' : ''}`}
+                style={{ padding: '16px', borderBottom: '1px solid #E9E9E9' }}>
+                <input
+                  onChange={this.handleChange}
+                  onKeyDown={this.keyDown}
+                  className={`cps-form-control ${styles['cpr-multi-selector__dialog__input']}`}
+                  placeholder={placeholder}
+                  {...(maxLength ? { maxLength } : {})}
+                />
+                {this.state.invalid && <span className="cps-error-block">{this.props.invalidMsg}</span>}
+              </div>
+            ) : (null)
+          }
 					<div
 						style={this.props.dialogHeight ? { maxHeight: this.props.dialogHeight } : {}}
 						className={`${styles['cpr-multi-selector__dialog__items']}`}>
@@ -502,6 +513,7 @@ MultiSelector.propTypes = {
 	color: PropTypes.string,
 	closeOnSelect: PropTypes.bool,
 	keepSearchTextOnSelect: PropTypes.bool,
+  showSearch: PropTypes.bool,
 };
 
 if (window && !window.MultiSelector) window.MultiSelector = MultiSelector;
