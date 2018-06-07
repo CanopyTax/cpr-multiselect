@@ -105,8 +105,8 @@ export default class MultiSelector extends React.Component {
   };
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.initialSelectedItems && prevProps.initialSelectedItems !== prevState.selectedItems) {
-      this.setState({selectedItems: prevProps.initialSelectedItems || []});
+    if (prevProps.initialSelectedItems !== this.props.initialSelectedItems) {
+      this.setState({selectedItems: this.props.initialSelectedItems || []});
     }
   };
 
