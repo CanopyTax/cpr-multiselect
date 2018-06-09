@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { without, includes, union, isNull, find, partial } from 'lodash';
+import { without, includes, union, isNull, find, partial, some } from 'lodash';
 import styles from './multi-selector.css';
 
 function DefaultItemComponent(props) {
@@ -282,7 +282,7 @@ export default class MultiSelector extends React.Component {
         );
       } else {
         const noResultsPhrase = this.props.noResultsPhrase || 'No items found.';
-        return <div className={`${styles['cpr-multi-selector-item']}`}>{noResultsPhrase}</div>;
+        return <div className={`${styles['cpr-multi-selector-no-items']}`}>{noResultsPhrase}</div>;
       }
     }
 
@@ -332,11 +332,13 @@ export default class MultiSelector extends React.Component {
 
   selectItem = (item, e) => {
     let selectedItems = this.state.selectedItems;
-
-    if (includes(selectedItems, item)) {
+    if (this.ref) {
+      this.ref.value = "";
+    }
+    if (some(selectedItems, item)) {
       this.setState(
         {
-          selectedItems: without(selectedItems, item),
+          selectedItems: item.id ? selectedItems.filter(i => i.id !== item.id) : without(selectedItems, item),
           invalid: false,
           dialogDisplayed: !this.props.closeOnSelect,
           lastModifiedItem: item,
@@ -437,6 +439,7 @@ export default class MultiSelector extends React.Component {
                   onKeyDown={this.keyDown}
                   className={`cps-form-control ${styles['cpr-multi-selector__dialog__input']}`}
                   placeholder={placeholder}
+                  ref={ref => this.ref = ref}
                   {...(maxLength ? { maxLength } : {})}
                 />
                 {this.state.invalid && <span className="cps-error-block">{this.props.invalidMsg}</span>}
