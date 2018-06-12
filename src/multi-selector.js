@@ -162,6 +162,7 @@ export default class MultiSelector extends React.Component {
 
   handleChange = (e) => {
     e.persist();
+    let newVal = e.target.value;
     if (this.state.invalid && this.props.validate) {
       this.setState({
         invalid: !this.props.validate(e.target.value),
@@ -172,7 +173,7 @@ export default class MultiSelector extends React.Component {
         disabled: this.props.disableInput ? this.props.disableInput(e.target.value) : false,
       },
       () => {
-        this.inputChange(e.target.value);
+        this.inputChange(newVal);
       }
     );
   };
@@ -332,9 +333,6 @@ export default class MultiSelector extends React.Component {
 
   selectItem = (item, e) => {
     let selectedItems = this.state.selectedItems;
-    if (this.ref) {
-      this.ref.value = "";
-    }
     if (some(selectedItems, item)) {
       this.setState(
         {
@@ -356,7 +354,6 @@ export default class MultiSelector extends React.Component {
         this.triggerItemChange
       );
     }
-
     if (!this.props.keepSearchTextOnSelect && e && e.currentTarget) {
       e.currentTarget.value = '';
       this.inputChange('');
@@ -439,7 +436,7 @@ export default class MultiSelector extends React.Component {
                   onKeyDown={this.keyDown}
                   className={`cps-form-control ${styles['cpr-multi-selector__dialog__input']}`}
                   placeholder={placeholder}
-                  ref={ref => this.ref = ref}
+                  value={this.state.searchValue}
                   {...(maxLength ? { maxLength } : {})}
                 />
                 {this.state.invalid && <span className="cps-error-block">{this.props.invalidMsg}</span>}
