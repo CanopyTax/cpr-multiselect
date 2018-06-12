@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { without, includes, union, isNull, find, partial } from 'lodash';
+import { without, includes, union, isNull, find, partial, some } from 'lodash';
 import styles from './multi-selector.css';
 
 function DefaultItemComponent(props) {
@@ -162,17 +162,18 @@ export default class MultiSelector extends React.Component {
 
   handleChange = (e) => {
     e.persist();
+    let newVal = e.target.value;
     if (this.state.invalid && this.props.validate) {
       this.setState({
-        invalid: !this.props.validate(e.target.value),
+        invalid: !this.props.validate(newVal),
       });
     }
     this.setState(
       {
-        disabled: this.props.disableInput ? this.props.disableInput(e.target.value) : false,
+        disabled: this.props.disableInput ? this.props.disableInput(newVal) : false,
       },
       () => {
-        this.inputChange(e.target.value);
+        this.inputChange(newVal);
       }
     );
   };
@@ -282,7 +283,7 @@ export default class MultiSelector extends React.Component {
         );
       } else {
         const noResultsPhrase = this.props.noResultsPhrase || 'No items found.';
-        return <div className={`${styles['cpr-multi-selector-item']}`}>{noResultsPhrase}</div>;
+        return <div className={`${styles['cpr-multi-selector-no-items']}`}>{noResultsPhrase}</div>;
       }
     }
 
@@ -332,11 +333,10 @@ export default class MultiSelector extends React.Component {
 
   selectItem = (item, e) => {
     let selectedItems = this.state.selectedItems;
-
-    if (includes(selectedItems, item)) {
+    if (some(selectedItems, item)) {
       this.setState(
         {
-          selectedItems: without(selectedItems, item),
+          selectedItems: item.id ? selectedItems.filter(i => i.id !== item.id) : without(selectedItems, item),
           invalid: false,
           dialogDisplayed: !this.props.closeOnSelect,
           lastModifiedItem: item,
@@ -354,7 +354,6 @@ export default class MultiSelector extends React.Component {
         this.triggerItemChange
       );
     }
-
     if (!this.props.keepSearchTextOnSelect && e && e.currentTarget) {
       e.currentTarget.value = '';
       this.inputChange('');
@@ -437,6 +436,7 @@ export default class MultiSelector extends React.Component {
                   onKeyDown={this.keyDown}
                   className={`cps-form-control ${styles['cpr-multi-selector__dialog__input']}`}
                   placeholder={placeholder}
+                  value={this.state.searchValue}
                   {...(maxLength ? { maxLength } : {})}
                 />
                 {this.state.invalid && <span className="cps-error-block">{this.props.invalidMsg}</span>}
