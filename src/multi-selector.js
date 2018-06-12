@@ -165,12 +165,12 @@ export default class MultiSelector extends React.Component {
     let newVal = e.target.value;
     if (this.state.invalid && this.props.validate) {
       this.setState({
-        invalid: !this.props.validate(e.target.value),
+        invalid: !this.props.validate(newVal),
       });
     }
     this.setState(
       {
-        disabled: this.props.disableInput ? this.props.disableInput(e.target.value) : false,
+        disabled: this.props.disableInput ? this.props.disableInput(newVal) : false,
       },
       () => {
         this.inputChange(newVal);
