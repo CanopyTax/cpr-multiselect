@@ -60,6 +60,35 @@ DefaultPillBoxComponent.propTypes = {
   displayDialog: PropTypes.func,
 };
 
+function DefaultPill(props) {
+	return(
+		<div
+			className={`${styles['cpr-multi-selector__pill']} ${styles[`cpr-multi-selector__pill--${props.color || "green"}`]}`}
+			title={`${props.getItemTitle(props.item)}`}>
+			<span
+				style={{verticalAlign: 'top', margin: "0 8px"}}
+				title={props.getItemTitle(props.item)}>
+				{props.getItemTitle(props.item)}
+			</span>
+			<div className={`${styles['cpr-multi-selector__pill__close']}`}>
+				<i
+					onClick={e => {
+						e.stopPropagation();
+						props.removeItem()
+					}}
+					className="cps-icon cps-icon-sm-neg"></i>
+			</div>
+		</div>
+	)
+}
+
+DefaultPill.propTypes = {
+	removeItem: PropTypes.func,
+	color: PropTypes.string,
+  getItemTitle: PropTypes.func,
+  item: PropTypes.any.isRequired,
+}
+
 export default class MultiSelector extends React.Component {
   constructor(props) {
     super();
@@ -118,6 +147,7 @@ export default class MultiSelector extends React.Component {
   };
 
   removeItem = (item, e) => {
+    e.stopPropagation();
     this.setState(
       {
         selectedItems: without(this.state.selectedItems, item),
@@ -395,29 +425,13 @@ export default class MultiSelector extends React.Component {
     //Get getItemTitle is the function that should be passed in to decide what `pill` will display on selection.
     let getItemTitle = this.props.getItemTitle || this.getItemTitle;
     let PillBoxComponent = this.props.CustomPillboxComponent || DefaultPillBoxComponent;
-    let pills = this.state.selectedItems.map((item, i) => {
-      return (
-        <div
-          key={i}
-          className={`${styles['cpr-multi-selector__pill']} ${styles[
-            `cpr-multi-selector__pill--${this.props.color || 'green'}`
-          ]}`}
-          title={`${getItemTitle(item)}`}>
-          <span style={{ verticalAlign: 'top', margin: '0 8px' }} title={getItemTitle(item)}>
-            {getItemTitle(item)}
-          </span>
-          <div className={`${styles['cpr-multi-selector__pill__close']}`}>
-            <i
-              onClick={e => {
-                e.stopPropagation();
-                this.removeItem(item);
-              }}
-              className="cps-icon cps-icon-sm-neg"
-            />
-          </div>
-        </div>
-      );
-    });
+    let Pill = this.props.CustomPill || DefaultPill
+    let pills = this.state.selectedItems
+			.map((item, i) => {
+				return (
+					<Pill key={i} item={item} removeItem={partial(this.removeItem, item)} color={this.props.color} getItemTitle={getItemTitle}/>
+				);
+			});
 
     let dialog;
 
