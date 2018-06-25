@@ -72,10 +72,7 @@ function DefaultPill(props) {
 			</span>
 			<div className={`${styles['cpr-multi-selector__pill__close']}`}>
 				<i
-					onClick={e => {
-						e.stopPropagation();
-						props.removeItem()
-					}}
+					onClick={props.removeItem}
 					className="cps-icon cps-icon-sm-neg"></i>
 			</div>
 		</div>
