@@ -146,8 +146,7 @@ export default class MultiSelector extends React.Component {
     });
   };
 
-  removeItem = (item, e) => {
-    e.stopPropagation();
+  removeItem = (item) => {
     this.setState(
       {
         selectedItems: without(this.state.selectedItems, item),
