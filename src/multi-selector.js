@@ -72,10 +72,7 @@ function DefaultPill(props) {
 			</span>
 			<div className={`${styles['cpr-multi-selector__pill__close']}`}>
 				<i
-					onClick={e => {
-						e.stopPropagation();
-						props.removeItem()
-					}}
+					onClick={props.removeItem}
 					className="cps-icon cps-icon-sm-neg"></i>
 			</div>
 		</div>
@@ -146,7 +143,8 @@ export default class MultiSelector extends React.Component {
     });
   };
 
-  removeItem = (item) => {
+  removeItem = (item, e) => {
+    e.stopPropagation();
     this.setState(
       {
         selectedItems: without(this.state.selectedItems, item),
