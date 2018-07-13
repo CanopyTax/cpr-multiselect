@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { without, includes, union, isNull, find, partial, some, uniqueId } from 'lodash';
+import { without, includes, union, isNull, find, partial, some } from 'lodash';
 import styles from './multi-selector.css';
 
 function DefaultItemComponent(props) {
@@ -107,6 +107,7 @@ export default class MultiSelector extends React.Component {
 
   static defaultProps = {
     showSearch: true,
+    pillUniqueIdentifier: 'id'
   }
 
   componentWillMount() {
@@ -426,7 +427,13 @@ export default class MultiSelector extends React.Component {
     let pills = this.state.selectedItems
 			.map((item, i) => {
 				return (
-					<Pill key={item.id || uniqueId()} item={item} removeItem={partial(this.removeItem, item)} color={this.props.color} getItemTitle={getItemTitle}/>
+					<Pill 
+            key={item[this.props.pillUniqueIdentifier] || i} 
+            item={item} 
+            removeItem={partial(this.removeItem, item)} 
+            color={this.props.color} 
+            getItemTitle={getItemTitle}
+          />
 				);
 			});
 
