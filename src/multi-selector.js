@@ -107,6 +107,7 @@ export default class MultiSelector extends React.Component {
 
   static defaultProps = {
     showSearch: true,
+    pillUniqueIdentifier: 'id'
   }
 
   componentWillMount() {
@@ -426,7 +427,13 @@ export default class MultiSelector extends React.Component {
     let pills = this.state.selectedItems
 			.map((item, i) => {
 				return (
-					<Pill key={i} item={item} removeItem={partial(this.removeItem, item)} color={this.props.color} getItemTitle={getItemTitle}/>
+					<Pill 
+            key={item[this.props.pillUniqueIdentifier] || i} 
+            item={item} 
+            removeItem={partial(this.removeItem, item)} 
+            color={this.props.color} 
+            getItemTitle={getItemTitle}
+          />
 				);
 			});
 

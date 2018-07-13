@@ -40,6 +40,7 @@ Canopy React Multi-select Component
 + `CustomPill`: custom component that replaces the default pill item
 + `onBlur`: called when dialog is closed
 + `showSearch`: defaults to `true`, allows you to control if the search bar is present.
++ `pillUniqueIdentifier`: Used as unique key for pills (needed only for custom pills that use internal state) default: 'id'
 
 ### Basic
 ```jsx
