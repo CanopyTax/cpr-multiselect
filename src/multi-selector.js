@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { without, includes, union, isNull, find, partial, some } from 'lodash';
+import { without, includes, union, isNull, find, partial, some, isEqual } from 'lodash';
 import styles from './multi-selector.css';
 
 function DefaultItemComponent(props) {
   const item = props.item;
   const getItemTitle = props.getItemTitle;
   const selectedItems = props.selectedItems;
-  const selected = includes(selectedItems, item);
+  const selected = selectedItems.some(checkItem => isEqual(checkItem, item));
 
   return (
     <div title={`${getItemTitle(item)}`}>
