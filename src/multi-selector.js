@@ -149,6 +149,7 @@ export default class MultiSelector extends React.Component {
     this.setState(
       {
         selectedItems: without(this.state.selectedItems, item),
+        lastModifiedItem: item,
       },
       this.triggerItemChange
     );
@@ -427,11 +428,11 @@ export default class MultiSelector extends React.Component {
     let pills = this.state.selectedItems
 			.map((item, i) => {
 				return (
-					<Pill 
-            key={item[this.props.pillUniqueIdentifier] || i} 
-            item={item} 
-            removeItem={partial(this.removeItem, item)} 
-            color={this.props.color} 
+					<Pill
+            key={item[this.props.pillUniqueIdentifier] || i}
+            item={item}
+            removeItem={partial(this.removeItem, item)}
+            color={this.props.color}
             getItemTitle={getItemTitle}
           />
 				);
