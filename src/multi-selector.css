@@ -32,8 +32,9 @@
   overflow-y: auto;
 }
 
+/* Do not remove. This class is targeted with JS */
 .cpr-multi-selector__dialog__input {
-  position: relative;
+  display: inherit;
 }
 
 .cpr-multi-selector-item {
