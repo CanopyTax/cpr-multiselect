@@ -32,6 +32,10 @@
   overflow-y: auto;
 }
 
+.cpr-multi-selector__dialog__input {
+  position: relative;
+}
+
 .cpr-multi-selector-item {
   display: block;
   height: 40px;

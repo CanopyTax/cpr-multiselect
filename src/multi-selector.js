@@ -103,16 +103,14 @@ export default class MultiSelector extends React.Component {
       lastModifiedItem: null,
       invalid: false,
     };
+
+    document.addEventListener('click', this.close);
   };
 
   static defaultProps = {
     showSearch: true,
     pillUniqueIdentifier: 'id'
   }
-
-  componentWillMount() {
-    document.addEventListener('click', this.close);
-  };
 
   componentDidMount() {
     this.gotMounted = true;
@@ -129,12 +127,6 @@ export default class MultiSelector extends React.Component {
       dialogDisplayed: false,
       searchValue: '',
     });
-  };
-
-  componentDidUpdate(prevProps, prevState) {
-    if (prevProps.initialSelectedItems !== this.props.initialSelectedItems) {
-      this.setState({selectedItems: this.props.initialSelectedItems || []});
-    }
   };
 
   displayDialog = (e) => {
