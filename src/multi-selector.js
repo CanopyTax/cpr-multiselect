@@ -112,6 +112,15 @@ export default class MultiSelector extends React.Component {
     pillUniqueIdentifier: 'id'
   }
 
+  componentDidUpdate(prevProps){
+    if(this.props.initialSelectedItems.length !== prevProps.initialSelectedItems.length){
+      this.setState({
+        selectedItems: this.props.initialSelectedItems,
+        initialSelectedItems: this.props.initialSelectedItems,
+      })
+    }
+  }
+
   componentDidMount() {
     this.gotMounted = true;
   };
