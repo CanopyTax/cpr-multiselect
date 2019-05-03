@@ -103,8 +103,6 @@ export default class MultiSelector extends React.Component {
       lastModifiedItem: null,
       invalid: false,
     };
-
-    document.addEventListener('click', this.close);
   };
 
   static defaultProps = {
@@ -113,7 +111,7 @@ export default class MultiSelector extends React.Component {
   }
 
   componentDidUpdate(prevProps){
-    if(this.props.initialSelectedItems.length !== prevProps.initialSelectedItems.length){
+    if(this.props.initialSelectedItems !== prevProps.initialSelectedItems){
       this.setState({
         selectedItems: this.props.initialSelectedItems,
         initialSelectedItems: this.props.initialSelectedItems,
@@ -123,6 +121,7 @@ export default class MultiSelector extends React.Component {
 
   componentDidMount() {
     this.gotMounted = true;
+    document.addEventListener('click', this.close);
   };
 
   componentWillUnmount() {
