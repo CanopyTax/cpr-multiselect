@@ -110,12 +110,18 @@ export default class MultiSelector extends React.Component {
     pillUniqueIdentifier: 'id'
   }
 
-  componentWillMount() {
-    document.addEventListener('click', this.close);
-  };
+  componentDidUpdate(prevProps){
+    if(this.props.initialSelectedItems !== prevProps.initialSelectedItems){
+      this.setState({
+        selectedItems: this.props.initialSelectedItems,
+        initialSelectedItems: this.props.initialSelectedItems,
+      })
+    }
+  }
 
   componentDidMount() {
     this.gotMounted = true;
+    document.addEventListener('click', this.close);
   };
 
   componentWillUnmount() {
@@ -129,12 +135,6 @@ export default class MultiSelector extends React.Component {
       dialogDisplayed: false,
       searchValue: '',
     });
-  };
-
-  componentDidUpdate(prevProps, prevState) {
-    if (prevProps.initialSelectedItems !== this.props.initialSelectedItems) {
-      this.setState({selectedItems: this.props.initialSelectedItems || []});
-    }
   };
 
   displayDialog = (e) => {
