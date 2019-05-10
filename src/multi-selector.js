@@ -107,7 +107,8 @@ export default class MultiSelector extends React.Component {
 
   static defaultProps = {
     showSearch: true,
-    pillUniqueIdentifier: 'id'
+    pillUniqueIdentifier: 'id',
+    initialSelectedItems: [],
   }
 
   componentDidUpdate(prevProps){
