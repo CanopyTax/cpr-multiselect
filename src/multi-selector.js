@@ -426,18 +426,18 @@ export default class MultiSelector extends React.Component {
     let getItemTitle = this.props.getItemTitle || this.getItemTitle;
     let PillBoxComponent = this.props.CustomPillboxComponent || DefaultPillBoxComponent;
     let Pill = this.props.CustomPill || DefaultPill
-    let pills = this.state.selectedItems
-			.map((item, i) => {
-				return (
-					<Pill
-            key={item[this.props.pillUniqueIdentifier] || i}
-            item={item}
-            removeItem={partial(this.removeItem, item)}
-            color={this.props.color}
-            getItemTitle={getItemTitle}
-          />
-				);
-			});
+    let pills = (this.state.selectedItems || [])
+    .map((item, i) => {
+      return (
+        <Pill
+          key={item[this.props.pillUniqueIdentifier] || i}
+          item={item}
+          removeItem={partial(this.removeItem, item)}
+          color={this.props.color}
+          getItemTitle={getItemTitle}
+        />
+      );
+    });
 
     let dialog;
 
