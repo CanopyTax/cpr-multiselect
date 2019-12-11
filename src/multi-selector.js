@@ -43,7 +43,7 @@ function DefaultPillBoxComponent(props) {
       <div
         disabled={props.disabled}
         onClick={!props.disabled && props.displayDialog}
-        className={`${styles['cpr-multi-selector__main-input']} cps-form-control ${props.disabled ? styles['cpr-multi-selector__disabled'] : ''}`}>
+        className={`${styles['cpr-multi-selector__main-input']} cps-form-control`}>
         {pills && pills.length ? (
           pills
         ) : (
