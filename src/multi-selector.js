@@ -41,8 +41,9 @@ function DefaultPillBoxComponent(props) {
         onFocus={props.displayDialog}
       />
       <div
-        onClick={props.displayDialog}
-        className={`${styles['cpr-multi-selector__main-input']} cps-form-control`}>
+        disabled={props.disabled}
+        onClick={!props.disabled && props.displayDialog}
+        className={`${styles['cpr-multi-selector__main-input']} cps-form-control ${props.disabled ? styles['cpr-multi-selector__disabled'] : ''}`}>
         {pills && pills.length ? (
           pills
         ) : (
@@ -70,11 +71,12 @@ function DefaultPill(props) {
 				title={props.getItemTitle(props.item)}>
 				{props.getItemTitle(props.item)}
 			</span>
-			<div className={`${styles['cpr-multi-selector__pill__close']}`}>
+			{!props.disabled && <div className={`${styles['cpr-multi-selector__pill__close']}`}>
 				<i
 					onClick={props.removeItem}
 					className="cps-icon cps-icon-sm-neg"></i>
 			</div>
+      }
 		</div>
 	)
 }
@@ -435,6 +437,7 @@ export default class MultiSelector extends React.Component {
           removeItem={partial(this.removeItem, item)}
           color={this.props.color}
           getItemTitle={getItemTitle}
+          disabled={this.props.disabled}
         />
       );
     });
@@ -496,6 +499,7 @@ export default class MultiSelector extends React.Component {
           displayDialog={this.displayDialog}
           pillPlaceholder={this.props.pillPlaceholder}
           hasError={this.props.hasError}
+          disabled={this.props.disabled}
         />
         {dialog}
       </div>

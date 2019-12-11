@@ -176,3 +176,7 @@
   border: 2px solid hsla(18,99%,71%,.3);
   box-shadow: none;
 }
+
+.cpr-multi-selector__disabled {
+  cursor: not-allowed;
+}
