@@ -29,7 +29,7 @@ Canopy React Multi-select Component
 + `noResultsPhrase`: The phrase to show when there are no matching results, or when `items` is empty. The default is "No items found."
 + `pressEnterToAddPhrase`: If `noRestrict` is true, this phrase will be displayed when users enter custom values. The default is "Press Enter to add".
 + `customCSSClass`: A css class to be put on the cpr-multiselector element
-+ `hasError`: pass in true to display an orange error border around the input div 
++ `hasError`: pass in true to display an orange error border around the input div
 + `validate`: function to validate the input. Return true or false.
 + `invalidMsg`: message to display when input is invalidated
 + `doneButton`: add a done button to the dialog when entering input
@@ -41,6 +41,7 @@ Canopy React Multi-select Component
 + `onBlur`: called when dialog is closed
 + `showSearch`: defaults to `true`, allows you to control if the search bar is present.
 + `pillUniqueIdentifier`: Used as unique key for pills (needed only for custom pills that use internal state) default: 'id'
++ `disabled`: If true, [canopy disabled input styling](https://goat.canopytax.com/#/components/form-elements/inputs/specs) will be applied and clicking the input will do nothing
 
 ### Basic
 ```jsx
