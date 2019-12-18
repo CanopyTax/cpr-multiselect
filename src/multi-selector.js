@@ -39,6 +39,7 @@ function DefaultPillBoxComponent(props) {
           ? styles['cpr-multi-selector__has-error']
           : ''}`}
         onFocus={props.displayDialog}
+        tabIndex={props.disabled ? -1 : 0}
       />
       <div
         disabled={props.disabled}
