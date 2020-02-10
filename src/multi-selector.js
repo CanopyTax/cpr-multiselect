@@ -25,6 +25,7 @@ function DefaultItemComponent(props) {
 DefaultItemComponent.propTypes = {
   item: PropTypes.any.isRequired,
   getItemTitle: PropTypes.func,
+  doNotScroll: PropTypes.bool,
   selectedItems: PropTypes.array.isRequired,
 };
 
@@ -112,6 +113,7 @@ export default class MultiSelector extends React.Component {
     showSearch: true,
     pillUniqueIdentifier: 'id',
     initialSelectedItems: [],
+    doNotScroll: false,
   }
 
   componentDidUpdate(prevProps){
@@ -171,7 +173,9 @@ export default class MultiSelector extends React.Component {
       },
       () => {
         if (!isNull(this.state.activeIndex) && !!this.searchItems[this.state.activeIndex]) {
-          this.searchItems[this.state.activeIndex].scrollIntoView();
+          if (!this.props.doNotScroll) {
+            this.searchItems[this.state.activeIndex].scrollIntoViewIfNeeded();
+          }
           if (this.state.mouseActive) {
             this.setState(
               {
@@ -358,7 +362,12 @@ export default class MultiSelector extends React.Component {
             item
           )} ${this.getActiveClass(index)}`}
           onClick={partial(this.selectItem, item)}>
-          <ItemComponent item={item} selectedItems={this.state.selectedItems} getItemTitle={getItemTitle} />
+          <ItemComponent 
+            item={item} 
+            selectedItems={this.state.selectedItems} 
+            getItemTitle={getItemTitle}
+            doNotScroll={this.props.doNotScroll} 
+          />
         </div>
       );
     });
@@ -539,6 +548,7 @@ MultiSelector.propTypes = {
   closeOnSelect: PropTypes.bool,
   keepSearchTextOnSelect: PropTypes.bool,
   showSearch: PropTypes.bool,
+  doNotScroll: PropTypes.bool,
 };
 
 if (window && !window.MultiSelector) window.MultiSelector = MultiSelector;
