@@ -174,7 +174,7 @@ export default class MultiSelector extends React.Component {
       () => {
         if (!isNull(this.state.activeIndex) && !!this.searchItems[this.state.activeIndex]) {
           if (!this.props.doNotScroll) {
-            this.searchItems[this.state.activeIndex].scrollIntoViewIfNeeded();
+            this.searchItems[this.state.activeIndex].scrollIntoView();
           }
           if (this.state.mouseActive) {
             this.setState(
