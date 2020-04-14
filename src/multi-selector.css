@@ -115,15 +115,21 @@
 }
 
 .cpr-multi-selector__pill--green {
-  background-color: rgb(207, 242, 220);
-  color: rgb(0, 158, 56);
-  border: 1px solid rgb(0, 158, 56);
+  background-color: rgba(0, 191, 75, 0.2);
+  color: #00BF4B;
+  border: solid 1px rgba(0, 191, 75, 0.5);
+  background-color: var(--cps-color-pill-team-bg);
+  color: var(--cps-color-pill-team-text);
+  border: solid 1px var(--cps-color-pill-team-text);
 }
 
 .cpr-multi-selector__pill--blue {
-  background-color: rgb(217, 235, 255);
-  color: rgb(51, 102, 187);
-  border: 1px solid rgb(51, 102, 187);
+  background-color: rgba(59, 155, 252, 0.2);
+  color: rgb(59,155,252);
+  border: solid 1px rgba(59,155,252, 0.5);
+  background-color: var(--cps-color-pill-bg);
+  color: var(--cps-color-pill-text);
+  border: solid 1px var(--cps-color-pill-text);
 }
 
 .cpr-multi-selector__pill span {
@@ -144,11 +150,13 @@
 }
 
 .cpr-multi-selector__pill--green .cpr-multi-selector__pill__close {
-  border-left: 1px solid rgb(0, 158, 56);
+  border-left: solid 1px rgba(0, 191, 75, 0.5);
+  border-left: solid 1px var(--cps-color-pill-team-text);
 }
 
 .cpr-multi-selector__pill--blue .cpr-multi-selector__pill__close {
-  border-left: 1px solid rgb(51, 102, 187);
+  border-left: solid 1px rgba(59,155,252, 0.5);
+  border-left: solid 1px var(--cps-color-pill-text);
 }
 
 .cpr-multi-selector__pill :global(.cps-icon) {
@@ -157,11 +165,13 @@
 }
 
 .cpr-multi-selector__pill--green :global(.cps-icon) {
-  color: rgb(0, 158, 56);
+  color: #00BF4B;
+  color: var(--cps-color-pill-team-text);
 }
 
 .cpr-multi-selector__pill--blue :global(.cps-icon) {
-  color: rgb(119, 119, 119);
+  color: rgb(59,155,252);
+  color: var(--cps-color-pill-text);
 }
 
 .cpr-multi-selector__icon {
