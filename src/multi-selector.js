@@ -362,11 +362,11 @@ export default class MultiSelector extends React.Component {
             item
           )} ${this.getActiveClass(index)}`}
           onClick={partial(this.selectItem, item)}>
-          <ItemComponent 
-            item={item} 
-            selectedItems={this.state.selectedItems} 
+          <ItemComponent
+            item={item}
+            selectedItems={this.state.selectedItems}
             getItemTitle={getItemTitle}
-            doNotScroll={this.props.doNotScroll} 
+            doNotScroll={this.props.doNotScroll}
           />
         </div>
       );
@@ -462,8 +462,8 @@ export default class MultiSelector extends React.Component {
           {
             this.props.showSearch ? (
               <div
-                className={`${this.state.invalid ? 'cps-has-error' : ''}`}
-                style={{ padding: '16px', borderBottom: '1px solid #E9E9E9' }}>
+                className={`${this.state.invalid ? 'cps-has-error' : ''}
+                  ${styles['cpr-multi-selector__dialog__search']}`}>
                 <input
                   onChange={this.handleChange}
                   onKeyDown={this.keyDown}

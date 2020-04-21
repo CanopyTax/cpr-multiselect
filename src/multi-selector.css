@@ -37,6 +37,11 @@
   display: inherit;
 }
 
+.cpr-multi-selector__dialog__search {
+  padding: 16px;
+  border-bottom: 1px solid #E9E9E9;
+}
+
 .cpr-multi-selector-item {
   display: block;
   height: 40px;
