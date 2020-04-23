@@ -49,7 +49,7 @@ function DefaultPillBoxComponent(props) {
         {pills && pills.length ? (
           pills
         ) : (
-          <div style={{ padding: '2px 8px 1px', color: '#AFAFAF', fontStyle: 'italic' }}>{props.pillPlaceholder}</div>
+          <div style={{ padding: '2px 8px 1px', color: 'var(--cps-color-cool-gray)', fontStyle: 'italic' }}>{props.pillPlaceholder}</div>
         )}
       </div>
     </div>
