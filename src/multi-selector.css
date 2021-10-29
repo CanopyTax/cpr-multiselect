@@ -37,6 +37,11 @@
   display: inherit;
 }
 
+.cpr-multi-selector__dialog__search {
+  padding: 16px;
+  border-bottom: 1px solid #E9E9E9;
+}
+
 .cpr-multi-selector-item {
   display: block;
   height: 40px;
@@ -185,4 +190,8 @@
 .cps-multi-selector__has-error {
   border: 2px solid hsla(18,99%,71%,.3);
   box-shadow: none;
+}
+
+.cps-multi-selector__error {
+  border-color: var(--cps-color-error);
 }

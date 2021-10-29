@@ -45,11 +45,11 @@ function DefaultPillBoxComponent(props) {
       <div
         disabled={props.disabled}
         onClick={!props.disabled && props.displayDialog}
-        className={`${styles['cpr-multi-selector__main-input']} cps-form-control`}>
+        className={`${styles['cpr-multi-selector__main-input']} ${props.hasError ? styles['cps-multi-selector__error'] : ''} cps-form-control`}>
         {pills && pills.length ? (
           pills
         ) : (
-          <div style={{ padding: '2px 8px 1px', color: '#AFAFAF', fontStyle: 'italic' }}>{props.pillPlaceholder}</div>
+          <div style={{ padding: '2px 8px 1px', color: 'var(--cps-color-cool-gray)', fontStyle: 'italic' }}>{props.pillPlaceholder}</div>
         )}
       </div>
     </div>
@@ -362,11 +362,11 @@ export default class MultiSelector extends React.Component {
             item
           )} ${this.getActiveClass(index)}`}
           onClick={partial(this.selectItem, item)}>
-          <ItemComponent 
-            item={item} 
-            selectedItems={this.state.selectedItems} 
+          <ItemComponent
+            item={item}
+            selectedItems={this.state.selectedItems}
             getItemTitle={getItemTitle}
-            doNotScroll={this.props.doNotScroll} 
+            doNotScroll={this.props.doNotScroll}
           />
         </div>
       );
@@ -462,8 +462,8 @@ export default class MultiSelector extends React.Component {
           {
             this.props.showSearch ? (
               <div
-                className={`${this.state.invalid ? 'cps-has-error' : ''}`}
-                style={{ padding: '16px', borderBottom: '1px solid #E9E9E9' }}>
+                className={`${this.state.invalid ? 'cps-has-error' : ''}
+                  ${styles['cpr-multi-selector__dialog__search']}`}>
                 <input
                   onChange={this.handleChange}
                   onKeyDown={this.keyDown}
