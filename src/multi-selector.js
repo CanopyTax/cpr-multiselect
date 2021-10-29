@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { without, includes, union, isNull, find, partial, some, isEqual } from 'lodash';
+import { without, includes, union, isNull, find, partial, some, isEqual, noop } from 'lodash';
 import styles from './multi-selector.css';
 
 function DefaultItemComponent(props) {
@@ -44,7 +44,7 @@ function DefaultPillBoxComponent(props) {
       />
       <div
         disabled={props.disabled}
-        onClick={!props.disabled && props.displayDialog}
+        onClick={!props.disabled ? props.displayDialog : noop}
         className={`${styles['cpr-multi-selector__main-input']} ${props.hasError ? styles['cps-multi-selector__error'] : ''} cps-form-control`}>
         {pills && pills.length ? (
           pills
